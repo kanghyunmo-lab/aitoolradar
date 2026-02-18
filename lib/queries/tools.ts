@@ -96,15 +96,30 @@ export async function getPopularComparisons(): Promise<
   Array<{ slugA: string; slugB: string; nameA: string; nameB: string }>
 > {
   const supabase = await createClient();
+
+  // Fetch all tools ordered by rating; we group by category client-side
+  // to pick top 10 per category for broader coverage across all 177 tools
   const { data: tools } = await supabase
     .from("ai_tools")
     .select("slug, name, category_id")
-    .order("rating", { ascending: false })
-    .limit(20);
+    .order("rating", { ascending: false });
 
   if (!tools || tools.length < 2) return [];
 
-  // Generate comparison pairs from top tools in same category
+  // Build top-10-per-category map
+  const byCategory = new Map<
+    string,
+    Array<{ slug: string; name: string }>
+  >();
+  for (const tool of tools) {
+    if (!tool.category_id) continue;
+    const key = String(tool.category_id);
+    if (!byCategory.has(key)) byCategory.set(key, []);
+    const list = byCategory.get(key)!;
+    if (list.length < 10) list.push({ slug: tool.slug, name: tool.name });
+  }
+
+  // Generate same-category comparison pairs (C(10,2) = 45 per category)
   const comparisons: Array<{
     slugA: string;
     slugB: string;
@@ -112,14 +127,14 @@ export async function getPopularComparisons(): Promise<
     nameB: string;
   }> = [];
 
-  for (let i = 0; i < tools.length; i++) {
-    for (let j = i + 1; j < tools.length; j++) {
-      if (tools[i].category_id === tools[j].category_id) {
+  for (const catTools of byCategory.values()) {
+    for (let i = 0; i < catTools.length; i++) {
+      for (let j = i + 1; j < catTools.length; j++) {
         comparisons.push({
-          slugA: tools[i].slug,
-          slugB: tools[j].slug,
-          nameA: tools[i].name,
-          nameB: tools[j].name,
+          slugA: catTools[i].slug,
+          slugB: catTools[j].slug,
+          nameA: catTools[i].name,
+          nameB: catTools[j].name,
         });
       }
     }

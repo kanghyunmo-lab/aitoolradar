@@ -44,16 +44,36 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
       ]);
 
-      // Comparison pages (top tools in same categories)
-      const topTools = tools.slice(0, 30);
-      for (let i = 0; i < topTools.length; i++) {
-        for (let j = i + 1; j < topTools.length; j++) {
-          toolPages.push({
-            url: `${BASE_URL}/compare/${topTools[i].slug}-vs-${topTools[j].slug}`,
-            lastModified: new Date(),
-            changeFrequency: "weekly" as const,
-            priority: 0.7,
-          });
+      // Comparison pages: top 10 per category, same-category pairs only
+      // C(10,2) = 45 pairs per category × ~10 categories = ~450 pages (manageable)
+      const { data: toolsWithCategory } = await supabase
+        .from("ai_tools")
+        .select("slug, category_id")
+        .order("rating", { ascending: false });
+
+      if (toolsWithCategory) {
+        // Group tools by category_id, keeping top 10 per category
+        const byCategory = new Map<string, string[]>();
+        for (const tool of toolsWithCategory) {
+          if (!tool.category_id) continue;
+          const key = String(tool.category_id);
+          if (!byCategory.has(key)) byCategory.set(key, []);
+          const list = byCategory.get(key)!;
+          if (list.length < 10) list.push(tool.slug);
+        }
+
+        // Generate all pairs within each category
+        for (const slugs of byCategory.values()) {
+          for (let i = 0; i < slugs.length; i++) {
+            for (let j = i + 1; j < slugs.length; j++) {
+              toolPages.push({
+                url: `${BASE_URL}/compare/${slugs[i]}-vs-${slugs[j]}`,
+                lastModified: new Date(),
+                changeFrequency: "weekly" as const,
+                priority: 0.7,
+              });
+            }
+          }
         }
       }
     }

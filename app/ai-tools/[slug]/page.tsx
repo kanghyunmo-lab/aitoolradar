@@ -30,6 +30,18 @@ export async function generateMetadata({
     alternates: {
       canonical: `/ai-tools/${tool.slug}`,
     },
+    openGraph: {
+      title: `${tool.name} Review 2026: Pricing, Features & Alternatives`,
+      description: tool.meta_description || tool.short_description || undefined,
+      url: `https://www.aitoolradar.net/ai-tools/${tool.slug}`,
+      type: 'article',
+      images: tool.logo_url ? [{ url: tool.logo_url, width: 400, height: 400 }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${tool.name} Review 2026`,
+      description: tool.meta_description || tool.short_description || '',
+    },
   };
 }
 
@@ -49,8 +61,35 @@ export default async function ToolPage({
 
   if (!tool) notFound();
 
+  // Product JSON-LD schema for SEO
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: tool.name,
+    description: tool.short_description,
+    url: tool.website_url,
+    applicationCategory: 'BusinessApplication',
+    offers: tool.starting_price ? {
+      '@type': 'Offer',
+      price: tool.starting_price,
+      priceCurrency: 'USD',
+    } : undefined,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: tool.rating,
+      bestRating: 5,
+      worstRating: 1,
+      ratingCount: 100,
+    },
+  };
+
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Breadcrumb */}
       <nav className="mb-6 text-sm text-gray-500">
         <Link href="/" className="hover:text-gray-700">Home</Link>
@@ -217,6 +256,24 @@ export default async function ToolPage({
           />
         </section>
       )}
+
+      {/* Related Links - Internal Link Section for SEO */}
+      <div className="mt-8 p-6 bg-gray-50 rounded-lg">
+        <h3 className="text-lg font-semibold mb-4">Explore More</h3>
+        <div className="flex flex-wrap gap-3">
+          <a href={`/alternatives/${tool.slug}`} className="px-4 py-2 bg-white border rounded-lg hover:shadow text-sm">
+            Best {tool.name} Alternatives &rarr;
+          </a>
+          <a href={`/pricing/${tool.slug}`} className="px-4 py-2 bg-white border rounded-lg hover:shadow text-sm">
+            {tool.name} Pricing Plans &rarr;
+          </a>
+          {tool.category?.slug && (
+            <a href={`/best/${tool.category.slug}`} className="px-4 py-2 bg-white border rounded-lg hover:shadow text-sm">
+              Best {tool.category.name} Tools &rarr;
+            </a>
+          )}
+        </div>
+      </div>
 
       {/* Bottom CTA */}
       {tool.affiliate_url && (

@@ -46,6 +46,16 @@ export async function generateMetadata({
     alternates: {
       canonical: `/compare/${comparison}`,
     },
+    openGraph: {
+      title: `${toolA.name} vs ${toolB.name} (2026): Which Is Better?`,
+      description: `Compare ${toolA.name} and ${toolB.name} side-by-side. Pricing, features, pros & cons.`,
+      url: `https://www.aitoolradar.net/compare/${toolA.slug}-vs-${toolB.slug}`,
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${toolA.name} vs ${toolB.name} (2026)`,
+    },
   };
 }
 
@@ -104,8 +114,25 @@ export default async function ComparisonPage({
 
   const result = getWinner(toolA, toolB);
 
+  // BreadcrumbList JSON-LD for structured data / SEO
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.aitoolradar.net' },
+      { '@type': 'ListItem', position: 2, name: 'Compare', item: 'https://www.aitoolradar.net/compare' },
+      { '@type': 'ListItem', position: 3, name: `${toolA.name} vs ${toolB.name}`, item: `https://www.aitoolradar.net/compare/${toolA.slug}-vs-${toolB.slug}` },
+    ],
+  };
+
   return (
     <article className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+      {/* JSON-LD: BreadcrumbList structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Breadcrumb */}
       <nav className="mb-6 text-sm text-gray-500">
         <Link href="/" className="hover:text-gray-700">Home</Link>

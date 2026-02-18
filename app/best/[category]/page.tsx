@@ -45,6 +45,16 @@ export async function generateMetadata({
     alternates: {
       canonical: `/best/${categorySlug}`,
     },
+    openGraph: {
+      title: `Best ${category.name} in 2026 - Top Picks & Reviews`,
+      description: `Discover the best ${category.name}. Compare features, pricing, and reviews.`,
+      url: `https://www.aitoolradar.net/best/${category.slug}`,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Best ${category.name} in 2026`,
+    },
   };
 }
 
@@ -74,8 +84,26 @@ export default async function CategoryPage({
         .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
         .join(" ");
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `Best ${displayName} in 2026`,
+    description: `Top ${displayName} tools compared`,
+    numberOfItems: tools.length,
+    itemListElement: tools.map((tool, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: tool.name,
+      url: `https://www.aitoolradar.net/ai-tools/${tool.slug}`,
+    })),
+  };
+
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Breadcrumb */}
       <nav className="mb-6 text-sm text-gray-500">
         <Link href="/" className="hover:text-gray-700">Home</Link>
@@ -145,6 +173,26 @@ export default async function CategoryPage({
           </ul>
         </div>
       </section>
+
+      {/* Popular Comparisons in this category */}
+      {tools.length >= 2 && (
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold mb-6">Popular Comparisons</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {tools.slice(0, 6).flatMap((toolA, i) =>
+              tools.slice(i + 1, i + 2).map(toolB => (
+                <a
+                  key={`${toolA.slug}-${toolB.slug}`}
+                  href={`/compare/${toolA.slug}-vs-${toolB.slug}`}
+                  className="p-3 border rounded-lg hover:shadow text-sm text-center hover:border-blue-400 transition"
+                >
+                  {toolA.name} vs {toolB.name}
+                </a>
+              ))
+            )}
+          </div>
+        </div>
+      )}
     </article>
   );
 }

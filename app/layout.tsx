@@ -27,6 +27,18 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "AIToolRadar",
+    url: "https://www.aitoolradar.net",
+    images: [
+      {
+        url: "https://www.aitoolradar.net/og-default.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@aitoolradar",
   },
 };
 
@@ -40,6 +52,37 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900`}
       >
+        {/* WebSite + Organization JSON-LD structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://www.aitoolradar.net/#website",
+                  url: "https://www.aitoolradar.net",
+                  name: "AIToolRadar",
+                  description: "Compare and review the best AI tools",
+                  potentialAction: {
+                    "@type": "SearchAction",
+                    target:
+                      "https://www.aitoolradar.net/search?q={search_term_string}",
+                    "query-input": "required name=search_term_string",
+                  },
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://www.aitoolradar.net/#organization",
+                  name: "AIToolRadar",
+                  url: "https://www.aitoolradar.net",
+                  logo: "https://www.aitoolradar.net/logo.png",
+                },
+              ],
+            }),
+          }}
+        />
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
