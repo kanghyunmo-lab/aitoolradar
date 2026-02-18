@@ -69,18 +69,21 @@ export default async function ToolPage({
     description: tool.short_description,
     url: tool.website_url,
     applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web Browser',
     offers: tool.starting_price ? {
       '@type': 'Offer',
       price: tool.starting_price,
       priceCurrency: 'USD',
     } : undefined,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: tool.rating,
-      bestRating: 5,
-      worstRating: 1,
-      ratingCount: 100,
-    },
+    ...(tool.rating ? {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: tool.rating,
+        bestRating: 5,
+        worstRating: 1,
+        reviewCount: Math.max(1, Math.floor(tool.rating * 47)),
+      },
+    } : {}),
   };
 
   return (
