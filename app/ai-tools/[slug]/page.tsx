@@ -79,8 +79,8 @@ export default async function ToolPage({
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: tool.rating,
-        bestRating: 5,
-        worstRating: 1,
+        bestRating: 10,
+        worstRating: 0,
         reviewCount: Math.max(1, Math.floor(tool.rating * 47)),
       },
     } : {}),
