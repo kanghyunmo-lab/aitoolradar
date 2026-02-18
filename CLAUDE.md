@@ -29,7 +29,8 @@
 - 딥리서치 보고서: `../Programmatic SEO 수익화 전략 수립.md`
 
 ## Current Phase
-- Phase 1 완료 (프로젝트 셋업 + 코드 작성)
-- Phase 2 완료 (Supabase 연동: schema.sql, seed-data.sql 실행, .env.local 설정)
-- Phase 3 완료 (로컬 페이지 동작 확인)
-- Phase 4 진행 중 (도메인 구매 + Vercel 배포)
+- Phase 1~5 완료 ✅
+- Phase 6 진행 중 (SEO 최적화: JSON-LD, Open Graph, 내부 링크, 비교 페이지 확장)
+- 배포: www.aitoolradar.net (Vercel + GitHub Actions 자동 배포)
+- DB: 177개 AI 도구, 10개 카테고리 (Supabase)
+- 다음 작업: PROGRESS.md Phase 6 체크리스트 참고

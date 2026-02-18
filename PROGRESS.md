@@ -165,10 +165,61 @@ npm run dev
 
 ---
 
-## Phase 6~9: 이후 단계 (Claude와 함께 진행)
+## Phase 6: SEO 최적화 🔄 진행 중
 
-Phase 5까지 완료하면 Claude에게 다음 단계 요청하세요:
-- "Phase 6: SEO 최적화 해주세요"
+> 분석보고서(`L:\H3\aitoolradar_분석보고서_2026-02-18.md`) 기반 작업 목록
+
+### 왜 이게 중요한가?
+- 현재 JSON-LD가 0개 → Perplexity, Google AI가 데이터를 제대로 인식 못함
+- 177개 도구 페이지 모두 내용(content_html)이 비어있음 → 구글이 가치 없는 페이지로 판단
+- 내부 링크 없음 → 방문자가 1페이지 보고 바로 이탈
+
+---
+
+### 체크리스트 (우선순위 순)
+
+#### 🔴 1순위: 구조화 데이터 (JSON-LD) — Claude가 코드 작성
+- [ ] 도구 리뷰 페이지에 Product + Review Schema 추가
+- [ ] 비교 페이지에 BreadcrumbList Schema 추가
+- [ ] 카테고리 페이지에 ItemList Schema 추가
+- [ ] 홈페이지에 WebSite + Organization Schema 추가
+
+#### 🔴 2순위: Open Graph / SNS 공유 최적화 — Claude가 코드 작성
+- [ ] `layout.tsx`에 기본 OG 태그 추가
+- [ ] 각 페이지별 OG 제목, 설명 동적 적용 확인
+
+#### 🟡 3순위: 내부 링크 강화 — Claude가 코드 작성
+- [ ] 도구 리뷰 페이지에 "관련 비교 페이지 3개" 링크 추가
+- [ ] 도구 리뷰 페이지에 "대안 보기" 링크 추가
+- [ ] 카테고리 페이지에 "인기 비교" 섹션 추가
+
+#### 🟡 4순위: 비교 페이지 전수 확장 — Claude가 코드 작성
+- [ ] 현재 상위 30개만 비교 → 177개 전체로 확장 (카테고리 내)
+
+#### 🟢 5순위: Google Search Console 등록 — 직접 해야 함
+- [ ] Google Search Console → 속성 추가 (www.aitoolradar.net)
+- [ ] sitemap.xml 제출 (`www.aitoolradar.net/sitemap.xml`)
+- [ ] URL 색인 요청
+
+#### 🟢 6순위: 콘텐츠 채우기 — Claude가 SQL 작성, 직접 실행
+- [ ] 177개 도구 리뷰 내용(content_html) 자동 생성 SQL
+- [ ] Supabase SQL Editor에서 실행
+
+---
+
+### 완료 확인 체크리스트
+- [ ] JSON-LD 추가 → 구글 리치 스니펫 테스터 확인
+- [ ] Open Graph 추가 → opengraph.xyz 미리보기 확인
+- [ ] 내부 링크 추가 완료
+- [ ] Google Search Console 등록 + sitemap 제출
+- [ ] git push → Vercel 자동 배포 완료
+
+---
+
+## Phase 7~9: 이후 단계 (Claude와 함께 진행)
+
+Phase 6까지 완료하면 Claude에게 다음 단계 요청하세요:
+- "Phase 7: 제휴 프로그램 가입 도와주세요"
 - 등등...
 
 ---
