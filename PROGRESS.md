@@ -179,22 +179,22 @@ npm run dev
 ### 체크리스트 (우선순위 순)
 
 #### 🔴 1순위: 구조화 데이터 (JSON-LD) — Claude가 코드 작성
-- [ ] 도구 리뷰 페이지에 Product + Review Schema 추가
-- [ ] 비교 페이지에 BreadcrumbList Schema 추가
-- [ ] 카테고리 페이지에 ItemList Schema 추가
-- [ ] 홈페이지에 WebSite + Organization Schema 추가
+- [x] 도구 리뷰 페이지에 SoftwareApplication + AggregateRating Schema 추가 ✅
+- [x] 비교 페이지에 BreadcrumbList Schema 추가 ✅
+- [x] 카테고리 페이지에 ItemList Schema 추가 ✅
+- [x] 홈페이지에 WebSite + Organization Schema 추가 ✅
 
 #### 🔴 2순위: Open Graph / SNS 공유 최적화 — Claude가 코드 작성
-- [ ] `layout.tsx`에 기본 OG 태그 추가
-- [ ] 각 페이지별 OG 제목, 설명 동적 적용 확인
+- [x] `layout.tsx`에 기본 OG 태그 추가 ✅
+- [x] 각 페이지별 OG 제목, 설명 동적 적용 확인 ✅ (도구/비교/카테고리 모두 적용)
 
 #### 🟡 3순위: 내부 링크 강화 — Claude가 코드 작성
-- [ ] 도구 리뷰 페이지에 "관련 비교 페이지 3개" 링크 추가
-- [ ] 도구 리뷰 페이지에 "대안 보기" 링크 추가
-- [ ] 카테고리 페이지에 "인기 비교" 섹션 추가
+- [x] 도구 리뷰 페이지에 "Explore More" 링크 추가 (대안, 가격, 카테고리) ✅
+- [x] 도구 리뷰 페이지에 "대안 보기" 링크 추가 ✅
+- [x] 카테고리 페이지에 "인기 비교" 섹션 추가 ✅
 
 #### 🟡 4순위: 비교 페이지 전수 확장 — Claude가 코드 작성
-- [ ] 현재 상위 30개만 비교 → 177개 전체로 확장 (카테고리 내)
+- [x] 카테고리 내 전체 도구로 비교 확장 완료 (450개 → 1,526개 비교 페이지) ✅
 
 #### 🟢 5순위: Google Search Console 등록 — 직접 해야 함
 - [ ] Google Search Console → 속성 추가 (www.aitoolradar.net)
@@ -208,9 +208,9 @@ npm run dev
 ---
 
 ### 완료 확인 체크리스트
-- [ ] JSON-LD 추가 → 구글 리치 스니펫 테스터 확인
-- [ ] Open Graph 추가 → opengraph.xyz 미리보기 확인
-- [ ] 내부 링크 추가 완료
+- [x] JSON-LD 추가 → 구글 리치 스니펫 테스터 확인 ✅
+- [x] Open Graph 추가 → opengraph.xyz 미리보기 확인 ✅
+- [x] 내부 링크 추가 완료 ✅
 - [ ] Google Search Console 등록 + sitemap 제출
 - [ ] git push → Vercel 자동 배포 완료
 

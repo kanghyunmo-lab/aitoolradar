@@ -106,7 +106,7 @@ export async function getPopularComparisons(): Promise<
 
   if (!tools || tools.length < 2) return [];
 
-  // Build top-10-per-category map
+  // Build per-category map (all tools, not limited)
   const byCategory = new Map<
     string,
     Array<{ slug: string; name: string }>
@@ -115,11 +115,10 @@ export async function getPopularComparisons(): Promise<
     if (!tool.category_id) continue;
     const key = String(tool.category_id);
     if (!byCategory.has(key)) byCategory.set(key, []);
-    const list = byCategory.get(key)!;
-    if (list.length < 10) list.push({ slug: tool.slug, name: tool.name });
+    byCategory.get(key)!.push({ slug: tool.slug, name: tool.name });
   }
 
-  // Generate same-category comparison pairs (C(10,2) = 45 per category)
+  // Generate same-category comparison pairs for all tools
   const comparisons: Array<{
     slugA: string;
     slugB: string;

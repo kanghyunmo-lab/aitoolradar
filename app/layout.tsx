@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
   ),
+  verification: {
+    google: "IZGbZ60wTX18dYWOMjQGtG6Zm1-eqyaC16K0cuKvqxI",
+  },
   openGraph: {
     type: "website",
     siteName: "AIToolRadar",
