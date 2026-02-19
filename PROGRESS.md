@@ -89,7 +89,9 @@ Phase 9: 분석+최적화          [░░░░░░░░░░░░░░�
 
 > **수익 없이는 트래픽이 의미 없음. 제휴 링크가 수익의 핵심.**
 
-### 🔴 긴급: 제휴 프로그램 가입 — 직접 해야 함
+### 🔴 긴급: 제휴 프로그램 가입 — 직접 해야 함 🧑‍💻
+> 추천: 직접 웹사이트 방문. AI 도움 필요시 → Gemini 2.5 Pro (가입 절차 검색)
+
 | 프로그램 | 커미션 | 가입 URL | 상태 |
 |---------|--------|---------|------|
 | Jasper AI | 30% 리커링 | jasper.ai/partners | [ ] |
@@ -99,15 +101,20 @@ Phase 9: 분석+최적화          [░░░░░░░░░░░░░░�
 | Make.com | 20% 리커링 | make.com/en/affiliate | [ ] |
 | Notion | 50% 첫결제 | notion.so/affiliates | [ ] |
 
-### 🔴 긴급: GA4 설치 — Claude가 코드 작성
-- [ ] Google Analytics 4 측정 ID 발급 (직접)
-- [ ] GA4 코드 사이트에 추가 (Claude)
-- [ ] 기본 이벤트 추적 설정
+### 🔴 긴급: GA4 설치 — ⚡ Claude Code
+> 추천 모델: **Claude Code** (코드 수정 필요)
+> Claude Code 리밋 시: 코드 부분은 대기, GA4 측정 ID 발급만 먼저 직접 진행
 
-### 🟡 중요: 제휴 링크 사이트에 반영 — Claude가 코드 작성
-- [ ] affiliate_url 필드에 제휴 링크 업데이트 (SQL)
-- [ ] CTA 버튼 "Try [Tool] Free" 등 추가/개선
-- [ ] 클릭 추적 이벤트 연결
+- [ ] Google Analytics 4 측정 ID 발급 (직접 🧑‍💻)
+- [ ] GA4 코드 사이트에 추가 (⚡ Claude Code)
+- [ ] 기본 이벤트 추적 설정 (⚡ Claude Code)
+
+### 🟡 중요: 제휴 링크 사이트에 반영
+> 추천 모델: SQL 작성 → **Sonnet 4.5** / **Gemini 2.5 Pro** / **Opus 4.6** / 코드 수정 → **Claude Code**
+
+- [ ] affiliate_url 필드에 제휴 링크 업데이트 SQL (Sonnet/Gemini/Opus로 SQL 생성 가능)
+- [ ] CTA 버튼 "Try [Tool] Free" 등 추가/개선 (⚡ Claude Code)
+- [ ] 클릭 추적 이벤트 연결 (⚡ Claude Code)
 
 ---
 
@@ -115,31 +122,48 @@ Phase 9: 분석+최적화          [░░░░░░░░░░░░░░�
 
 > **사이트만 만들면 아무도 안 옴. 적극적으로 트래픽을 끌어와야 함.**
 
-### 🔴 블로그 기능 추가 — Claude가 코드 작성
-- [ ] 블로그 페이지 템플릿 (`app/blog/[slug]/page.tsx`)
-- [ ] DB 테이블 추가 (blog_posts)
-- [ ] 사이트맵에 블로그 포함
-- [ ] 첫 번째 블로그 글 5개 작성
+### 🔴 블로그 기능 추가 — ⚡ Claude Code
+> 추천 모델: **Claude Code** (코드 작성 필수)
+> Claude Code 리밋 시: 블로그 글 내용만 먼저 다른 AI로 작성해두기
+
+- [ ] 블로그 페이지 템플릿 (`app/blog/[slug]/page.tsx`) (⚡ Claude Code)
+- [ ] DB 테이블 추가 (blog_posts) (⚡ Claude Code)
+- [ ] 사이트맵에 블로그 포함 (⚡ Claude Code)
+- [ ] 첫 번째 블로그 글 5개 작성 (아래 참고)
 
 #### 블로그 글 주제 (롱테일 키워드 타겟)
-| 주제 | 타겟 키워드 |
-|------|-----------|
-| Best AI Writing Tools for Small Business 2026 | "best ai writing tools small business" |
-| Jasper vs Copy.ai: Which AI Writer is Better? | "jasper vs copy ai" |
-| Free AI Tools for Startups in 2026 | "free ai tools startups" |
-| How to Use AI to Grow Your Business | "ai tools for business growth" |
-| Complete Guide to AI Image Generators | "ai image generator guide" |
+> 추천 모델: **Sonnet 4.5** (가성비 최고) / **Gemini 2.5 Pro** (웹 검색 필요 시) / **Opus 4.6** (최고 품질)
 
-### 🟡 커뮤니티 마케팅 — 직접 해야 함
+| 주제 | 타겟 키워드 | 추천 AI |
+|------|-----------|---------|
+| Best AI Writing Tools for Small Business 2026 | "best ai writing tools small business" | Sonnet 4.5 / Gemini |
+| Jasper vs Copy.ai: Which AI Writer is Better? | "jasper vs copy ai" | Sonnet 4.5 |
+| Free AI Tools for Startups in 2026 | "free ai tools startups" | Sonnet 4.5 / Gemini |
+| How to Use AI to Grow Your Business | "ai tools for business growth" | Sonnet 4.5 / Gemini |
+| Complete Guide to AI Image Generators | "ai image generator guide" | Sonnet 4.5 |
+
+### 🟡 커뮤니티 마케팅 — 직접 🧑‍💻
+> 추천: **Gemini 2.5 Pro** (홍보 글 초안 작성, 키워드 리서치)
+
 - [ ] Reddit 활동 (r/artificial, r/marketing, r/startups)
 - [ ] X(Twitter) AI 도구 리뷰 스레드
 - [ ] Product Hunt 런칭
 - [ ] 관련 Facebook/Discord 그룹 참여
 
-### 🟡 Google Indexing API — Claude가 코드 작성
-- [ ] Google Cloud Console에서 API 키 발급 (직접)
-- [ ] Indexing API 자동 호출 스크립트 작성 (Claude)
-- [ ] 새 페이지 자동 색인 요청
+### 🟡 Google Indexing API
+> 추천 모델: API 키 발급 → 직접 🧑‍💻 / 스크립트 작성 → **Claude Code**
+
+- [ ] Google Cloud Console에서 API 키 발급 (직접 🧑‍💻)
+- [ ] Indexing API 자동 호출 스크립트 작성 (⚡ Claude Code)
+- [ ] 새 페이지 자동 색인 요청 (⚡ Claude Code)
+
+### 🟢 나머지 151개 content_html 작성
+> 추천 모델: **Sonnet 4.5** (가성비 최고) / **Opus 4.6** (최고 품질) / **Gemini 2.5 Pro** (대량 생성)
+> Claude Code 리밋 시 이 작업을 진행하면 효율적!
+
+- [ ] 도구 목록 + slug 정리 (어떤 AI든 가능)
+- [ ] 20개씩 나눠서 SQL UPDATE문 생성 (Sonnet 4.5 추천, 품질 더 필요시 Opus)
+- [ ] Supabase SQL Editor에서 실행 (직접 🧑‍💻)
 
 ---
 
@@ -147,11 +171,33 @@ Phase 9: 분석+최적화          [░░░░░░░░░░░░░░�
 
 > Phase 7-8 진행 후, 데이터 기반으로 최적화
 
-- [ ] GA4 데이터 분석 (어떤 페이지에 트래픽이 오는지)
-- [ ] Search Console 성과 확인 (어떤 키워드로 노출되는지)
-- [ ] 전환율 높은 페이지 식별 → 해당 카테고리 콘텐츠 강화
-- [ ] A/B 테스트 (CTA 버튼 문구, 색상 등)
-- [ ] 나머지 151개 content_html 작성 (트래픽 데이터 기반 우선순위)
+- [ ] GA4 데이터 분석 (Gemini 2.5 Pro — 데이터 해석)
+- [ ] Search Console 성과 확인 (직접 🧑‍💻 + Gemini로 분석)
+- [ ] 전환율 높은 페이지 식별 → 해당 카테고리 콘텐츠 강화 (Sonnet 4.5 / Opus 4.6)
+- [ ] A/B 테스트 CTA 버튼 (⚡ Claude Code)
+- [ ] 키워드 리서치 확장 (Gemini 2.5 Pro — 웹 검색 가능)
+
+---
+
+## 추천 AI 모델 가이드
+
+| 아이콘 | 의미 | 언제 사용 |
+|--------|------|----------|
+| ⚡ Claude Code | 코드 작성/수정 필요 | 파일 수정, 기능 추가, git push |
+| 🤖 Opus 4.6 | 최고 품질 콘텐츠 | 심층 분석, 복잡한 리뷰 (비용 높음) |
+| 🎯 Sonnet 4.5 | 고품질 + 가성비 | 리뷰 작성, SQL 생성, 블로그 글 (Opus 90% 품질, 5배 저렴) |
+| 🔍 Gemini 2.5 Pro | 웹 검색 + 대량 작성 | 키워드 리서치, 트렌드 분석, 최신 정보 필요 시 |
+| 🧑‍💻 직접 | 사람이 직접 해야 함 | 제휴 가입, API 키 발급, 커뮤니티 활동 |
+
+### Claude Code 리밋 걸렸을 때 할 수 있는 작업
+1. **Sonnet 4.5 / Opus 4.6**: 나머지 151개 content_html SQL 생성 (20개씩)
+2. **Sonnet 4.5 / Gemini 2.5 Pro**: 블로그 글 5개 작성 (HTML 형식)
+3. **Gemini 2.5 Pro**: 키워드 리서치 (카테고리별 롱테일 20개)
+4. **Sonnet 4.5 / Gemini 2.5 Pro**: Reddit/X 홍보 글 초안 작성
+5. **직접**: 제휴 프로그램 가입 신청
+6. **직접**: GA4 측정 ID 발급
+
+> **Opus vs Sonnet 선택 기준:** 대부분 Sonnet 4.5로 충분. Opus는 경쟁 키워드 심층 분석 등 복잡한 작업에만 사용.
 
 ---
 
@@ -172,13 +218,15 @@ Phase 9: 분석+최적화          [░░░░░░░░░░░░░░�
 
 ## 지금 당장 해야 할 것 (우선순위)
 
-| 순위 | 작업 | 누가 | 소요 시간 |
-|------|------|------|----------|
-| **1** | git push 배포 | Claude 안내 | 5분 |
-| **2** | GA4 설치 | Claude 코드 + 직접 설정 | 30분 |
-| **3** | 제휴 프로그램 가입 (최소 3개) | 직접 | 1-2시간 |
-| **4** | 블로그 기능 추가 | Claude 코드 | 1세션 |
-| **5** | 첫 블로그 글 작성 | Claude 도움 | 1세션 |
+| 순위 | 작업 | 누가/모델 | 소요 시간 |
+|------|------|----------|----------|
+| **1** | ~~git push 배포~~ | ~~Claude Code~~ | ✅ 완료 |
+| **2** | GA4 설치 | ⚡ Claude Code + 직접 | 30분 |
+| **3** | 제휴 프로그램 가입 (최소 3개) | 직접 🧑‍💻 | 1-2시간 |
+| **4** | 블로그 기능 추가 | ⚡ Claude Code | 1세션 |
+| **5** | 블로그 글 5개 작성 | 🔍 Gemini 2.5 Pro | 리밋 시 진행 |
+| **6** | 나머지 content_html SQL | 🎯 Sonnet 4.5 / 🤖 Opus 4.6 | 리밋 시 진행 |
+| **7** | 키워드 리서치 | 🔍 Gemini 2.5 Pro | 리밋 시 진행 |
 
 ---
 
