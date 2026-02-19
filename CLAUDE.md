@@ -30,7 +30,9 @@
 
 ## Current Phase
 - Phase 1~5 완료 ✅
-- Phase 6 진행 중 (SEO 최적화: JSON-LD, Open Graph, 내부 링크, 비교 페이지 확장)
-- 배포: www.aitoolradar.net (Vercel + GitHub Actions 자동 배포)
-- DB: 177개 AI 도구, 10개 카테고리 (Supabase)
-- 다음 작업: PROGRESS.md Phase 6 체크리스트 참고
+- Phase 6 SEO 최적화 80% 완료 (JSON-LD, OG, 내부링크, GSC 등록, 비교 확장, content_html 26개)
+- Phase 7 수익 기반 구축 대기 (제휴 가입, GA4, 블로그)
+- 배포: www.aitoolradar.net (Vercel + GitHub 자동 배포)
+- DB: 177개 AI 도구, 10개 카테고리, 2,057 페이지 (Supabase)
+- 긴급: git push 배포 필요 (코드 변경사항 미반영)
+- 다음 작업: PROGRESS.md "지금 당장 해야 할 것" 참고
