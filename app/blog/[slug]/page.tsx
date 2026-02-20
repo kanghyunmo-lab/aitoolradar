@@ -4,6 +4,9 @@ import Link from "next/link";
 import { getBlogPostBySlug, getBlogSlugs, getRecentBlogPosts } from "@/lib/queries/blog";
 import type { BlogPost } from "@/lib/types";
 
+// 새 글 추가 시 온디맨드 렌더링 허용 (재배포 없이 새 슬러그 지원)
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   try {
     const slugs = await getBlogSlugs();

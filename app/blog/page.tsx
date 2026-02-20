@@ -3,6 +3,9 @@ import Link from "next/link";
 import { getAllBlogPosts } from "@/lib/queries/blog";
 import type { BlogPost } from "@/lib/types";
 
+// 1시간마다 자동 갱신 (새 블로그 글 추가 시 자동 반영)
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "AI Tools Blog: Guides, Reviews & Comparisons | AIToolRadar",
   description:
