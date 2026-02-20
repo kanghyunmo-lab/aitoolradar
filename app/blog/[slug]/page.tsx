@@ -116,17 +116,28 @@ export default async function BlogPostPage({
           </nav>
 
           {/* Post Header */}
-          <header className="mb-8">
+          <header className="mb-10 pb-8 border-b border-gray-200">
             {post.category && (
-              <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-wide text-blue-600">
+              <span className="mb-3 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-600">
                 {post.category}
               </span>
             )}
-            <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl leading-tight">
+            <h1 className="mt-3 text-3xl font-extrabold text-gray-900 sm:text-4xl leading-tight">
               {post.title}
             </h1>
-            <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-500">
-              <span>By {post.author}</span>
+            {post.excerpt && (
+              <p className="mt-4 text-lg text-gray-600 leading-relaxed">
+                {post.excerpt}
+              </p>
+            )}
+            <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-gray-500">
+              <div className="flex items-center gap-2">
+                <div className="h-7 w-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                  AI
+                </div>
+                <span className="font-medium text-gray-700">{post.author}</span>
+              </div>
+              <span className="text-gray-300">·</span>
               <span>
                 {new Date(post.published_at).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -134,6 +145,7 @@ export default async function BlogPostPage({
                   day: "numeric",
                 })}
               </span>
+              <span className="text-gray-300">·</span>
               <span>{post.reading_time_minutes} min read</span>
             </div>
           </header>
@@ -150,7 +162,7 @@ export default async function BlogPostPage({
           {/* Article Body */}
           {post.content_html ? (
             <div
-              className="prose prose-lg max-w-none prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-10 prose-h3:text-xl prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-table:text-sm"
+              className="blog-content"
               dangerouslySetInnerHTML={{ __html: post.content_html }}
             />
           ) : (
