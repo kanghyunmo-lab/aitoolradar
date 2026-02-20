@@ -55,3 +55,19 @@ export interface Integration {
   integration_type: string | null;
   description: string | null;
 }
+
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  content_html: string | null;
+  meta_description: string | null;
+  cover_image_url: string | null;
+  author: string;
+  category: string | null;
+  reading_time_minutes: number;
+  is_published: boolean;
+  published_at: string;
+  updated_at: string;
+}

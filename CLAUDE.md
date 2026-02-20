@@ -29,10 +29,10 @@
 - 딥리서치 보고서: `../Programmatic SEO 수익화 전략 수립.md`
 
 ## Current Phase
-- Phase 1~5 완료 ✅
-- Phase 6 SEO 최적화 80% 완료 (JSON-LD, OG, 내부링크, GSC 등록, 비교 확장, content_html 26개)
-- Phase 7 수익 기반 구축 대기 (제휴 가입, GA4, 블로그)
+- Phase 1~6 완료 ✅ (SEO 80%), Phase 7 진행 중 (GA4 ✅, 제휴 가입 🔄)
+- Phase 8 트래픽: 블로그 기능 추가 1순위 진행 중 🔄
 - 배포: www.aitoolradar.net (Vercel + GitHub 자동 배포)
 - DB: 177개 AI 도구, 10개 카테고리, 2,057 페이지 (Supabase)
-- 긴급: git push 배포 필요 (코드 변경사항 미반영)
+- 블로그 글 10개 준비 완료 (`scripts/blog-posts/*.html`)
+- 현재 작업 순위: (1) 블로그 기능 추가 → (2) 비교 페이지 404 수정 → (3) 제휴 링크 CTA → (4) content_html 151개 (Antigravity)
 - 다음 작업: PROGRESS.md "지금 당장 해야 할 것" 참고

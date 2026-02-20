@@ -1,7 +1,7 @@
 # AIToolRadar 진행 상황 대시보드
 
 > 이 파일을 열면 지금 어디까지 왔는지, 다음에 뭘 해야 하는지 한눈에 볼 수 있습니다.
-> 마지막 업데이트: 2026-02-19
+> 마지막 업데이트: 2026-02-20
 
 ---
 
@@ -26,7 +26,8 @@ Phase 9: 분석+최적화          [░░░░░░░░░░░░░░�
 | 총 페이지 수 | 2,057개 (사이트맵 기준) |
 | 비교 페이지 | 1,526개 |
 | content_html 작성 | 26/177개 |
-| 제휴 링크 가입 | 0개 |
+| 블로그 글 준비 | 10개 (scripts/blog-posts/*.html) ✅ |
+| 제휴 링크 가입 | 진행 중 🔄 |
 | 월 방문자 | ~0명 |
 | 월 수익 | 0원 |
 
@@ -79,27 +80,18 @@ Phase 9: 분석+최적화          [░░░░░░░░░░░░░░�
 - [x] 사이트맵 제출 (2,057 페이지 발견) ✅
 - [x] content_html 26개 도구 작성 + Supabase 실행 ✅
 
+### 완료된 작업 추가 ✅
+- [x] git push → Vercel 배포 ✅
+- [x] GA4 설치 완료 ✅
+
 ### 남은 작업
-- [ ] **git push → Vercel 배포** (코드 변경사항 + 26개 콘텐츠 반영)
-- [ ] 나머지 151개 content_html (급하지 않음 — 트래픽 확인 후 결정)
+- [ ] 나머지 151개 content_html (4순위 — Antigravity로 진행)
 
 ---
 
-## Phase 7: 수익 기반 구축 ⬅️ 다음 단계
+## Phase 7: 수익 기반 구축 🔄 진행 중
 
 > **수익 없이는 트래픽이 의미 없음. 제휴 링크가 수익의 핵심.**
-
-### 🔴 긴급: 제휴 프로그램 가입 — 직접 해야 함 🧑‍💻
-> 추천: 직접 웹사이트 방문. AI 도움 필요시 → Gemini 2.5 Pro (가입 절차 검색)
-
-| 프로그램 | 커미션 | 가입 URL | 상태 |
-|---------|--------|---------|------|
-| Jasper AI | 30% 리커링 | jasper.ai/partners | [ ] |
-| Copy.ai | 45% 리커링 | copy.ai/affiliates | [ ] |
-| Writesonic | 30% 리커링 | writesonic.com/affiliates | [ ] |
-| Zapier | 20% 리커링 | zapier.com/platform/partner | [ ] |
-| Make.com | 20% 리커링 | make.com/en/affiliate | [ ] |
-| Notion | 50% 첫결제 | notion.so/affiliates | [ ] |
 
 ### ✅ 완료: GA4 설치
 - [x] Google Analytics 4 측정 ID 발급 (G-VC94ZW0C5N) ✅
@@ -107,10 +99,21 @@ Phase 9: 분석+최적화          [░░░░░░░░░░░░░░�
 - [x] Vercel 환경변수 추가 + Redeploy ✅
 - [x] 향상된 측정 활성화 (페이지 조회, 스크롤, 이탈 클릭) ✅
 
-### 🟡 중요: 제휴 링크 사이트에 반영
-> 추천 모델: SQL 작성 → **Sonnet 4.5** / **Gemini 2.5 Pro** / **Opus 4.6** / 코드 수정 → **Claude Code**
+### 🔄 진행 중: 제휴 프로그램 가입 — 직접 해야 함 🧑‍💻
 
-- [ ] affiliate_url 필드에 제휴 링크 업데이트 SQL (Sonnet/Gemini/Opus로 SQL 생성 가능)
+| 프로그램 | 커미션 | 가입 URL | 상태 |
+|---------|--------|---------|------|
+| Jasper AI | 30% 리커링 | jasper.ai/partners | 🔄 진행 중 |
+| Copy.ai | 45% 리커링 | copy.ai/affiliates | 🔄 진행 중 |
+| Writesonic | 30% 리커링 | writesonic.com/affiliates | 🔄 진행 중 |
+| Zapier | 20% 리커링 | zapier.com/platform/partner | [ ] |
+| Make.com | 20% 리커링 | make.com/en/affiliate | [ ] |
+| Notion | 50% 첫결제 | notion.so/affiliates | [ ] |
+
+### 3순위: 제휴 링크 사이트에 반영 — ⚡ Claude Code
+> 제휴 가입 완료 후 진행
+
+- [ ] affiliate_url 필드에 제휴 링크 업데이트 SQL
 - [ ] CTA 버튼 "Try [Tool] Free" 등 추가/개선 (⚡ Claude Code)
 - [ ] 클릭 추적 이벤트 연결 (⚡ Claude Code)
 
@@ -120,25 +123,40 @@ Phase 9: 분석+최적화          [░░░░░░░░░░░░░░�
 
 > **사이트만 만들면 아무도 안 옴. 적극적으로 트래픽을 끌어와야 함.**
 
-### 🔴 블로그 기능 추가 — ⚡ Claude Code
-> 추천 모델: **Claude Code** (코드 작성 필수)
-> Claude Code 리밋 시: 블로그 글 내용만 먼저 다른 AI로 작성해두기
+### 1순위: 블로그 기능 추가 — ⚡ Claude Code ← **지금 진행 중**
 
-- [ ] 블로그 페이지 템플릿 (`app/blog/[slug]/page.tsx`) (⚡ Claude Code)
-- [ ] DB 테이블 추가 (blog_posts) (⚡ Claude Code)
-- [ ] 사이트맵에 블로그 포함 (⚡ Claude Code)
-- [ ] 첫 번째 블로그 글 5개 작성 (아래 참고)
+> 블로그 글 10개 이미 준비 완료! (`scripts/blog-posts/*.html`)
+> 기능만 추가하면 바로 발행 가능.
 
-#### 블로그 글 주제 (롱테일 키워드 타겟)
-> 추천 모델: **Sonnet 4.5** (가성비 최고) / **Gemini 2.5 Pro** (웹 검색 필요 시) / **Opus 4.6** (최고 품질)
+- [ ] DB 테이블 추가 (blog_posts) — Supabase SQL Editor 실행
+- [ ] 블로그 목록 페이지 (`app/blog/page.tsx`)
+- [ ] 블로그 상세 페이지 (`app/blog/[slug]/page.tsx`)
+- [ ] 사이트맵에 블로그 포함 (`app/sitemap.ts` 수정)
+- [ ] 헤더 네비게이션에 Blog 메뉴 추가
+- [ ] 블로그 글 10개 DB에 입력 SQL 생성
+- [ ] git push → Vercel 배포
 
-| 주제 | 타겟 키워드 | 추천 AI |
-|------|-----------|---------|
-| Best AI Writing Tools for Small Business 2026 | "best ai writing tools small business" | Sonnet 4.5 / Gemini |
-| Jasper vs Copy.ai: Which AI Writer is Better? | "jasper vs copy ai" | Sonnet 4.5 |
-| Free AI Tools for Startups in 2026 | "free ai tools startups" | Sonnet 4.5 / Gemini |
-| How to Use AI to Grow Your Business | "ai tools for business growth" | Sonnet 4.5 / Gemini |
-| Complete Guide to AI Image Generators | "ai image generator guide" | Sonnet 4.5 |
+#### 준비된 블로그 글 목록 ✅ (scripts/blog-posts/)
+| 파일 | 타겟 키워드 |
+|------|-----------|
+| blog-01-jasper-vs-copyai-vs-writesonic.html | jasper vs copy ai, best ai writing tool 2026 |
+| blog-02-free-ai-tools-for-startups.html | free ai tools startups 2026 |
+| blog-03-chatgpt-vs-claude-vs-gemini.html | chatgpt vs claude vs gemini |
+| blog-04-complete-guide-ai-image-generators.html | ai image generator guide |
+| blog-05-automate-business-with-ai.html | automate business with ai |
+| blog-06-best-ai-coding-assistants.html | best ai coding assistant 2026 |
+| blog-07-ai-writing-tools-small-business.html | ai writing tools small business |
+| blog-08-midjourney-vs-dalle-vs-stable-diffusion.html | midjourney vs dalle vs stable diffusion |
+| blog-09-ai-tools-replace-expensive-software.html | ai tools replace software |
+| blog-10-how-to-use-perplexity-ai-research.html | how to use perplexity ai |
+
+### 2순위: 비교 페이지 404 수정 — ⚡ Claude Code
+
+> 푸터 "Popular Comparisons" 링크가 모두 404. 구글 랭킹 하락 요인.
+
+- [ ] Footer.tsx에서 404 발생 링크 목록 확인
+- [ ] 실제 작동하는 비교 페이지 URL로 교체 또는 섹션 제거
+- [ ] git push → 배포
 
 ### 🟡 커뮤니티 마케팅 — 직접 🧑‍💻
 > 추천: **Gemini 2.5 Pro** (홍보 글 초안 작성, 키워드 리서치)
@@ -216,15 +234,15 @@ Phase 9: 분석+최적화          [░░░░░░░░░░░░░░�
 
 ## 지금 당장 해야 할 것 (우선순위)
 
-| 순위 | 작업 | 누가/모델 | 소요 시간 |
-|------|------|----------|----------|
-| **1** | ~~git push 배포~~ | ~~Claude Code~~ | ✅ 완료 |
-| **2** | GA4 설치 | ⚡ Claude Code + 직접 | 30분 |
-| **3** | 제휴 프로그램 가입 (최소 3개) | 직접 🧑‍💻 | 1-2시간 |
-| **4** | 블로그 기능 추가 | ⚡ Claude Code | 1세션 |
-| **5** | 블로그 글 5개 작성 | 🔍 Gemini 2.5 Pro | 리밋 시 진행 |
-| **6** | 나머지 content_html SQL | 🎯 Sonnet 4.5 / 🤖 Opus 4.6 | 리밋 시 진행 |
-| **7** | 키워드 리서치 | 🔍 Gemini 2.5 Pro | 리밋 시 진행 |
+| 순위 | 작업 | 누가/모델 | 상태 |
+|------|------|----------|------|
+| ~~1~~ | ~~git push 배포~~ | ~~Claude Code~~ | ✅ 완료 |
+| ~~2~~ | ~~GA4 설치~~ | ~~Claude Code + 직접~~ | ✅ 완료 |
+| **1** | **블로그 기능 추가** (글 10개 준비 완료) | ⚡ Claude Code | 🔄 **지금 진행** |
+| **2** | **비교 페이지 404 수정** | ⚡ Claude Code | ⬅️ 다음 |
+| **3** | **제휴 링크 CTA 반영** (가입 완료 후) | ⚡ Claude Code | 대기 |
+| **3-병행** | 제휴 프로그램 가입 (최소 3개) | 직접 🧑‍💻 | 🔄 진행 중 |
+| **4** | 나머지 content_html 151개 SQL | 🤖 Antigravity | 대기 |
 
 ---
 

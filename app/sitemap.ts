@@ -93,5 +93,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // DB not connected
   }
 
-  return [...staticPages, ...categoryPages, ...toolPages];
+  // Blog pages
+  let blogPages: MetadataRoute.Sitemap = [];
+  try {
+    const { createClient: createClient2 } = await import("@/lib/supabase/server");
+    const supabase2 = await createClient2();
+    const { data: posts } = await supabase2
+      .from("blog_posts")
+      .select("slug, updated_at")
+      .eq("is_published", true);
+
+    if (posts) {
+      blogPages = [
+        {
+          url: `${BASE_URL}/blog`,
+          lastModified: new Date(),
+          changeFrequency: "weekly" as const,
+          priority: 0.9,
+        },
+        ...posts.map((post) => ({
+          url: `${BASE_URL}/blog/${post.slug}`,
+          lastModified: new Date(post.updated_at),
+          changeFrequency: "monthly" as const,
+          priority: 0.8,
+        })),
+      ];
+    }
+  } catch {
+    // blog table not yet created
+  }
+
+  return [...staticPages, ...categoryPages, ...toolPages, ...blogPages];
 }

@@ -44,6 +44,12 @@ export default function Header() {
           >
             Automation
           </Link>
+          <Link
+            href="/blog"
+            className="text-sm font-semibold text-blue-600 hover:text-blue-700"
+          >
+            Blog
+          </Link>
         </div>
       </nav>
     </header>
