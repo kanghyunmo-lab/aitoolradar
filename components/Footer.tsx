@@ -34,7 +34,7 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-gray-900">Popular Comparisons</h3>
             <ul className="mt-4 space-y-2">
               <li>
-                <Link href="/compare/chatgpt-vs-claude" className="text-sm text-gray-600 hover:text-gray-900">
+                <Link href="/compare/chatgpt-vs-claude-ai" className="text-sm text-gray-600 hover:text-gray-900">
                   ChatGPT vs Claude
                 </Link>
               </li>
