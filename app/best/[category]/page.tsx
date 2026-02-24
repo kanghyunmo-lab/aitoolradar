@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getToolsByCategory, getCategorySlugs } from "@/lib/queries/tools";
-import ToolCard from "@/components/ToolCard";
+import CategoryToolList from "@/components/CategoryToolList";
 
 export async function generateStaticParams() {
   try {
@@ -19,6 +19,7 @@ export async function generateMetadata({
   params: Promise<{ category: string }>;
 }): Promise<Metadata> {
   const { category: categorySlug } = await params;
+  const year = new Date().getFullYear();
 
   const { category } = await getToolsByCategory(categorySlug).catch(() => ({
     tools: [],
@@ -32,13 +33,13 @@ export async function generateMetadata({
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
     return {
-      title: `Best ${name} in 2026`,
+      title: `Best ${name} in ${year}`,
       description: `Compare the best ${name.toLowerCase()} with honest reviews and pricing data. Find the perfect tool for your needs.`,
     };
   }
 
   return {
-    title: `Best ${category.name} in 2026 - Top Picks & Reviews`,
+    title: `Best ${category.name} in ${year} - Top Picks & Reviews`,
     description:
       category.meta_description ||
       `Compare the best ${category.name.toLowerCase()} with honest reviews and pricing data. Find the perfect tool for your needs.`,
@@ -46,14 +47,14 @@ export async function generateMetadata({
       canonical: `/best/${categorySlug}`,
     },
     openGraph: {
-      title: `Best ${category.name} in 2026 - Top Picks & Reviews`,
+      title: `Best ${category.name} in ${year} - Top Picks & Reviews`,
       description: `Discover the best ${category.name}. Compare features, pricing, and reviews.`,
       url: `https://www.aitoolradar.net/best/${category.slug}`,
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `Best ${category.name} in 2026`,
+      title: `Best ${category.name} in ${year}`,
     },
   };
 }
@@ -77,6 +78,7 @@ export default async function CategoryPage({
     // DB not connected - show placeholder
   }
 
+  const year = new Date().getFullYear();
   const displayName = category
     ? category.name
     : categorySlug
@@ -87,7 +89,7 @@ export default async function CategoryPage({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: `Best ${displayName} in 2026`,
+    name: `Best ${displayName} in ${year}`,
     description: `Top ${displayName} tools compared`,
     numberOfItems: tools.length,
     itemListElement: tools.map((tool, index) => ({
@@ -112,31 +114,24 @@ export default async function CategoryPage({
       </nav>
 
       <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-        Best {displayName} in 2026
+        Best {displayName} in {year}
       </h1>
       <p className="mt-3 text-lg text-gray-600">
         {category?.description ||
-          `Compare the top ${displayName.toLowerCase()} to find the perfect solution for your needs. Updated with the latest pricing and features for 2026.`}
+          `Compare the top ${displayName.toLowerCase()} to find the perfect solution for your needs. Updated with the latest pricing and features for ${year}.`}
       </p>
 
-      {/* Tool Listings */}
-      <div className="mt-10 space-y-4">
-        {tools.length > 0 ? (
-          tools.map((tool, i) => (
-            <ToolCard key={tool.id} tool={tool} rank={i + 1} />
-          ))
-        ) : (
-          <div className="rounded-xl border border-dashed border-gray-300 p-12 text-center">
-            <p className="text-gray-500">
-              No tools found in this category yet.
-            </p>
-            <p className="mt-2 text-sm text-gray-400">
-              Connect Supabase and add tools with this category to see them
-              here.
-            </p>
-          </div>
-        )}
-      </div>
+      {/* Tool Listings with Filters */}
+      {tools.length > 0 ? (
+        <CategoryToolList tools={tools} />
+      ) : (
+        <div className="mt-10 rounded-xl border border-dashed border-gray-300 p-12 text-center">
+          <p className="text-gray-500">No tools found in this category yet.</p>
+          <p className="mt-2 text-sm text-gray-400">
+            Connect Supabase and add tools with this category to see them here.
+          </p>
+        </div>
+      )}
 
       {/* SEO Content */}
       <section className="mt-16">

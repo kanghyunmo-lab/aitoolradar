@@ -1,308 +1,129 @@
-# AIToolRadar 진행 상황 대시보드
+# AIToolRadar 진행 상황
 
-> 이 파일을 열면 지금 어디까지 왔는지, 다음에 뭘 해야 하는지 한눈에 볼 수 있습니다.
-> 마지막 업데이트: 2026-02-21 (content_html 174개 Supabase 실행 완료 → SEO 100%)
+> 마지막 업데이트: 2026-02-24
+> 전략 기준: `docs/PRD_v3.md` | 참고 자료: `docs/참고자료.md`
 
 ---
 
 ## 전체 진행률
 
 ```
-Phase 1: 프로젝트 셋업      [████████████████████] 100% ✅
-Phase 2: Supabase 연동       [████████████████████] 100% ✅
-Phase 3: 페이지 동작 확인     [████████████████████] 100% ✅
-Phase 4: 도메인+배포          [████████████████████] 100% ✅
-Phase 5: 데이터 200개 확장    [████████████████████] 100% ✅
-Phase 6: SEO 최적화           [████████████████████] 100% ✅
-Phase 7: 수익 기반 구축       [████░░░░░░░░░░░░░░░░]  20% 🔄 ⬅️ 진행 중
-Phase 8: 트래픽 확보          [████░░░░░░░░░░░░░░░░]  20% 🔄
-Phase 9: 분석+최적화          [░░░░░░░░░░░░░░░░░░░░]   0%
+기반 구축 (Phase 1~6)   [████████████████████] 100% ✅
+수익 기반 (Phase 7)     [████░░░░░░░░░░░░░░░░]  20% 🔄 ← 지금 여기
+트래픽 확보 (Phase 8)   [████████░░░░░░░░░░░░]  40% 🔄
+분석+최적화 (Phase 9)   [░░░░░░░░░░░░░░░░░░░░]   0%
 ```
 
-### 현재 핵심 수치
+---
+
+## 현재 핵심 수치
+
 | 항목 | 수치 |
 |------|------|
 | AI 도구 수 | 177개 |
-| 총 페이지 수 | ~2,086개 (블로그 10개 + 법적페이지 5개 추가) |
+| 총 페이지 수 | ~2,086개 |
 | 비교 페이지 | 1,526개 |
-| 블로그 글 | 10개 발행 완료 ✅ |
-| content_html 작성 | 200/177개 (174개 배치 + 기존 26개, 일부 중복 포함) ✅ |
-| 법적/정보 페이지 | 5개 생성 완료 ✅ (about, privacy, terms, affiliate-disclosure, methodology) |
-| 제휴 링크 가입 | Writesonic 승인 대기 중 ⏳ / Copy.ai·Jasper 진행 예정 |
-| content_html 배치 SQL | 6개 파일 준비 완료 (총 174개 도구) ✅ |
+| 블로그 글 | 10개 ✅ |
+| content_html | 177개 전체 완료 ✅ |
+| 법적 페이지 | 5개 완료 ✅ |
+| GA4 | 설치 완료 ✅ (G-VC94ZW0C5N) |
+| Google 색인 요청 | 200/612개 완료 (2026-02-21 1차) |
 | 월 방문자 | ~0명 |
-| 월 수익 | 0원 |
+| 월 수익 | $0 |
 
 ---
 
-## Phase 1~5: 완료 ✅
+## ✅ 완료된 것 (건드리지 말 것)
 
-<details>
-<summary>클릭하여 상세 보기 (이미 완료된 작업)</summary>
-
-### Phase 1: 프로젝트 셋업 ✅
-- [x] Next.js 15 프로젝트 생성 (App Router + TypeScript + Tailwind)
-- [x] Supabase 클라이언트 코드 (`lib/supabase/server.ts`, `client.ts`)
-- [x] DB 스키마 SQL (`scripts/schema.sql`)
-- [x] 시드 데이터 SQL (`scripts/seed-data.sql`, 10개 도구)
-- [x] 6가지 페이지 유형 구축 완료
-- [x] 사이트맵 + robots.txt
-- [x] 빌드 테스트 성공
-
-### Phase 2: Supabase 연동 ✅
-- [x] Supabase 프로젝트 생성 (ap-northeast-1)
-- [x] schema.sql + seed-data.sql 실행 완료
-- [x] .env.local 환경 변수 설정
-- [x] 로컬 확인 완료
-
-### Phase 3: 페이지 동작 확인 ✅
-- [x] 홈페이지, 도구 리뷰, 비교, 카테고리, 가격, 대안 페이지 모두 동작 확인
-
-### Phase 4: 도메인 + 배포 ✅
-- [x] 도메인: www.aitoolradar.net (Namecheap, $12.48/yr)
-- [x] GitHub: kanghyunmo-lab/aitoolradar
-- [x] Vercel 배포 + 도메인 연결 완료
-
-### Phase 5: 데이터 200개 확장 ✅
-- [x] 177개 AI 도구 (10개 카테고리)
-- [x] seed-data-v2.sql 실행 완료
-
-</details>
+- Next.js 15 + Supabase + Vercel 배포
+- 177개 도구 + 1,526개 비교 페이지
+- content_html 177개 (5가지 패턴 적용)
+- 블로그 10개 발행
+- 법적 페이지 5개 (affiliate-disclosure 포함)
+- GA4 설치 + Google Search Console + Indexing API 1차
+- JSON-LD / OG태그 / 사이트맵 SEO 완료
 
 ---
 
-## Phase 6: SEO 최적화 🔄 진행 중 (80%)
+## 🔴 지금 당장 (이번 주) — 직접 해야 함
 
-### 완료된 작업 ✅
-- [x] JSON-LD 구조화 데이터 (SoftwareApplication, BreadcrumbList, ItemList, WebSite) ✅
-- [x] Open Graph / SNS 공유 최적화 (layout.tsx + 각 페이지별 동적 적용) ✅
-- [x] 내부 링크 강화 (Explore More, 대안 보기, 인기 비교 섹션) ✅
-- [x] 비교 페이지 전수 확장 (450개 → 1,526개) ✅
-- [x] Google Search Console 등록 + 소유권 인증 ✅
-- [x] 사이트맵 제출 (2,057 페이지 발견) ✅
-- [x] content_html 26개 도구 작성 + Supabase 실행 ✅
+| 순위 | 작업 | 방법 | 상태 |
+|------|------|------|------|
+| **1** | Writesonic 승인 확인 | affiliates.writesonic.com | ⏳ 대기 중 |
+| **2** | Semrush 가입 | semrush.com/partners | ⬜ |
+| **3** | DeepL 가입 | PartnerStack 마켓에서 검색 | ⬜ |
+| **4** | Copy.ai 가입 | PartnerStack 마켓에서 검색 | ⬜ |
+| **5** | Jasper 가입 재시도 | PartnerStack 마켓에서 검색 | ⬜ |
+| **6** | Indexing API 2차 실행 | `node scripts/google-indexing.js` | ⬜ |
+| **7** | Indexing API 3차 실행 | `node scripts/google-indexing.js` | ⬜ |
 
-### 완료된 작업 추가 ✅
-- [x] git push → Vercel 배포 ✅
-- [x] GA4 설치 완료 ✅
-
-### 남은 작업
-- [ ] 나머지 151개 content_html (4순위 — Antigravity로 진행)
+> 가입 완료 → 제휴 링크 복사 → Claude Code에게 전달
 
 ---
 
-## Phase 7: 수익 기반 구축 🔄 진행 중
+## 🟡 제휴 링크 받은 후 — Claude Code 작업
 
-> **수익 없이는 트래픽이 의미 없음. 제휴 링크가 수익의 핵심.**
-
-### ✅ 완료: GA4 설치
-- [x] Google Analytics 4 측정 ID 발급 (G-VC94ZW0C5N) ✅
-- [x] GA4 코드 사이트에 추가 (`app/layout.tsx` + next/script) ✅
-- [x] Vercel 환경변수 추가 + Redeploy ✅
-- [x] 향상된 측정 활성화 (페이지 조회, 스크롤, 이탈 클릭) ✅
-
-### 🔄 진행 중: 제휴 프로그램 가입 — 직접 해야 함 🧑‍💻
-
-| 프로그램 | 커미션 | 가입 URL | 상태 |
-|---------|--------|---------|------|
-| Writesonic | 30% 리커링 | affiliates.writesonic.com | ⏳ 승인 대기 중 |
-| Copy.ai | 45% 리커링 | 공개 페이지 없음 → 이메일 문의 | 🔄 진행 예정 |
-| Jasper AI | 30% 리커링 | 공개 페이지 없음 → 추후 재시도 | ⬜ 보류 |
-| Zapier | 20% 리커링 | zapier.com/platform/partner | ⬜ 대기 |
-| Make.com | 20% 리커링 | make.com/en/affiliate | ⬜ 대기 |
-| Notion | 50% 첫결제 | notion.so/affiliates | ⬜ 대기 |
-
-### 3순위: 제휴 링크 사이트에 반영 — ⚡ Claude Code
-> 제휴 가입 완료 후 진행
-
-- [ ] affiliate_url 필드에 제휴 링크 업데이트 SQL
-- [ ] CTA 버튼 "Try [Tool] Free" 등 추가/개선 (⚡ Claude Code)
-- [ ] 클릭 추적 이벤트 연결 (⚡ Claude Code)
+| 순위 | 작업 | 상태 |
+|------|------|------|
+| **C-1** | 신규 도구 DB 등록 (Writesonic, DeepL, Synthesia, Frase.io) | ⬜ |
+| **C-2** | affiliate_url DB 업데이트 SQL 작성 + 실행 | ⬜ |
+| **C-3** | CTA 버튼 개선 (리뷰/비교/가격/대안 4개 페이지 타입) | ⬜ |
+| **C-4** | GA4 affiliate_click 이벤트 연결 | ⬜ |
+| **C-5** | AI 도구 추천 퀴즈 위젯 개발 | ⬜ |
 
 ---
 
-## Phase 8: 트래픽 확보
+## 🟢 다음 단계 (Stage 2~3)
 
-> **사이트만 만들면 아무도 안 옴. 적극적으로 트래픽을 끌어와야 함.**
-
-### ✅ 1순위: 블로그 기능 추가 — 완료
-
-- [x] DB 테이블 생성 (`scripts/create-blog-table.sql` Supabase 실행) ✅
-- [x] 블로그 목록 페이지 (`app/blog/page.tsx`) ✅
-- [x] 블로그 상세 페이지 (`app/blog/[slug]/page.tsx`) ✅
-- [x] 사이트맵에 블로그 포함 (`app/sitemap.ts` 수정) ✅
-- [x] 헤더 네비게이션에 Blog 메뉴 추가 ✅
-- [x] 블로그 글 10개 DB 입력 (`node scripts/import-blog-posts.js`) ✅
-- [x] 블로그 디자인 개선 (globals.css `.blog-content` 커스텀 CSS) ✅
-- [x] git push → Vercel 배포 ✅
-
-#### 준비된 블로그 글 목록 ✅ (scripts/blog-posts/)
-| 파일 | 타겟 키워드 |
-|------|-----------|
-| blog-01-jasper-vs-copyai-vs-writesonic.html | jasper vs copy ai, best ai writing tool 2026 |
-| blog-02-free-ai-tools-for-startups.html | free ai tools startups 2026 |
-| blog-03-chatgpt-vs-claude-vs-gemini.html | chatgpt vs claude vs gemini |
-| blog-04-complete-guide-ai-image-generators.html | ai image generator guide |
-| blog-05-automate-business-with-ai.html | automate business with ai |
-| blog-06-best-ai-coding-assistants.html | best ai coding assistant 2026 |
-| blog-07-ai-writing-tools-small-business.html | ai writing tools small business |
-| blog-08-midjourney-vs-dalle-vs-stable-diffusion.html | midjourney vs dalle vs stable diffusion |
-| blog-09-ai-tools-replace-expensive-software.html | ai tools replace software |
-| blog-10-how-to-use-perplexity-ai-research.html | how to use perplexity ai |
-
-### ✅ 2순위: 비교 페이지 404 수정 + 법적 페이지 추가 — 완료
-
-- [x] Footer.tsx 비교 링크 수정 (`chatgpt-vs-claude` → `chatgpt-vs-claude-ai`) ✅
-- [x] `/about` 페이지 생성 (미션, 편집 방침) ✅
-- [x] `/privacy` 페이지 생성 (GA4·쿠키 공시) ✅
-- [x] `/terms` 페이지 생성 (이용약관) ✅
-- [x] `/affiliate-disclosure` 페이지 생성 (FTC 규정 준수 — 제휴마케팅 필수) ✅
-- [x] `/methodology` 페이지 생성 (5가지 평가 기준) ✅
-- [x] git push → 배포 ✅
-
-### 🟡 커뮤니티 마케팅 — 직접 🧑‍💻
-> 추천: **Gemini 2.5 Pro** (홍보 글 초안 작성, 키워드 리서치)
-
-- [ ] Reddit 활동 (r/artificial, r/marketing, r/startups)
-- [ ] X(Twitter) AI 도구 리뷰 스레드
-- [ ] Product Hunt 런칭
-- [ ] 관련 Facebook/Discord 그룹 참여
-
-### 🟡 Google Indexing API
-> 추천 모델: API 키 발급 → 직접 🧑‍💻 / 스크립트 작성 → **Claude Code**
-
-- [ ] Google Cloud Console에서 API 키 발급 (직접 🧑‍💻)
-- [ ] Indexing API 자동 호출 스크립트 작성 (⚡ Claude Code)
-- [ ] 새 페이지 자동 색인 요청 (⚡ Claude Code)
-
-### 🟢 나머지 content_html 작성
-> 6개 배치 SQL 파일 준비 완료! Supabase에서 실행만 하면 됨.
-
-- [x] content-html-diversified-batch1.sql (25개 도구) ✅ 준비
-- [x] content-html-diversified-batch2.sql (33개 도구) ✅ 준비
-- [x] content-html-diversified-batch3.sql (40개 도구) ✅ 준비
-- [x] content-html-diversified-batch4.sql (38개 도구) ✅ 준비
-- [x] content-html-diversified-batch5.sql (32개 도구) ✅ 준비
-- [x] content-html-diversified-batch6.sql (6개 도구) ✅ 준비
-- [x] **Supabase SQL Editor에서 순서대로 실행 완료** ✅ (2026-02-21)
-  - 총 174개 도구 content_html 업데이트 완료!
-
----
-
-## Phase 9: 분석 + 최적화
-
-> Phase 7-8 진행 후, 데이터 기반으로 최적화
-
-- [ ] GA4 데이터 분석 (Gemini 2.5 Pro — 데이터 해석)
-- [ ] Search Console 성과 확인 (직접 🧑‍💻 + Gemini로 분석)
-- [ ] 전환율 높은 페이지 식별 → 해당 카테고리 콘텐츠 강화 (Sonnet 4.5 / Opus 4.6)
-- [ ] A/B 테스트 CTA 버튼 (⚡ Claude Code)
-- [ ] 키워드 리서치 확장 (Gemini 2.5 Pro — 웹 검색 가능)
-
----
-
-## 추천 AI 모델 가이드
-
-| 아이콘 | 의미 | 언제 사용 |
-|--------|------|----------|
-| ⚡ Claude Code | 코드 작성/수정 필요 | 파일 수정, 기능 추가, git push |
-| 🤖 Opus 4.6 | 최고 품질 콘텐츠 | 심층 분석, 복잡한 리뷰 (비용 높음) |
-| 🎯 Sonnet 4.5 | 고품질 + 가성비 | 리뷰 작성, SQL 생성, 블로그 글 (Opus 90% 품질, 5배 저렴) |
-| 🔍 Gemini 2.5 Pro | 웹 검색 + 대량 작성 | 키워드 리서치, 트렌드 분석, 최신 정보 필요 시 |
-| 🧑‍💻 직접 | 사람이 직접 해야 함 | 제휴 가입, API 키 발급, 커뮤니티 활동 |
-
-### Claude Code 리밋 걸렸을 때 할 수 있는 작업
-1. **Sonnet 4.5 / Opus 4.6**: 나머지 151개 content_html SQL 생성 (20개씩)
-2. **Sonnet 4.5 / Gemini 2.5 Pro**: 블로그 글 5개 작성 (HTML 형식)
-3. **Gemini 2.5 Pro**: 키워드 리서치 (카테고리별 롱테일 20개)
-4. **Sonnet 4.5 / Gemini 2.5 Pro**: Reddit/X 홍보 글 초안 작성
-5. **직접**: 제휴 프로그램 가입 신청
-6. **직접**: GA4 측정 ID 발급
-
-> **Opus vs Sonnet 선택 기준:** 대부분 Sonnet 4.5로 충분. Opus는 경쟁 키워드 심층 분석 등 복잡한 작업에만 사용.
+| 작업 | 담당 | 시점 |
+|------|------|------|
+| 도구 300~500개 확장 | Antigravity | Stage 1 완료 후 |
+| 블로그 글 추가 (월 2~4개) | Antigravity | 지속적으로 |
+| 성장 5 제휴 가입 (Gamma, Zapier, Synthesia, Frase, Pictory) | 직접 | Week 2 |
+| Reddit 커뮤니티 활동 | 직접 | 트래픽 생기면서 병행 |
 
 ---
 
 ## 현실적 수익 타임라인
 
-| 기간 | 목표 | 필요한 것 |
-|------|------|----------|
-| Month 1-2 (현재) | $0 | 시스템 구축 완료, 제휴 가입, GA4 설치 |
-| Month 3-4 | $0-100 | 블로그 10개, 커뮤니티 활동, 첫 트래픽 |
-| Month 5-6 | $100-500 | 블로그 20개, 백링크 확보, 키워드 랭킹 시작 |
-| Month 7-9 | $500-2,000 | 블로그 40개, 트래픽 성장, 제휴 전환 |
-| Month 10-12 | $2,000-5,000+ | 복리 효과, 트래픽 자동 성장 |
-
-> **참고:** PRD 목표 월 $7,500(1,000만원)은 매우 도전적. 위 타임라인이 현실적.
-> 핵심은 "꾸준히 블로그 쓰기 + 커뮤니티 활동"입니다.
+| 기간 | 목표 | 핵심 |
+|------|------|------|
+| 1~3개월 (지금) | $0 | 제휴 CTA 반영, 색인 진행 중 |
+| 4~6개월 | $0~100 | 첫 트래픽 유입 |
+| 7~9개월 | $100~500 | 롱테일 랭킹 시작 |
+| 10~12개월 | $500~1,500 | 리커링 누적 |
+| 13~18개월 | $1,500~3,000 | Phase 1 목표 |
+| 19~24개월 | $3,000~7,500 | B2B 추가 후 목표 |
 
 ---
 
-## 지금 당장 해야 할 것 (우선순위)
+## 추천 AI 모델 가이드
 
-| 순위 | 작업 | 누가/모델 | 상태 |
-|------|------|----------|------|
-| ~~-~~ | ~~git push 배포~~ | ~~Claude Code~~ | ✅ 완료 |
-| ~~-~~ | ~~GA4 설치~~ | ~~Claude Code + 직접~~ | ✅ 완료 |
-| ~~1~~ | ~~블로그 기능 추가 (글 10개 발행)~~ | ~~Claude Code~~ | ✅ 완료 |
-| ~~2~~ | ~~비교 페이지 404 수정 + 법적 페이지~~ | ~~Claude Code~~ | ✅ 완료 |
-| **3** | **제휴 링크 CTA 반영** (가입 완료 후) | ⚡ Claude Code | ⬅️ 대기 중 |
-| **3-병행** | **제휴 프로그램 가입** (최소 3개) | 직접 🧑‍💻 | 🔄 진행 중 |
-| ~~4~~ | ~~나머지 content_html 151개 SQL~~ | ~~Antigravity~~ | ✅ 완료 |
+| 담당 | 언제 사용 |
+|------|----------|
+| ⚡ Claude Code | 코드 수정, 기능 추가, git push |
+| 🔍 Antigravity | 도구 데이터 확장, 블로그 글 작성, SQL 생성 |
+| 🧑‍💻 직접 | 제휴 가입, API 키 발급, 커뮤니티 활동 |
 
 ---
 
-## 파일 구조 설명 (초보자용)
+## 파일 구조 (핵심만)
 
 ```
 aitoolradar/
-├── app/                    ← 웹페이지들이 들어있는 폴더
-│   ├── page.tsx            ← 홈페이지 (aitoolradar.net/)
-│   ├── layout.tsx          ← 모든 페이지의 공통 틀 (헤더, 푸터)
-│   ├── ai-tools/[slug]/    ← 도구 리뷰 (aitoolradar.net/ai-tools/jasper)
-│   ├── compare/[...]/      ← 비교 페이지 (aitoolradar.net/compare/a-vs-b)
-│   ├── best/[category]/    ← 카테고리 (aitoolradar.net/best/ai-writing-tools)
-│   ├── pricing/[slug]/     ← 가격 (aitoolradar.net/pricing/jasper)
-│   ├── alternatives/[...]/  ← 대안 (aitoolradar.net/alternatives/chatgpt)
-│   ├── sitemap.ts          ← 구글에 알려주는 페이지 목록
-│   └── robots.ts           ← 구글 크롤러 제어
-│
-├── components/             ← 재사용 가능한 UI 조각들
-│   ├── Header.tsx          ← 상단 메뉴바
-│   ├── Footer.tsx          ← 하단 정보
-│   └── ToolCard.tsx        ← 도구 카드
-│
-├── lib/                    ← 유틸리티 코드
-│   ├── supabase/           ← 데이터베이스 연결 설정
-│   ├── queries/tools.ts    ← DB에서 데이터 가져오는 함수들
-│   └── types.ts            ← 데이터 형태 정의
-│
-├── scripts/                ← SQL 스크립트
-│   ├── schema.sql          ← DB 테이블 만드는 SQL
-│   ├── seed-data.sql       ← 초기 데이터 (10개)
-│   ├── seed-data-v2.sql    ← 확장 데이터 (167개 추가)
-│   └── content-html-26-tools.sql ← 26개 도구 리뷰 콘텐츠
-│
-├── docs/PRD_v3.md          ← 프로젝트 기획서
-├── PROGRESS.md             ← 이 파일! 진행 상황 추적
-└── CLAUDE.md               ← Claude에게 주는 프로젝트 설명서
+├── app/
+│   ├── page.tsx              ← 홈페이지
+│   ├── ai-tools/[slug]/      ← 도구 리뷰
+│   ├── compare/[...]/        ← 비교 페이지
+│   ├── best/[category]/      ← 카테고리
+│   ├── pricing/[slug]/       ← 가격
+│   ├── alternatives/[...]/   ← 대안
+│   └── blog/[slug]/          ← 블로그
+├── docs/
+│   ├── PRD_v3.md             ← 전략 기준 문서
+│   └── 참고자료.md            ← 경쟁사/제휴/콘텐츠 참고
+├── scripts/
+│   └── google-indexing.js    ← 색인 요청 스크립트
+├── PROGRESS.md               ← 이 파일
+└── CLAUDE.md                 ← Claude 지침서
 ```
-
----
-
-## 용어 사전
-
-| 용어 | 의미 |
-|------|------|
-| **pSEO** | Programmatic SEO. 데이터로 페이지를 자동 대량 생성하는 기법 |
-| **SSG** | Static Site Generation. 빌드할 때 미리 HTML을 만들어두는 방식 |
-| **ISR** | Incremental Static Regeneration. SSG인데 주기적으로 업데이트 |
-| **slug** | URL에 들어가는 이름 (예: "jasper", "copy-ai") |
-| **Supabase** | 무료 데이터베이스 서비스 (PostgreSQL 기반) |
-| **Vercel** | Next.js를 무료로 배포할 수 있는 호스팅 서비스 |
-| **리커링** | 매달 반복적으로 들어오는 수익 (recurring revenue) |
-| **CPA** | Cost Per Action. 한 건당 수수료 |
-| **제휴 마케팅** | 다른 회사 제품 추천하고 수수료 받는 것 |
-| **CTA** | Call To Action. "지금 시작하기" 같은 행동 유도 버튼 |
-| **GA4** | Google Analytics 4. 웹사이트 방문자 분석 도구 |
-| **백링크** | 다른 사이트에서 우리 사이트로 들어오는 링크 (SEO 핵심) |

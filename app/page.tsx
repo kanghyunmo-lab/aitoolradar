@@ -25,19 +25,62 @@ export default async function Home() {
           <span className="text-blue-600">for Any Task</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
-          Compare 500+ AI tools with honest reviews, pricing data, and
+          Compare 177+ AI tools with honest reviews, pricing data, and
           side-by-side comparisons. Make the right choice for your business.
         </p>
-        <div className="mt-8 flex justify-center gap-4">
+
+        {/* Hero Search Bar */}
+        <form action="/search" method="GET" className="mx-auto mt-10 max-w-2xl">
+          <div className="flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-5 py-3 shadow-md focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-100">
+            <svg
+              className="h-5 w-5 shrink-0 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+            <input
+              type="search"
+              name="q"
+              placeholder="Search AI tools... e.g. Jasper, ChatGPT, Midjourney"
+              className="flex-1 bg-transparent text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="rounded-xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            >
+              Search
+            </button>
+          </div>
+          <p className="mt-3 text-sm text-gray-400">
+            Popular:{" "}
+            {["Jasper", "ChatGPT", "Midjourney", "Copy.ai"].map((s, i) => (
+              <span key={s}>
+                <a href={`/search?q=${s}`} className="hover:text-blue-600 hover:underline">
+                  {s}
+                </a>
+                {i < 3 && <span className="mx-1 text-gray-300">·</span>}
+              </span>
+            ))}
+          </p>
+        </form>
+
+        <div className="mt-6 flex justify-center gap-4">
           <Link
             href="/best/ai-writing-tools"
-            className="rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700"
+            className="rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             Browse AI Tools
           </Link>
           <Link
             href="/compare/chatgpt-vs-claude"
-            className="rounded-lg border border-gray-300 bg-white px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             Compare Tools
           </Link>
