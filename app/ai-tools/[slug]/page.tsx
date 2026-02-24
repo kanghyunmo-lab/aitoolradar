@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getToolBySlug, getToolSlugs } from "@/lib/queries/tools";
+import ToolLogo from "@/components/ToolLogo";
 
 export async function generateStaticParams() {
   try {
@@ -22,16 +23,17 @@ export async function generateMetadata({
 
   if (!tool) return { title: "Tool Not Found" };
 
+  const year = new Date().getFullYear();
   return {
-    title: `${tool.name} Review 2026: Pricing, Features & Alternatives`,
+    title: `${tool.name} Review ${year}: Pricing, Features & Alternatives`,
     description:
       tool.meta_description ||
-      `Comprehensive review of ${tool.name}. Compare pricing, features, pros & cons with alternatives. Updated for 2026.`,
+      `Comprehensive review of ${tool.name}. Compare pricing, features, pros & cons with alternatives. Updated for ${year}.`,
     alternates: {
       canonical: `/ai-tools/${tool.slug}`,
     },
     openGraph: {
-      title: `${tool.name} Review 2026: Pricing, Features & Alternatives`,
+      title: `${tool.name} Review ${year}: Pricing, Features & Alternatives`,
       description: tool.meta_description || tool.short_description || undefined,
       url: `https://www.aitoolradar.net/ai-tools/${tool.slug}`,
       type: 'article',
@@ -39,7 +41,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${tool.name} Review 2026`,
+      title: `${tool.name} Review ${year}`,
       description: tool.meta_description || tool.short_description || '',
     },
   };
@@ -113,16 +115,10 @@ export default async function ToolPage({
 
       {/* Header */}
       <header className="flex items-start gap-6">
-        {tool.logo_url && (
-          <img
-            src={tool.logo_url}
-            alt={`${tool.name} logo`}
-            className="h-16 w-16 rounded-xl object-contain"
-          />
-        )}
+        <ToolLogo name={tool.name} logoUrl={tool.logo_url} className="h-16 w-16" />
         <div>
           <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            {tool.name} Review 2026
+            {tool.name} Review {new Date().getFullYear()}
           </h1>
           <p className="mt-2 text-lg text-gray-600">{tool.short_description}</p>
           <div className="mt-3 flex flex-wrap items-center gap-3">

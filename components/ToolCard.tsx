@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { AiTool } from "@/lib/types";
+import ToolLogo from "@/components/ToolLogo";
 
 interface ToolCardProps {
   tool: AiTool;
@@ -17,13 +18,7 @@ export default function ToolCard({ tool, rank }: ToolCardProps) {
 
       <div className="flex-1">
         <div className="flex items-center gap-3">
-          {tool.logo_url && (
-            <img
-              src={tool.logo_url}
-              alt={`${tool.name} logo`}
-              className="h-10 w-10 rounded-lg object-contain"
-            />
-          )}
+          <ToolLogo name={tool.name} logoUrl={tool.logo_url} className="h-10 w-10" />
           <div>
             <Link
               href={`/ai-tools/${tool.slug}`}

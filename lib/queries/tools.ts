@@ -61,6 +61,17 @@ export async function getAllCategories(): Promise<Category[]> {
   return data ?? [];
 }
 
+export async function searchTools(query: string): Promise<AiTool[]> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("ai_tools")
+    .select("*, category:categories(*), pricing_plans(*)")
+    .or(`name.ilike.%${query}%,short_description.ilike.%${query}%`)
+    .order("rating", { ascending: false })
+    .limit(20);
+  return data ?? [];
+}
+
 export async function getCategorySlugs(): Promise<string[]> {
   const supabase = await createClient();
   const { data } = await supabase.from("categories").select("slug");

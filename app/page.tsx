@@ -3,6 +3,7 @@ import { getAllTools, getAllCategories } from "@/lib/queries/tools";
 import ToolCard from "@/components/ToolCard";
 
 export default async function Home() {
+  const year = new Date().getFullYear();
   let tools: Awaited<ReturnType<typeof getAllTools>> = [];
   let categories: Awaited<ReturnType<typeof getAllCategories>> = [];
 
@@ -88,7 +89,7 @@ export default async function Home() {
       {/* Top Rated Tools */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-bold text-gray-900">
-          Top Rated AI Tools 2026
+          Top Rated AI Tools {year}
         </h2>
         <div className="mt-6 space-y-4">
           {tools.length > 0 ? (
