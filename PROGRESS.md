@@ -51,55 +51,53 @@
 
 ---
 
-## 🔴 지금 당장 (이번 주) — 직접 해야 함
+## 🔴 Month 1~3 (지금~5월) — 직접 해야 함
 
 | 순위 | 작업 | 방법 | 상태 |
 |------|------|------|------|
-| **1** | Writesonic 승인 확인 | affiliates.writesonic.com | ⏳ 대기 중 |
-| **2** | Semrush 가입 | semrush.com/partners | ⬜ |
-| **3** | DeepL 가입 | PartnerStack 마켓에서 검색 | ⬜ |
-| **4** | Copy.ai 가입 | PartnerStack 마켓에서 검색 | ⬜ |
-| **5** | Jasper 가입 재시도 | PartnerStack 마켓에서 검색 | ⬜ |
-| **6** | Indexing API 2차 실행 | `node scripts/google-indexing.js` | ⬜ |
-| **7** | Indexing API 3차 실행 | `node scripts/google-indexing.js` | ⬜ |
+| **1** | 비교 페이지 샘플 10개 직접 읽기 | aitoolradar.net/compare/ 아무거나 10개 | ⬜ 최우선 |
+| **2** | Indexing API 2차 실행 | `node scripts/google-indexing.js` | ⬜ |
+| **3** | Indexing API 3차 실행 | `node scripts/google-indexing.js` | ⬜ |
+| **4** | Writesonic 승인 확인 | affiliates.writesonic.com | ⏳ 대기 중 |
+| **5** | Copy.ai / Semrush / Jasper 가입 | PartnerStack 마켓 | ⬜ |
+| **6** | 리뷰한 AI 도구 회사 10곳에 링크 공유 요청 | 각 도구 공식 트위터/이메일 | ⬜ 백링크 씨앗 |
 
-> 가입 완료 → 제휴 링크 복사 → Claude Code에게 전달
-
----
-
-## 🟡 제휴 링크 받은 후 — Claude Code 작업
-
-| 순위 | 작업 | 상태 |
-|------|------|------|
-| **C-1** | 신규 도구 DB 등록 (Writesonic, DeepL, Synthesia, Frase.io) | ⬜ |
-| **C-2** | affiliate_url DB 업데이트 SQL 작성 + 실행 | ⬜ |
-| **C-3** | CTA 버튼 개선 (리뷰/비교/가격/대안 4개 페이지 타입) | ⬜ |
-| **C-4** | GA4 affiliate_click 이벤트 연결 | ⬜ |
-| **C-5** | AI 도구 추천 퀴즈 위젯 개발 | ⬜ |
+> 비교 페이지 품질 확인 후 → Claude Code에게 결과 전달 (noindex 여부 결정)
 
 ---
 
-## 🟢 다음 단계 (Stage 2~3)
+## 🟡 Claude Code 대기 작업
+
+| 순위 | 작업 | 트리거 | 상태 |
+|------|------|--------|------|
+| **C-1** | 얇은 비교 페이지 noindex 처리 | 품질 확인 후 | ⬜ |
+| **C-2** | affiliate_url DB 업데이트 + CTA 버튼 개선 | 제휴 링크 수령 후 | ⬜ |
+| **C-3** | GA4 affiliate_click 이벤트 | C-2 완료 후 | ⬜ |
+| **C-4** | AI 도구 추천 퀴즈 위젯 | Month 4+ | ⬜ |
+
+---
+
+## 🟢 Month 4~6 이후
 
 | 작업 | 담당 | 시점 |
 |------|------|------|
-| 도구 300~500개 확장 | Antigravity | Stage 1 완료 후 |
-| 블로그 글 추가 (월 2~4개) | Antigravity | 지속적으로 |
-| 성장 5 제휴 가입 (Gamma, Zapier, Synthesia, Frase, Pictory) | 직접 | Week 2 |
-| Reddit 커뮤니티 활동 | 직접 | 트래픽 생기면서 병행 |
+| 상위 50개 비교 페이지 content_html 강화 | Antigravity | Month 4 |
+| 도구 300개로 확장 | Antigravity | Month 4~6 |
+| 블로그 월 2개 발행 | Antigravity | 지속 |
+| Reddit 커뮤니티 진성 참여 | 직접 | 트래픽 생기면서 병행 |
 
 ---
 
-## 현실적 수익 타임라인
+## 수익 타임라인 (현실 기준, 1년 무수익 각오)
 
-| 기간 | 목표 | 핵심 |
-|------|------|------|
-| 1~3개월 (지금) | $0 | 제휴 CTA 반영, 색인 진행 중 |
-| 4~6개월 | $0~100 | 첫 트래픽 유입 |
-| 7~9개월 | $100~500 | 롱테일 랭킹 시작 |
-| 10~12개월 | $500~1,500 | 리커링 누적 |
-| 13~18개월 | $1,500~3,000 | Phase 1 목표 |
-| 19~24개월 | $3,000~7,500 | B2B 추가 후 목표 |
+| 기간 | 방문자 목표 | 수익 목표 | 핵심 변수 |
+|------|------------|----------|----------|
+| Month 1~3 (지금) | 50~200명/월 | $0 | 색인 완료, 제휴 CTA 준비 |
+| Month 4~6 | 500~1,500명/월 | $0~50 | 롱테일 랭킹 시작 |
+| Month 7~9 | 2,000~5,000명/월 | $50~300 | 백링크 효과 가시화 |
+| Month 10~12 | 5,000~15,000명/월 | $300~1,000 | 리커링 수수료 누적 |
+| Month 13~18 | 유지+성장 | $1,000~3,000 | 도구 300개+ 확장 효과 |
+| Month 19~24 | — | $3,000~5,000 | 안정적 복리 구조 |
 
 ---
 
