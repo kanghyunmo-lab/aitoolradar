@@ -8,121 +8,105 @@ interface Props {
   tools: AiTool[];
 }
 
-const LEFT = {
-  header: "bg-blue-600 text-white",
-  border: "border-blue-200",
-  tabActive: "bg-blue-600 text-white",
-  tabIdle: "text-gray-600 hover:text-blue-700 hover:bg-blue-50",
-  toolSelected: "border-blue-500 bg-blue-50 ring-2 ring-blue-400",
-};
-
-const RIGHT = {
-  header: "bg-purple-600 text-white",
-  border: "border-purple-200",
-  tabActive: "bg-purple-600 text-white",
-  tabIdle: "text-gray-600 hover:text-purple-700 hover:bg-purple-50",
-  toolSelected: "border-purple-500 bg-purple-50 ring-2 ring-purple-400",
-};
-
 export default function CompareSelector({ categories, tools }: Props) {
   const router = useRouter();
 
   const firstCatId = categories[0]?.id ?? "";
-  const [leftCatId, setLeftCatId] = useState(firstCatId);
-  const [rightCatId, setRightCatId] = useState(firstCatId);
+  const [activeCatId, setActiveCatId] = useState(firstCatId);
   const [toolA, setToolA] = useState<AiTool | null>(null);
   const [toolB, setToolB] = useState<AiTool | null>(null);
 
-  const leftTools = useMemo(
-    () => tools.filter((t) => t.category_id === leftCatId),
-    [tools, leftCatId]
-  );
-  const rightTools = useMemo(
-    () => tools.filter((t) => t.category_id === rightCatId),
-    [tools, rightCatId]
+  const categoryTools = useMemo(
+    () => tools.filter((t) => t.category_id === activeCatId),
+    [tools, activeCatId]
   );
 
   const canCompare = toolA && toolB && toolA.slug !== toolB.slug;
 
-  return (
-    <div className="mt-10">
-      {/* Two Panels */}
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
-        {/* Left Panel */}
-        <div className="flex-1">
-          <ToolPanel
-            label="첫 번째 도구"
-            accent={LEFT}
-            categories={categories}
-            tools={leftTools}
-            activeCatId={leftCatId}
-            onCatChange={(id) => { setLeftCatId(id); setToolA(null); }}
-            selected={toolA}
-            onSelect={setToolA}
-            excludeSlug={toolB?.slug}
-          />
-        </div>
+  function handleCatChange(id: string) {
+    setActiveCatId(id);
+    setToolA(null);
+    setToolB(null);
+  }
 
-        {/* VS Badge */}
-        <div className="flex items-center justify-center py-2 lg:py-0 lg:pt-16">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-gray-300 bg-white text-sm font-bold text-gray-500 shadow-sm">
+  return (
+    <div className="mt-6">
+      {/* Shared Category Tabs */}
+      <div className="flex gap-1.5 overflow-x-auto pb-2">
+        {categories.map((cat) => (
+          <button
+            key={cat.id}
+            onClick={() => handleCatChange(cat.id)}
+            className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+              activeCatId === cat.id
+                ? "bg-blue-600 text-white"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          >
+            {cat.name}
+          </button>
+        ))}
+      </div>
+
+      {/* Two Panels */}
+      <div className="mt-3 flex flex-col items-stretch gap-3 sm:flex-row sm:items-start">
+        <ToolPanel
+          label="Tool A"
+          accentColor="blue"
+          tools={categoryTools}
+          selected={toolA}
+          onSelect={setToolA}
+          excludeSlug={toolB?.slug}
+        />
+
+        <div className="flex shrink-0 items-center justify-center sm:pt-10">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-gray-300 bg-white text-xs font-bold text-gray-500 shadow-sm">
             VS
           </div>
         </div>
 
-        {/* Right Panel */}
-        <div className="flex-1">
-          <ToolPanel
-            label="두 번째 도구"
-            accent={RIGHT}
-            categories={categories}
-            tools={rightTools}
-            activeCatId={rightCatId}
-            onCatChange={(id) => { setRightCatId(id); setToolB(null); }}
-            selected={toolB}
-            onSelect={setToolB}
-            excludeSlug={toolA?.slug}
-          />
-        </div>
+        <ToolPanel
+          label="Tool B"
+          accentColor="purple"
+          tools={categoryTools}
+          selected={toolB}
+          onSelect={setToolB}
+          excludeSlug={toolA?.slug}
+        />
       </div>
 
-      {/* Compare CTA */}
-      <div className="mt-8 flex flex-col items-center gap-2">
+      {/* CTA */}
+      <div className="mt-5 flex flex-col items-center gap-1.5">
         {canCompare ? (
           <button
             onClick={() =>
               router.push(`/compare/${toolA.slug}-vs-${toolB.slug}`)
             }
-            className="rounded-xl bg-blue-600 px-8 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-blue-700"
+            className="rounded-xl bg-blue-600 px-8 py-3 text-sm font-semibold text-white shadow-md transition-colors hover:bg-blue-700"
           >
-            {toolA.name} vs {toolB.name} 비교하기 →
+            Compare {toolA.name} vs {toolB.name} &rarr;
           </button>
         ) : (
           <p className="text-sm text-gray-400">
             {!toolA && !toolB
-              ? "양쪽 패널에서 도구를 하나씩 선택하세요"
+              ? "Select one tool from each panel to compare"
               : !toolA
-              ? "왼쪽에서 도구를 선택하세요"
+              ? "Select a tool from the left panel"
               : !toolB
-              ? "오른쪽에서 도구를 선택하세요"
-              : "같은 도구는 비교할 수 없습니다"}
+              ? "Select a tool from the right panel"
+              : "Please select two different tools"}
           </p>
         )}
 
-        {/* Current selection summary */}
         {(toolA || toolB) && (
           <p className="text-xs text-gray-400">
-            {toolA ? (
-              <span className="text-blue-600 font-medium">{toolA.name}</span>
-            ) : (
-              <span>?</span>
-            )}
-            {" "}vs{" "}
-            {toolB ? (
-              <span className="text-purple-600 font-medium">{toolB.name}</span>
-            ) : (
-              <span>?</span>
-            )}
+            <span className="font-medium text-blue-600">
+              {toolA?.name ?? "?"}
+            </span>
+            {" vs "}
+            <span className="font-medium text-purple-600">
+              {toolB?.name ?? "?"}
+            </span>
           </p>
         )}
       </div>
@@ -134,11 +118,8 @@ export default function CompareSelector({ categories, tools }: Props) {
 
 interface PanelProps {
   label: string;
-  accent: typeof LEFT;
-  categories: Category[];
+  accentColor: "blue" | "purple";
   tools: AiTool[];
-  activeCatId: string;
-  onCatChange: (id: string) => void;
   selected: AiTool | null;
   onSelect: (tool: AiTool) => void;
   excludeSlug?: string;
@@ -146,75 +127,63 @@ interface PanelProps {
 
 function ToolPanel({
   label,
-  accent,
-  categories,
+  accentColor,
   tools,
-  activeCatId,
-  onCatChange,
   selected,
   onSelect,
   excludeSlug,
 }: PanelProps) {
   const filteredTools = tools.filter((t) => t.slug !== excludeSlug);
 
+  const headerBg =
+    accentColor === "blue" ? "bg-blue-600" : "bg-purple-600";
+  const border =
+    accentColor === "blue" ? "border-blue-200" : "border-purple-200";
+  const selectedRow =
+    accentColor === "blue"
+      ? "bg-blue-50 text-blue-900 font-semibold"
+      : "bg-purple-50 text-purple-900 font-semibold";
+
   return (
-    <div className={`overflow-hidden rounded-2xl border-2 ${accent.border}`}>
+    <div className={`min-w-0 flex-1 overflow-hidden rounded-xl border-2 ${border}`}>
       {/* Header */}
-      <div className={`${accent.header} px-4 py-3`}>
-        <p className="text-xs font-semibold uppercase tracking-wide opacity-80">
+      <div className={`${headerBg} px-3 py-2`}>
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-white/70">
           {label}
         </p>
-        {selected ? (
-          <p className="mt-0.5 text-lg font-bold">✓ {selected.name}</p>
-        ) : (
-          <p className="mt-0.5 text-sm opacity-60">선택 안 됨</p>
-        )}
+        <p className="truncate text-sm font-bold text-white">
+          {selected ? `✓ ${selected.name}` : "Not selected"}
+        </p>
       </div>
 
-      {/* Category Tabs */}
-      <div className="flex gap-1 overflow-x-auto border-b border-gray-100 bg-gray-50 px-2 py-2">
-        {categories.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => onCatChange(cat.id)}
-            className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-              activeCatId === cat.id ? accent.tabActive : accent.tabIdle
-            }`}
-          >
-            {cat.name}
-          </button>
-        ))}
-      </div>
-
-      {/* Tool Grid */}
-      <div className="grid grid-cols-2 gap-2 p-3">
+      {/* Tool List */}
+      <ul className="max-h-60 divide-y divide-gray-100 overflow-y-auto">
         {filteredTools.length > 0 ? (
           filteredTools.map((tool) => (
-            <button
-              key={tool.id}
-              onClick={() => onSelect(tool)}
-              className={`rounded-lg border px-3 py-2.5 text-left transition-all ${
-                selected?.id === tool.id
-                  ? accent.toolSelected
-                  : "border-gray-200 hover:border-gray-300 hover:shadow-sm"
-              }`}
-            >
-              <span className="block truncate text-sm font-medium text-gray-900">
-                {tool.name}
-              </span>
-              {tool.rating != null && (
-                <span className="text-xs text-gray-400">
-                  ★ {tool.rating}
-                </span>
-              )}
-            </button>
+            <li key={tool.id}>
+              <button
+                onClick={() => onSelect(tool)}
+                className={`w-full px-3 py-2.5 text-left text-sm transition-colors ${
+                  selected?.id === tool.id
+                    ? selectedRow
+                    : "text-gray-700 hover:bg-gray-50"
+                }`}
+              >
+                <span className="block truncate">{tool.name}</span>
+                {tool.rating != null && (
+                  <span className="text-[11px] text-gray-400">
+                    ★ {tool.rating}
+                  </span>
+                )}
+              </button>
+            </li>
           ))
         ) : (
-          <p className="col-span-2 py-8 text-center text-sm text-gray-400">
-            이 카테고리에 도구가 없습니다.
-          </p>
+          <li className="py-8 text-center text-sm text-gray-400">
+            No tools in this category.
+          </li>
         )}
-      </div>
+      </ul>
     </div>
   );
 }
