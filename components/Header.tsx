@@ -45,6 +45,12 @@ export default function Header() {
             Automation
           </Link>
           <Link
+            href="/workflows"
+            className="text-sm font-medium text-gray-600 hover:text-gray-900"
+          >
+            Workflows
+          </Link>
+          <Link
             href="/blog"
             className="text-sm font-semibold text-blue-600 hover:text-blue-700"
           >

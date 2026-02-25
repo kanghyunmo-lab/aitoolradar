@@ -54,6 +54,11 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-gray-900">Resources</h3>
             <ul className="mt-4 space-y-2">
               <li>
+                <Link href="/workflows" className="text-sm text-gray-600 hover:text-gray-900">
+                  AI Workflows
+                </Link>
+              </li>
+              <li>
                 <Link href="/blog" className="text-sm text-gray-600 hover:text-gray-900">
                   Blog
                 </Link>

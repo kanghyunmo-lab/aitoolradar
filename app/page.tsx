@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getAllTools, getAllCategories } from "@/lib/queries/tools";
 import { getRecentBlogPosts } from "@/lib/queries/blog";
 import ToolCard from "@/components/ToolCard";
+import { workflows } from "@/lib/workflows";
 import type { BlogPost } from "@/lib/types";
 
 export default async function Home() {
@@ -159,6 +160,53 @@ export default async function Home() {
               </p>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* AI Workflows */}
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">
+              AI Workflow Guides
+            </h2>
+            <p className="mt-1 text-sm text-gray-500">
+              Step-by-step tool stacks for real tasks
+            </p>
+          </div>
+          <Link
+            href="/workflows"
+            className="text-sm font-medium text-blue-600 hover:text-blue-700"
+          >
+            View all &rarr;
+          </Link>
+        </div>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {workflows.slice(0, 3).map((workflow) => (
+            <Link
+              key={workflow.slug}
+              href={`/workflows/${workflow.slug}`}
+              className="group rounded-xl border border-gray-200 bg-white p-5 hover:border-blue-300 hover:shadow-md transition-all"
+            >
+              <span className="text-xs font-semibold uppercase tracking-wide text-blue-600">
+                {workflow.steps.length} Steps
+              </span>
+              <h3 className="mt-1 text-sm font-bold text-gray-900 group-hover:text-blue-600">
+                {workflow.title}
+              </h3>
+              <p className="mt-1 text-xs text-gray-500">{workflow.tagline}</p>
+              <div className="mt-3 flex flex-wrap gap-1">
+                {workflow.steps.flatMap((s) => s.tools).slice(0, 4).map((tool) => (
+                  <span
+                    key={tool.slug}
+                    className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
+                  >
+                    {tool.name}
+                  </span>
+                ))}
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
