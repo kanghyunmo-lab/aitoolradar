@@ -1,29 +1,31 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getPopularComparisons, getAllCategories } from "@/lib/queries/tools";
+import { getAllTools, getAllCategories } from "@/lib/queries/tools";
+import CompareSelector from "@/components/CompareSelector";
 
 export const metadata: Metadata = {
-  title: "AI Tool Comparisons - Compare Side by Side | AIToolRadar",
+  title: "Compare AI Tools Side by Side | AIToolRadar",
   description:
-    "Compare AI tools side by side. Honest feature, pricing, and pros & cons comparisons to help you pick the right tool.",
+    "Compare any two AI tools side by side. Select tools by category and see features, pricing, and honest reviews.",
   alternates: { canonical: "/compare" },
 };
 
 export default async function ComparePage() {
-  let comparisons: Awaited<ReturnType<typeof getPopularComparisons>> = [];
+  let tools: Awaited<ReturnType<typeof getAllTools>> = [];
+  let categories: Awaited<ReturnType<typeof getAllCategories>> = [];
 
   try {
-    comparisons = await getPopularComparisons();
+    [tools, categories] = await Promise.all([
+      getAllTools(),
+      getAllCategories(),
+    ]);
   } catch {
     // DB not connected
   }
 
-  // Show up to 60 comparisons on this page
-  const featured = comparisons.slice(0, 60);
-
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* Header */}
+      {/* Breadcrumb */}
       <nav className="mb-6 text-sm text-gray-500">
         <Link href="/" className="hover:text-gray-700">
           Home
@@ -33,52 +35,25 @@ export default async function ComparePage() {
       </nav>
 
       <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-        Compare AI Tools Side by Side
+        AI 도구 비교하기
       </h1>
       <p className="mt-3 text-lg text-gray-600">
-        {comparisons.length > 0
-          ? `${comparisons.length.toLocaleString()} comparisons available. Pick any two tools to see a detailed breakdown.`
-          : "Browse head-to-head AI tool comparisons with pricing, features, and honest reviews."}
+        카테고리에서 도구를 선택하고{" "}
+        <span className="font-medium text-blue-600">왼쪽</span>과{" "}
+        <span className="font-medium text-purple-600">오른쪽</span>을 채우면
+        상세 비교 페이지로 이동합니다.
       </p>
 
-      {/* Comparison Grid */}
-      {featured.length > 0 ? (
-        <>
-          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((c) => (
-              <Link
-                key={`${c.slugA}-${c.slugB}`}
-                href={`/compare/${c.slugA}-vs-${c.slugB}`}
-                className="flex items-center justify-between rounded-xl border border-gray-200 px-4 py-3 text-sm hover:border-blue-400 hover:bg-blue-50 transition-colors"
-              >
-                <span className="font-medium text-gray-900 truncate">
-                  {c.nameA}
-                </span>
-                <span className="mx-2 shrink-0 text-xs font-bold text-gray-400">
-                  vs
-                </span>
-                <span className="font-medium text-gray-900 truncate text-right">
-                  {c.nameB}
-                </span>
-              </Link>
-            ))}
-          </div>
-
-          {comparisons.length > 60 && (
-            <p className="mt-8 text-center text-sm text-gray-400">
-              Showing 60 of {comparisons.length.toLocaleString()} comparisons.
-              Use the search bar to find specific tools.
-            </p>
-          )}
-        </>
+      {categories.length > 0 ? (
+        <CompareSelector categories={categories} tools={tools} />
       ) : (
         <div className="mt-10 rounded-xl border border-dashed border-gray-300 p-12 text-center">
-          <p className="text-gray-500">No comparisons available yet.</p>
+          <p className="text-gray-500">비교할 도구 데이터가 없습니다.</p>
           <Link
             href="/"
             className="mt-4 inline-block text-sm text-blue-600 hover:underline"
           >
-            Browse AI Tools →
+            홈으로 돌아가기 →
           </Link>
         </div>
       )}
