@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { workflows } from "@/lib/workflows";
+import { getAllWorkflows } from "@/lib/queries/workflows";
+import type { Workflow } from "@/lib/types";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "AI Workflow Guides: Step-by-Step Tool Stacks | AIToolRadar",
@@ -16,7 +19,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function WorkflowsPage() {
+export default async function WorkflowsPage() {
+  let workflowList: Workflow[] = [];
+  try {
+    workflowList = await getAllWorkflows();
+  } catch {
+    // DB error — show empty state
+  }
+
   return (
     <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
       {/* Breadcrumb */}
@@ -38,49 +48,55 @@ export default function WorkflowsPage() {
       </header>
 
       {/* Workflow Grid */}
-      <div className="grid gap-6 sm:grid-cols-2">
-        {workflows.map((workflow) => (
-          <Link
-            key={workflow.slug}
-            href={`/workflows/${workflow.slug}`}
-            className="group flex flex-col rounded-xl border border-gray-200 bg-white p-6 hover:border-blue-300 hover:shadow-md transition-all"
-          >
-            <div className="flex items-start justify-between">
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-wide text-blue-600">
-                  {workflow.steps.length} Steps
-                </span>
-                <h2 className="mt-1 text-lg font-bold text-gray-900 group-hover:text-blue-600">
-                  {workflow.title}
-                </h2>
-                <p className="text-sm text-gray-500">{workflow.tagline}</p>
-              </div>
-              <span className="ml-4 mt-1 text-gray-400 group-hover:text-blue-500 text-xl">
-                &rarr;
-              </span>
-            </div>
-            <p className="mt-3 text-sm text-gray-600 line-clamp-2">
-              {workflow.description}
-            </p>
-            {/* Tool pills */}
-            <div className="mt-4 flex flex-wrap gap-1.5">
-              {workflow.steps.flatMap((s) => s.tools).slice(0, 5).map((tool) => (
-                <span
-                  key={tool.slug}
-                  className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700"
-                >
-                  {tool.name}
-                </span>
-              ))}
-              {workflow.steps.flatMap((s) => s.tools).length > 5 && (
-                <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-500">
-                  +{workflow.steps.flatMap((s) => s.tools).length - 5} more
-                </span>
-              )}
-            </div>
-          </Link>
-        ))}
-      </div>
+      {workflowList.length === 0 ? (
+        <p className="text-gray-500">No workflows yet. Check back soon!</p>
+      ) : (
+        <div className="grid gap-6 sm:grid-cols-2">
+          {workflowList.map((workflow) => {
+            const totalTools = workflow.steps.flatMap((s) => s.tools).length;
+            return (
+              <Link
+                key={workflow.slug}
+                href={`/workflows/${workflow.slug}`}
+                className="group flex flex-col rounded-xl border border-gray-200 bg-white p-6 hover:border-blue-300 hover:shadow-md transition-all"
+              >
+                <div className="flex items-start justify-between">
+                  <div>
+                    <span className="text-xs font-semibold uppercase tracking-wide text-blue-600">
+                      {workflow.steps.length} Steps · {totalTools} Tools
+                    </span>
+                    <h2 className="mt-1 text-lg font-bold text-gray-900 group-hover:text-blue-600">
+                      {workflow.title}
+                    </h2>
+                    <p className="text-sm text-gray-500">{workflow.tagline}</p>
+                  </div>
+                  <span className="ml-4 mt-1 text-gray-400 group-hover:text-blue-500 text-xl">
+                    &rarr;
+                  </span>
+                </div>
+                <p className="mt-3 text-sm text-gray-600 line-clamp-2">
+                  {workflow.description}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {workflow.steps.flatMap((s) => s.tools).slice(0, 5).map((tool) => (
+                    <span
+                      key={tool.slug}
+                      className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700"
+                    >
+                      {tool.name}
+                    </span>
+                  ))}
+                  {totalTools > 5 && (
+                    <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-500">
+                      +{totalTools - 5} more
+                    </span>
+                  )}
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </main>
   );
 }

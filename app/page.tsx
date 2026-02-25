@@ -1,21 +1,23 @@
 import Link from "next/link";
 import { getAllTools, getAllCategories } from "@/lib/queries/tools";
 import { getRecentBlogPosts } from "@/lib/queries/blog";
+import { getRecentWorkflows } from "@/lib/queries/workflows";
 import ToolCard from "@/components/ToolCard";
-import { workflows } from "@/lib/workflows";
-import type { BlogPost } from "@/lib/types";
+import type { BlogPost, Workflow } from "@/lib/types";
 
 export default async function Home() {
   const year = new Date().getFullYear();
   let tools: Awaited<ReturnType<typeof getAllTools>> = [];
   let categories: Awaited<ReturnType<typeof getAllCategories>> = [];
   let recentPosts: BlogPost[] = [];
+  let recentWorkflows: Workflow[] = [];
 
   try {
-    [tools, categories, recentPosts] = await Promise.all([
+    [tools, categories, recentPosts, recentWorkflows] = await Promise.all([
       getAllTools(),
       getAllCategories(),
       getRecentBlogPosts(4),
+      getRecentWorkflows(3),
     ]);
   } catch {
     // DB not connected yet - show placeholder content
@@ -182,7 +184,7 @@ export default async function Home() {
           </Link>
         </div>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {workflows.slice(0, 3).map((workflow) => (
+          {recentWorkflows.map((workflow) => (
             <Link
               key={workflow.slug}
               href={`/workflows/${workflow.slug}`}

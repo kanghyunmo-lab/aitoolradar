@@ -1,13 +1,19 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getWorkflowBySlug, getAllWorkflowSlugs, workflows } from "@/lib/workflows";
+import { getWorkflowBySlug, getWorkflowSlugs, getAllWorkflows } from "@/lib/queries/workflows";
 import { getToolBySlug } from "@/lib/queries/tools";
+import type { Workflow } from "@/lib/types";
 import ToolLogo from "@/components/ToolLogo";
 import AffiliateCTA from "@/components/AffiliateCTA";
 
-export function generateStaticParams() {
-  return getAllWorkflowSlugs().map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  try {
+    const slugs = await getWorkflowSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({
@@ -16,16 +22,16 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const workflow = getWorkflowBySlug(slug);
+  const workflow = await getWorkflowBySlug(slug);
   if (!workflow) return { title: "Not Found" };
 
   return {
     title: `${workflow.title} — Step-by-Step AI Tool Stack | AIToolRadar`,
-    description: workflow.description,
+    description: workflow.description ?? undefined,
     alternates: { canonical: `/workflows/${workflow.slug}` },
     openGraph: {
       title: `${workflow.title} | AIToolRadar`,
-      description: workflow.description,
+      description: workflow.description ?? undefined,
       url: `https://www.aitoolradar.net/workflows/${workflow.slug}`,
       type: "article",
     },
@@ -38,10 +44,10 @@ export default async function WorkflowPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const workflow = getWorkflowBySlug(slug);
+  const workflow = await getWorkflowBySlug(slug);
   if (!workflow) notFound();
 
-  // Fetch tool data for each step (for logos + affiliate links)
+  // Fetch tool data for logos + affiliate links
   const allToolSlugs = workflow.steps.flatMap((s) => s.tools.map((t) => t.slug));
   const uniqueSlugs = [...new Set(allToolSlugs)];
   const toolDataMap: Record<string, Awaited<ReturnType<typeof getToolBySlug>>> = {};
@@ -52,19 +58,27 @@ export default async function WorkflowPage({
         const tool = await getToolBySlug(toolSlug);
         if (tool) toolDataMap[toolSlug] = tool;
       } catch {
-        // Tool not found in DB — gracefully skip
+        // Tool not in DB — skip gracefully
       }
     })
   );
 
-  // Related workflows
-  const relatedWorkflows = workflow.relatedSlugs
-    .map((s) => workflows.find((w) => w.slug === s))
-    .filter(Boolean);
+  // Related workflows from DB
+  let relatedWorkflows: Workflow[] = [];
+  if (workflow.related_slugs && workflow.related_slugs.length > 0) {
+    try {
+      const all = await getAllWorkflows();
+      relatedWorkflows = all.filter((w) =>
+        workflow.related_slugs!.includes(w.slug)
+      );
+    } catch {
+      // skip
+    }
+  }
 
   const totalTools = workflow.steps.flatMap((s) => s.tools).length;
 
-  // JSON-LD HowTo schema
+  // HowTo JSON-LD
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "HowTo",
@@ -108,15 +122,14 @@ export default async function WorkflowPage({
         </p>
         <p className="mt-4 text-base text-gray-600">{workflow.description}</p>
 
-        {/* Stats bar */}
         <div className="mt-6 flex flex-wrap gap-4">
-          <span className="flex items-center gap-1.5 rounded-full bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700">
+          <span className="rounded-full bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700">
             {workflow.steps.length} Steps
           </span>
-          <span className="flex items-center gap-1.5 rounded-full bg-green-50 px-4 py-1.5 text-sm font-medium text-green-700">
+          <span className="rounded-full bg-green-50 px-4 py-1.5 text-sm font-medium text-green-700">
             {totalTools} AI Tools
           </span>
-          <span className="flex items-center gap-1.5 rounded-full bg-yellow-50 px-4 py-1.5 text-sm font-medium text-yellow-700">
+          <span className="rounded-full bg-yellow-50 px-4 py-1.5 text-sm font-medium text-yellow-700">
             High ROI
           </span>
         </div>
@@ -133,7 +146,6 @@ export default async function WorkflowPage({
               key={step.step}
               className="rounded-xl border border-gray-200 bg-white p-6"
             >
-              {/* Step header */}
               <div className="flex items-center gap-3 mb-4">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
                   {step.step}
@@ -143,7 +155,6 @@ export default async function WorkflowPage({
                 </h3>
               </div>
 
-              {/* Tools for this step */}
               <div className="grid gap-3 sm:grid-cols-2">
                 {step.tools.map((toolRef) => {
                   const toolData = toolDataMap[toolRef.slug];
@@ -229,14 +240,14 @@ export default async function WorkflowPage({
           <div className="grid gap-4 sm:grid-cols-3">
             {relatedWorkflows.map((related) => (
               <Link
-                key={related!.slug}
-                href={`/workflows/${related!.slug}`}
+                key={related.slug}
+                href={`/workflows/${related.slug}`}
                 className="rounded-xl border border-gray-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all"
               >
                 <p className="text-sm font-bold text-gray-900 hover:text-blue-600">
-                  {related!.title}
+                  {related.title}
                 </p>
-                <p className="mt-1 text-xs text-gray-500">{related!.tagline}</p>
+                <p className="mt-1 text-xs text-gray-500">{related.tagline}</p>
               </Link>
             ))}
           </div>

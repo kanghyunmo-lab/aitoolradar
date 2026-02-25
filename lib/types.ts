@@ -56,6 +56,29 @@ export interface Integration {
   description: string | null;
 }
 
+export interface WorkflowTool {
+  name: string;
+  slug: string;
+}
+
+export interface WorkflowStep {
+  step: number;
+  goal: string;
+  tools: WorkflowTool[];
+}
+
+export interface Workflow {
+  id: string;
+  slug: string;
+  title: string;
+  tagline: string | null;
+  description: string | null;
+  steps: WorkflowStep[];
+  related_slugs: string[] | null;
+  is_published: boolean;
+  created_at: string;
+}
+
 export interface BlogPost {
   id: string;
   slug: string;
