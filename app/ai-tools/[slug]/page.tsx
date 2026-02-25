@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getToolBySlug, getToolSlugs } from "@/lib/queries/tools";
 import ToolLogo from "@/components/ToolLogo";
+import AffiliateCTA from "@/components/AffiliateCTA";
 
 export async function generateStaticParams() {
   try {
@@ -144,14 +145,15 @@ export default async function ToolPage({
       {/* CTA */}
       {tool.affiliate_url && (
         <div className="mt-8 rounded-xl bg-blue-50 p-6 text-center">
-          <a
+          <AffiliateCTA
             href={tool.affiliate_url}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
+            toolName={tool.name}
+            toolSlug={tool.slug}
+            placement="top_cta"
             className="inline-block rounded-lg bg-blue-600 px-8 py-3 text-lg font-semibold text-white hover:bg-blue-700"
           >
             Try {tool.name} Free &rarr;
-          </a>
+          </AffiliateCTA>
           {tool.starting_price && (
             <p className="mt-2 text-sm text-gray-600">
               Starting from ${tool.starting_price}/month
@@ -285,14 +287,15 @@ export default async function ToolPage({
               ? "Start your free trial today. No credit card required."
               : `Plans start at $${tool.starting_price}/month.`}
           </p>
-          <a
+          <AffiliateCTA
             href={tool.affiliate_url}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
+            toolName={tool.name}
+            toolSlug={tool.slug}
+            placement="bottom_cta"
             className="mt-4 inline-block rounded-lg bg-blue-600 px-8 py-3 text-lg font-semibold text-white hover:bg-blue-700"
           >
             Get Started with {tool.name} &rarr;
-          </a>
+          </AffiliateCTA>
         </div>
       )}
     </article>

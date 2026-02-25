@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getComparisonTools, getPopularComparisons } from "@/lib/queries/tools";
 import type { AiTool } from "@/lib/types";
+import AffiliateCTA from "@/components/AffiliateCTA";
 
 function parseComparison(comparison: string): {
   slugA: string;
@@ -165,14 +166,15 @@ export default async function ComparisonPage({
           </p>
           <p className="mt-1 text-sm text-gray-600">{result.reason}</p>
           {result.winner.affiliate_url && (
-            <a
+            <AffiliateCTA
               href={result.winner.affiliate_url}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
+              toolName={result.winner.name}
+              toolSlug={result.winner.slug}
+              placement="winner_banner"
               className="mt-4 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700"
             >
               Try {result.winner.name} &rarr;
-            </a>
+            </AffiliateCTA>
           )}
         </div>
       )}
@@ -272,14 +274,15 @@ export default async function ComparisonPage({
             </div>
           )}
           {toolA.affiliate_url && (
-            <a
+            <AffiliateCTA
               href={toolA.affiliate_url}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
+              toolName={toolA.name}
+              toolSlug={toolA.slug}
+              placement="pros_cons"
               className="mt-4 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700"
             >
               Try {toolA.name} &rarr;
-            </a>
+            </AffiliateCTA>
           )}
         </div>
 
@@ -313,14 +316,15 @@ export default async function ComparisonPage({
             </div>
           )}
           {toolB.affiliate_url && (
-            <a
+            <AffiliateCTA
               href={toolB.affiliate_url}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
+              toolName={toolB.name}
+              toolSlug={toolB.slug}
+              placement="pros_cons"
               className="mt-4 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700"
             >
               Try {toolB.name} &rarr;
-            </a>
+            </AffiliateCTA>
           )}
         </div>
       </section>
