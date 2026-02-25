@@ -81,14 +81,41 @@
 
 ---
 
+## 🟢 Month 3~4 (블로그 전략 전환)
+
+> 지금 블로그 10개는 충분. 트래픽 데이터 없이 추가 생성 금지.
+> Month 3 이후 GA4 데이터 보고 → 수요 확인된 주제만 작성.
+
+| 작업 | 담당 | 시점 |
+|------|------|------|
+| **워크플로우 블로그 1개 (검증용)** | Antigravity | Month 3 |
+| ↳ 예: "Best AI Stack for YouTube Automation" | | 낮은 경쟁, 고구매의도 |
+| 블로그 성과 분석 후 추가 작성 여부 결정 | 직접 | Month 4 |
+
 ## 🟢 Month 4~6 이후
 
 | 작업 | 담당 | 시점 |
 |------|------|------|
 | 상위 50개 비교 페이지 content_html 강화 | Antigravity | Month 4 |
 | 도구 300개로 확장 | Antigravity | Month 4~6 |
-| 블로그 월 2개 발행 | Antigravity | 지속 |
+| 워크플로우 블로그 데이터 검증 완료 시 → /workflows/ 전용 페이지 개발 | Claude Code | Month 5~6 |
 | Reddit 커뮤니티 진성 참여 | 직접 | 트래픽 생기면서 병행 |
+
+## 🔮 워크플로우 전략 (검증 후 실행)
+
+> 핵심 아이디어: "도구 비교"에서 "워크플로우 추천"으로 포지션 전환
+> 방문자 1명당 수익 4~5배 / 경쟁 낮은 키워드 / 높은 구매 의도
+
+**검증 순서:**
+1. 블로그 1개로 트래픽 테스트 (Month 3)
+2. 트래픽 확인되면 → /workflows/[slug] 전용 페이지 (Month 5~6)
+3. 트래픽 확인되면 → 워크플로우 퀴즈 ("What do you want to automate?") (Month 8+)
+
+**예시 워크플로우 콘텐츠:**
+- AI YouTube Automation Stack (Script → Voice → Edit → Thumbnail)
+- AI Content Marketing Workflow (Research → Write → Design → Schedule)
+- AI Coding Workflow (IDE → Review → Test → Deploy)
+- AI Customer Support Stack (Chat → Summarize → Ticket → Analytics)
 
 ---
 
