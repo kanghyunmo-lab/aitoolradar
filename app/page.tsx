@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { getAllTools, getAllCategories } from "@/lib/queries/tools";
+import { getRecentBlogPosts } from "@/lib/queries/blog";
 import ToolCard from "@/components/ToolCard";
+import type { BlogPost } from "@/lib/types";
 
 export default async function Home() {
   const year = new Date().getFullYear();
   let tools: Awaited<ReturnType<typeof getAllTools>> = [];
   let categories: Awaited<ReturnType<typeof getAllCategories>> = [];
+  let recentPosts: BlogPost[] = [];
 
   try {
-    [tools, categories] = await Promise.all([
+    [tools, categories, recentPosts] = await Promise.all([
       getAllTools(),
       getAllCategories(),
+      getRecentBlogPosts(4),
     ]);
   } catch {
     // DB not connected yet - show placeholder content
@@ -157,6 +161,58 @@ export default async function Home() {
           )}
         </div>
       </section>
+
+      {/* Recent Blog Posts */}
+      {recentPosts.length > 0 && (
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-gray-900">
+              Latest AI Tool Guides
+            </h2>
+            <Link
+              href="/blog"
+              className="text-sm font-medium text-blue-600 hover:text-blue-700"
+            >
+              View all guides &rarr;
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {recentPosts.map((post) => (
+              <article
+                key={post.slug}
+                className="flex flex-col rounded-xl border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow"
+              >
+                <div className="flex flex-1 flex-col p-5">
+                  {post.category && (
+                    <span className="mb-2 text-xs font-semibold uppercase tracking-wide text-blue-600">
+                      {post.category}
+                    </span>
+                  )}
+                  <h3 className="text-sm font-bold text-gray-900 leading-snug">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="hover:text-blue-600"
+                    >
+                      {post.title}
+                    </Link>
+                  </h3>
+                  {post.excerpt && (
+                    <p className="mt-2 flex-1 text-xs text-gray-500 line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                  )}
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="mt-3 text-xs font-semibold text-blue-600 hover:text-blue-700"
+                  >
+                    Read more &rarr;
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* SEO Content Section */}
       <section className="bg-gray-50 px-4 py-16">
