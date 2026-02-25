@@ -152,18 +152,40 @@
 ```
 aitoolradar/
 ├── app/
-│   ├── page.tsx              ← 홈페이지 (블로그 섹션 포함)
-│   ├── ai-tools/[slug]/      ← 도구 리뷰 (AffiliateCTA 적용)
-│   ├── compare/[...]/        ← 비교 페이지 (AffiliateCTA 적용)
-│   ├── best/[category]/      ← 카테고리
-│   ├── pricing/[slug]/       ← 가격
-│   ├── alternatives/[...]/   ← 대안
-│   └── blog/[slug]/          ← 블로그
+│   ├── page.tsx                  ← 홈페이지
+│   ├── ai-tools/[slug]/          ← 도구 리뷰
+│   ├── compare/[comparison]/     ← 비교 페이지 (1,526개)
+│   ├── best/[category]/          ← 카테고리
+│   ├── alternatives/[slug]/      ← 대안 페이지
+│   ├── pricing/[slug]/           ← 가격 페이지
+│   ├── blog/[slug]/              ← 블로그
+│   └── workflows/[slug]/         ← AI 워크플로우 (pSEO)
 ├── components/
-│   └── AffiliateCTA.tsx      ← GA4 추적 CTA 버튼 컴포넌트
+│   ├── AffiliateCTA.tsx          ← GA4 추적 CTA 버튼
+│   ├── ToolCard.tsx / ToolLogo.tsx
+│   ├── CompareSelector.tsx / CategoryToolList.tsx
+│   └── Header.tsx / Footer.tsx
+├── lib/
+│   ├── types.ts                  ← 전체 TypeScript 타입
+│   ├── supabase/                 ← DB 클라이언트
+│   └── queries/
+│       ├── tools.ts              ← 도구 쿼리
+│       ├── blog.ts               ← 블로그 쿼리
+│       └── workflows.ts          ← 워크플로우 쿼리 (신규)
+├── scripts/
+│   ├── schema.sql                ← DB 스키마
+│   ├── seed-data-v2.sql          ← 177개 도구 데이터
+│   ├── create-blog-table.sql     ← 블로그 테이블
+│   ├── create-workflows-table.sql← 워크플로우 테이블
+│   ├── google-indexing.js        ← 색인 요청 스크립트
+│   ├── import-blog-posts.js      ← 블로그 임포트
+│   └── archived/                 ← 완료된 SQL (보관용)
 ├── docs/
-│   ├── PRD_v3.md             ← 전략 기준 문서
-│   └── 참고자료.md            ← 경쟁사/제휴/콘텐츠 참고
-├── PROGRESS.md               ← 이 파일
-└── CLAUDE.md                 ← Claude 지침서
+│   ├── PRD_v3.md                 ← 전략 기준 문서
+│   ├── 참고자료.md               ← 경쟁사/제휴 참고
+│   ├── ai_workflow_research.md   ← 워크플로우 리서치
+│   ├── workflow_recommendations.md← 워크플로우 추천
+│   └── archived/                 ← 완료된 가이드 (보관용)
+├── PROGRESS.md                   ← 이 파일
+└── CLAUDE.md                     ← Claude 지침서
 ```
