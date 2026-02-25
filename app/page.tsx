@@ -79,7 +79,7 @@ export default async function Home() {
             Browse AI Tools
           </Link>
           <Link
-            href="/compare/chatgpt-vs-claude"
+            href="/compare"
             className="rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             Compare Tools

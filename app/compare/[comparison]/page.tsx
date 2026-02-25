@@ -8,9 +8,14 @@ function parseComparison(comparison: string): {
   slugA: string;
   slugB: string;
 } | null {
-  const parts = comparison.split("-vs-");
-  if (parts.length !== 2) return null;
-  return { slugA: parts[0], slugB: parts[1] };
+  // Use indexOf to split on the FIRST occurrence of "-vs-" only
+  // This handles slugs that may contain hyphens safely
+  const vsIdx = comparison.indexOf("-vs-");
+  if (vsIdx === -1) return null;
+  const slugA = comparison.slice(0, vsIdx);
+  const slugB = comparison.slice(vsIdx + 4);
+  if (!slugA || !slugB) return null;
+  return { slugA, slugB };
 }
 
 export async function generateStaticParams() {
