@@ -37,11 +37,10 @@ export default function CompareSelector({ categories, tools }: Props) {
           <button
             key={cat.id}
             onClick={() => handleCatChange(cat.id)}
-            className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-              activeCatId === cat.id
+            className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium transition-colors ${activeCatId === cat.id
                 ? "bg-blue-600 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-            }`}
+                : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+              }`}
           >
             {cat.name}
           </button>
@@ -60,7 +59,7 @@ export default function CompareSelector({ categories, tools }: Props) {
         />
 
         <div className="flex shrink-0 items-center justify-center sm:pt-10">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-gray-300 bg-white text-xs font-bold text-gray-500 shadow-sm">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-gray-700 bg-gray-800 text-xs font-bold text-gray-400 shadow-sm">
             VS
           </div>
         </div>
@@ -91,10 +90,10 @@ export default function CompareSelector({ categories, tools }: Props) {
             {!toolA && !toolB
               ? "Select one tool from each panel to compare"
               : !toolA
-              ? "Select a tool from the left panel"
-              : !toolB
-              ? "Select a tool from the right panel"
-              : "Please select two different tools"}
+                ? "Select a tool from the left panel"
+                : !toolB
+                  ? "Select a tool from the right panel"
+                  : "Please select two different tools"}
           </p>
         )}
 
@@ -138,11 +137,11 @@ function ToolPanel({
   const headerBg =
     accentColor === "blue" ? "bg-blue-600" : "bg-purple-600";
   const border =
-    accentColor === "blue" ? "border-blue-200" : "border-purple-200";
+    accentColor === "blue" ? "border-blue-500/30" : "border-purple-500/30";
   const selectedRow =
     accentColor === "blue"
-      ? "bg-blue-50 text-blue-900 font-semibold"
-      : "bg-purple-50 text-purple-900 font-semibold";
+      ? "bg-blue-900/30 text-blue-300 font-bold"
+      : "bg-purple-900/30 text-purple-300 font-bold";
 
   return (
     <div className={`min-w-0 flex-1 overflow-hidden rounded-xl border-2 ${border}`}>
@@ -157,21 +156,20 @@ function ToolPanel({
       </div>
 
       {/* Tool List */}
-      <ul className="max-h-60 divide-y divide-gray-100 overflow-y-auto">
+      <ul className="max-h-60 divide-y divide-gray-800/50 overflow-y-auto">
         {filteredTools.length > 0 ? (
           filteredTools.map((tool) => (
             <li key={tool.id}>
               <button
                 onClick={() => onSelect(tool)}
-                className={`w-full px-3 py-2.5 text-left text-sm transition-colors ${
-                  selected?.id === tool.id
+                className={`w-full px-3 py-2.5 text-left text-sm transition-colors ${selected?.id === tool.id
                     ? selectedRow
-                    : "text-gray-700 hover:bg-gray-50"
-                }`}
+                    : "text-gray-300 hover:bg-gray-800/50"
+                  }`}
               >
                 <span className="block truncate">{tool.name}</span>
                 {tool.rating != null && (
-                  <span className="text-[11px] text-gray-400">
+                  <span className="text-[11px] text-gray-500">
                     ★ {tool.rating}
                   </span>
                 )}

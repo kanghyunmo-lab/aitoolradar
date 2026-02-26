@@ -603,7 +603,31 @@
     "https://www.aitoolradar.net/best/ai-sales-tools",
     "https://www.aitoolradar.net/best/ai-data-analytics",
     "https://www.aitoolradar.net/blog/complete-guide-ai-image-generators-2026",
-    "https://www.aitoolradar.net/blog/how-to-automate-your-business-with-ai-2026"
+    "https://www.aitoolradar.net/blog/how-to-automate-your-business-with-ai-2026",
+    "https://www.aitoolradar.net/workflows/ai-youtube-video-creation",
+    "https://www.aitoolradar.net/workflows/ai-podcast-production-workflow",
+    "https://www.aitoolradar.net/workflows/ai-online-course-creation",
+    "https://www.aitoolradar.net/workflows/ai-seo-blog-content-creation",
+    "https://www.aitoolradar.net/workflows/ai-social-media-content-repurposing",
+    "https://www.aitoolradar.net/workflows/ai-book-writing-self-publishing",
+    "https://www.aitoolradar.net/workflows/ai-cold-email-outreach",
+    "https://www.aitoolradar.net/workflows/ai-ecommerce-product-descriptions",
+    "https://www.aitoolradar.net/workflows/ai-landing-page-creation",
+    "https://www.aitoolradar.net/workflows/ai-music-production-content-creators",
+    "https://www.aitoolradar.net/workflows/ai-newsletter-automation",
+    "https://www.aitoolradar.net/workflows/ai-real-estate-listing-marketing",
+    "https://www.aitoolradar.net/workflows/ai-sales-deck-presentation",
+    "https://www.aitoolradar.net/workflows/ai-ugc-ad-creation",
+    "https://www.aitoolradar.net/workflows/ai-video-ad-creative-production",
+    "https://www.aitoolradar.net/workflows",
+    "https://www.aitoolradar.net/blog/jasper-vs-copyai-vs-writesonic-2026",
+    "https://www.aitoolradar.net/blog/best-free-ai-tools-for-startups-2026",
+    "https://www.aitoolradar.net/blog/chatgpt-vs-claude-vs-gemini-comparison",
+    "https://www.aitoolradar.net/blog/best-ai-coding-assistants-developers-2026",
+    "https://www.aitoolradar.net/blog/ai-writing-tools-small-business-guide-2026",
+    "https://www.aitoolradar.net/blog/midjourney-vs-dalle-vs-stable-diffusion-2026",
+    "https://www.aitoolradar.net/blog/ai-tools-replace-expensive-software-2026",
+    "https://www.aitoolradar.net/blog/how-to-use-perplexity-ai-research-2026"
   ],
   "failed": [
     {
@@ -639,5 +663,5 @@
       "error": "Quota exceeded for quota metric 'Publish requests' and limit 'Publish requests per day' of service 'indexing.googleapis.com' for consumer 'project_number:268925314451'."
     }
   ],
-  "lastRun": "2026-02-25T13:28:38.443Z"
+  "lastRun": "2026-02-26T11:37:30.776Z"
 }

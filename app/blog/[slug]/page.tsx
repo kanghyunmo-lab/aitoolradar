@@ -107,35 +107,35 @@ export default async function BlogPostPage({
         {/* Main Content */}
         <article>
           {/* Breadcrumb */}
-          <nav className="mb-6 text-sm text-gray-500">
-            <Link href="/" className="hover:text-gray-700">Home</Link>
+          <nav className="mb-6 text-sm text-gray-400">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
             {" / "}
-            <Link href="/blog" className="hover:text-gray-700">Blog</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             {" / "}
-            <span className="text-gray-900">{post.title}</span>
+            <span className="text-gray-200">{post.title}</span>
           </nav>
 
           {/* Post Header */}
-          <header className="mb-10 pb-8 border-b border-gray-200">
+          <header className="mb-10 pb-8 border-b border-gray-800">
             {post.category && (
-              <span className="mb-3 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-600">
+              <span className="mb-3 inline-block rounded-full bg-blue-500/10 border border-blue-500/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue-400">
                 {post.category}
               </span>
             )}
-            <h1 className="mt-3 text-3xl font-extrabold text-gray-900 sm:text-4xl leading-tight">
+            <h1 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl leading-tight">
               {post.title}
             </h1>
             {post.excerpt && (
-              <p className="mt-4 text-lg text-gray-600 leading-relaxed">
+              <p className="mt-4 text-lg text-gray-400 leading-relaxed">
                 {post.excerpt}
               </p>
             )}
-            <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-gray-500">
+            <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-gray-400">
               <div className="flex items-center gap-2">
-                <div className="h-7 w-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                <div className="h-7 w-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-[0_0_10px_rgba(37,99,235,0.4)]">
                   AI
                 </div>
-                <span className="font-medium text-gray-700">{post.author}</span>
+                <span className="font-bold text-gray-200">{post.author}</span>
               </div>
               <span className="text-gray-300">·</span>
               <span>
@@ -162,25 +162,26 @@ export default async function BlogPostPage({
           {/* Article Body */}
           {post.content_html ? (
             <div
-              className="blog-content"
+              className="blog-content prose prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: post.content_html }}
             />
           ) : (
-            <p className="text-gray-500">Content coming soon.</p>
+            <p className="text-gray-400">Content coming soon.</p>
           )}
 
           {/* Bottom CTA */}
-          <div className="mt-12 rounded-xl bg-blue-50 border border-blue-100 p-8 text-center">
-            <h2 className="text-xl font-bold text-gray-900">
+          <div className="mt-12 rounded-xl border border-blue-500/30 bg-blue-900/10 p-8 text-center backdrop-blur-sm relative overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-500/5 blur-[50px] -z-10 rounded-full"></div>
+            <h2 className="text-xl font-bold text-white relative z-10">
               Ready to Find Your Perfect AI Tool?
             </h2>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 text-gray-400 relative z-10">
               Browse and compare 177+ AI tools to find the right fit for your
               workflow.
             </p>
             <Link
               href="/"
-              className="mt-4 inline-block rounded-lg bg-blue-600 px-8 py-3 font-semibold text-white hover:bg-blue-700"
+              className="mt-6 inline-block rounded-lg bg-blue-600 px-8 py-3 text-base font-semibold text-white hover:bg-blue-500 transition-colors shadow-[0_0_15px_rgba(37,99,235,0.3)] relative z-10"
             >
               Explore AI Tools &rarr;
             </Link>
@@ -191,8 +192,8 @@ export default async function BlogPostPage({
         <aside className="mt-12 lg:mt-0">
           {/* Related Posts */}
           {relatedPosts.length > 0 && (
-            <div className="rounded-xl border border-gray-200 p-6">
-              <h3 className="mb-4 text-base font-bold text-gray-900">
+            <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-6">
+              <h3 className="mb-4 text-base font-bold text-white uppercase tracking-wider">
                 Related Articles
               </h3>
               <div className="space-y-4">
@@ -200,11 +201,11 @@ export default async function BlogPostPage({
                   <div key={related.slug}>
                     <Link
                       href={`/blog/${related.slug}`}
-                      className="text-sm font-medium text-gray-800 hover:text-blue-600 leading-snug"
+                      className="text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors leading-snug"
                     >
                       {related.title}
                     </Link>
-                    <p className="mt-1 text-xs text-gray-400">
+                    <p className="mt-1 text-xs text-gray-500">
                       {related.reading_time_minutes} min read
                     </p>
                   </div>
@@ -214,11 +215,11 @@ export default async function BlogPostPage({
           )}
 
           {/* Popular Tools */}
-          <div className="mt-6 rounded-xl border border-gray-200 p-6">
-            <h3 className="mb-4 text-base font-bold text-gray-900">
+          <div className="mt-6 rounded-xl border border-gray-800 bg-gray-900/50 p-6">
+            <h3 className="mb-4 text-base font-bold text-white uppercase tracking-wider">
               Popular AI Tools
             </h3>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {[
                 { name: "Jasper AI", slug: "jasper" },
                 { name: "Copy.ai", slug: "copy-ai" },
@@ -229,7 +230,7 @@ export default async function BlogPostPage({
                 <Link
                   key={tool.slug}
                   href={`/ai-tools/${tool.slug}`}
-                  className="block text-sm text-gray-700 hover:text-blue-600"
+                  className="block text-sm text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   {tool.name} &rarr;
                 </Link>

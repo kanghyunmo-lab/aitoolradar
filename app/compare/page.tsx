@@ -26,32 +26,32 @@ export default async function ComparePage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Breadcrumb */}
-      <nav className="mb-4 text-sm text-gray-500">
-        <Link href="/" className="hover:text-gray-700">
+      <nav className="mb-4 text-sm text-gray-400">
+        <Link href="/" className="hover:text-white transition-colors">
           Home
         </Link>
         {" / "}
-        <span className="text-gray-900">Compare</span>
+        <span className="text-gray-200">Compare</span>
       </nav>
 
-      <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+      <h1 className="text-3xl font-extrabold text-white sm:text-4xl">
         Compare AI Tools Side by Side
       </h1>
-      <p className="mt-2 text-base text-gray-600">
+      <p className="mt-2 text-base text-gray-400">
         Pick a category, select{" "}
-        <span className="font-medium text-blue-600">Tool A</span> and{" "}
-        <span className="font-medium text-purple-600">Tool B</span>, then
+        <span className="font-medium text-blue-400">Tool A</span> and{" "}
+        <span className="font-medium text-purple-400">Tool B</span>, then
         click Compare to see the full breakdown.
       </p>
 
       {categories.length > 0 ? (
         <CompareSelector categories={categories} tools={tools} />
       ) : (
-        <div className="mt-10 rounded-xl border border-dashed border-gray-300 p-12 text-center">
-          <p className="text-gray-500">No tool data available.</p>
+        <div className="mt-10 rounded-xl border border-dashed border-gray-800 bg-gray-900/50 p-12 text-center">
+          <p className="text-gray-400">No tool data available.</p>
           <Link
             href="/"
-            className="mt-4 inline-block text-sm text-blue-600 hover:underline"
+            className="mt-4 inline-block text-sm text-blue-500 hover:underline"
           >
             Back to Home &rarr;
           </Link>

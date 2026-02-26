@@ -106,6 +106,30 @@ function generateAllUrls() {
     urls.push(`${SITE_URL}/best/${cat}`);
   });
 
+  // 워크플로우 페이지
+  const workflowSlugs = [
+    'ai-youtube-video-creation',
+    'ai-podcast-production-workflow',
+    'ai-online-course-creation',
+    'ai-seo-blog-content-creation',
+    'ai-social-media-content-repurposing',
+    'ai-book-writing-self-publishing',
+    'ai-cold-email-outreach',
+    'ai-ecommerce-product-descriptions',
+    'ai-landing-page-creation',
+    'ai-music-production-content-creators',
+    'ai-newsletter-automation',
+    'ai-real-estate-listing-marketing',
+    'ai-sales-deck-presentation',
+    'ai-ugc-ad-creation',
+    'ai-video-ad-creative-production',
+  ];
+  workflowSlugs.forEach(slug => {
+    urls.push(`${SITE_URL}/workflows/${slug}`);
+  });
+  // /workflows 목록 페이지
+  urls.push(`${SITE_URL}/workflows`);
+
   // 블로그 포스트
   const blogSlugs = [
     'jasper-vs-copyai-vs-writesonic-2026',

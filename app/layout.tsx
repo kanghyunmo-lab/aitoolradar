@@ -72,7 +72,7 @@ export default function RootLayout({
         </>
       )}
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* WebSite + Organization JSON-LD structured data */}
         <script

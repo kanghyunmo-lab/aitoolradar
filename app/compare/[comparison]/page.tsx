@@ -75,10 +75,10 @@ function ComparisonRow({
   valueB: React.ReactNode;
 }) {
   return (
-    <tr className="border-b border-gray-100">
-      <td className="py-3 pr-4 text-sm font-medium text-gray-500">{label}</td>
-      <td className="py-3 px-4 text-sm text-gray-900">{valueA}</td>
-      <td className="py-3 pl-4 text-sm text-gray-900">{valueB}</td>
+    <tr className="border-b border-gray-800 hover:bg-white/5 transition-colors">
+      <td className="py-3 pr-4 text-sm font-medium text-gray-400">{label}</td>
+      <td className="py-3 px-4 text-sm text-gray-300">{valueA}</td>
+      <td className="py-3 pl-4 text-sm text-gray-300">{valueB}</td>
     </tr>
   );
 }
@@ -140,38 +140,38 @@ export default async function ComparisonPage({
       />
 
       {/* Breadcrumb */}
-      <nav className="mb-6 text-sm text-gray-500">
-        <Link href="/" className="hover:text-gray-700">Home</Link>
+      <nav className="mb-6 text-sm text-gray-400">
+        <Link href="/" className="hover:text-white transition-colors">Home</Link>
         {" / "}
-        <span className="text-gray-900">
+        <span className="text-gray-200">
           {toolA.name} vs {toolB.name}
         </span>
       </nav>
 
-      <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+      <h1 className="text-3xl font-extrabold text-white sm:text-4xl">
         {toolA.name} vs {toolB.name}
       </h1>
-      <p className="mt-3 text-lg text-gray-600">
+      <p className="mt-3 text-lg text-gray-400">
         A comprehensive comparison to help you choose the right AI tool in 2026.
       </p>
 
       {/* Winner Banner */}
       {result && (
-        <div className="mt-8 rounded-xl bg-yellow-50 border border-yellow-200 p-6 text-center">
-          <p className="text-sm font-medium text-yellow-600 uppercase">
+        <div className="mt-8 rounded-xl bg-yellow-500/10 border border-yellow-500/20 p-6 text-center backdrop-blur-sm">
+          <p className="text-sm font-bold tracking-wider text-yellow-500 uppercase">
             Our Pick
           </p>
-          <p className="mt-1 text-2xl font-bold text-gray-900">
+          <p className="mt-1 text-2xl font-bold text-white">
             {result.winner.name}
           </p>
-          <p className="mt-1 text-sm text-gray-600">{result.reason}</p>
+          <p className="mt-2 text-sm text-gray-300">{result.reason}</p>
           {result.winner.affiliate_url && (
             <AffiliateCTA
               href={result.winner.affiliate_url}
               toolName={result.winner.name}
               toolSlug={result.winner.slug}
               placement="winner_banner"
-              className="mt-4 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700"
+              className="mt-5 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-500 transition-colors shadow-[0_0_15px_rgba(37,99,235,0.3)]"
             >
               Try {result.winner.name} &rarr;
             </AffiliateCTA>
@@ -181,20 +181,20 @@ export default async function ComparisonPage({
 
       {/* Comparison Table */}
       <section className="mt-10">
-        <h2 className="text-xl font-bold text-gray-900">
+        <h2 className="text-xl font-bold text-white">
           Feature Comparison
         </h2>
-        <div className="mt-4 overflow-x-auto">
+        <div className="mt-4 overflow-x-auto rounded-xl border border-gray-800 bg-gray-900/50">
           <table className="w-full">
             <thead>
-              <tr className="border-b-2 border-gray-200">
-                <th className="py-3 pr-4 text-left text-sm font-semibold text-gray-500">
+              <tr className="border-b-2 border-gray-800 bg-gray-800/50">
+                <th className="py-3 pr-4 pl-4 text-left text-sm font-bold text-gray-400">
                   Feature
                 </th>
-                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-900">
+                <th className="py-3 px-4 text-left text-sm font-bold text-white">
                   {toolA.name}
                 </th>
-                <th className="py-3 pl-4 text-left text-sm font-semibold text-gray-900">
+                <th className="py-3 pl-4 text-left text-sm font-bold text-white">
                   {toolB.name}
                 </th>
               </tr>
@@ -244,30 +244,30 @@ export default async function ComparisonPage({
 
       {/* Pros & Cons Side by Side */}
       <section className="mt-12 grid gap-8 sm:grid-cols-2">
-        <div>
-          <h2 className="text-xl font-bold text-gray-900">{toolA.name}</h2>
-          <p className="mt-2 text-sm text-gray-600">
+        <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-6">
+          <h2 className="text-xl font-bold text-white">{toolA.name}</h2>
+          <p className="mt-2 text-sm text-gray-400">
             {toolA.short_description}
           </p>
           {toolA.pros && toolA.pros.length > 0 && (
-            <div className="mt-4">
-              <h3 className="text-sm font-semibold text-green-700">Pros</h3>
-              <ul className="mt-2 space-y-1">
+            <div className="mt-6">
+              <h3 className="text-sm font-bold text-green-400 uppercase tracking-wider">Pros</h3>
+              <ul className="mt-3 space-y-2">
                 {toolA.pros.map((p, i) => (
-                  <li key={i} className="text-sm text-gray-600">
-                    + {p}
+                  <li key={i} className="text-sm text-gray-300 flex items-start gap-2">
+                    <span className="text-green-500 font-bold">+</span> {p}
                   </li>
                 ))}
               </ul>
             </div>
           )}
           {toolA.cons && toolA.cons.length > 0 && (
-            <div className="mt-4">
-              <h3 className="text-sm font-semibold text-red-700">Cons</h3>
-              <ul className="mt-2 space-y-1">
+            <div className="mt-6">
+              <h3 className="text-sm font-bold text-red-400 uppercase tracking-wider">Cons</h3>
+              <ul className="mt-3 space-y-2">
                 {toolA.cons.map((c, i) => (
-                  <li key={i} className="text-sm text-gray-600">
-                    - {c}
+                  <li key={i} className="text-sm text-gray-300 flex items-start gap-2">
+                    <span className="text-red-500 font-bold">-</span> {c}
                   </li>
                 ))}
               </ul>
@@ -279,37 +279,37 @@ export default async function ComparisonPage({
               toolName={toolA.name}
               toolSlug={toolA.slug}
               placement="pros_cons"
-              className="mt-4 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700"
+              className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-500 transition-colors shadow-[0_0_10px_rgba(37,99,235,0.2)]"
             >
               Try {toolA.name} &rarr;
             </AffiliateCTA>
           )}
         </div>
 
-        <div>
-          <h2 className="text-xl font-bold text-gray-900">{toolB.name}</h2>
-          <p className="mt-2 text-sm text-gray-600">
+        <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-6">
+          <h2 className="text-xl font-bold text-white">{toolB.name}</h2>
+          <p className="mt-2 text-sm text-gray-400">
             {toolB.short_description}
           </p>
           {toolB.pros && toolB.pros.length > 0 && (
-            <div className="mt-4">
-              <h3 className="text-sm font-semibold text-green-700">Pros</h3>
-              <ul className="mt-2 space-y-1">
+            <div className="mt-6">
+              <h3 className="text-sm font-bold text-green-400 uppercase tracking-wider">Pros</h3>
+              <ul className="mt-3 space-y-2">
                 {toolB.pros.map((p, i) => (
-                  <li key={i} className="text-sm text-gray-600">
-                    + {p}
+                  <li key={i} className="text-sm text-gray-300 flex items-start gap-2">
+                    <span className="text-green-500 font-bold">+</span> {p}
                   </li>
                 ))}
               </ul>
             </div>
           )}
           {toolB.cons && toolB.cons.length > 0 && (
-            <div className="mt-4">
-              <h3 className="text-sm font-semibold text-red-700">Cons</h3>
-              <ul className="mt-2 space-y-1">
+            <div className="mt-6">
+              <h3 className="text-sm font-bold text-red-400 uppercase tracking-wider">Cons</h3>
+              <ul className="mt-3 space-y-2">
                 {toolB.cons.map((c, i) => (
-                  <li key={i} className="text-sm text-gray-600">
-                    - {c}
+                  <li key={i} className="text-sm text-gray-300 flex items-start gap-2">
+                    <span className="text-red-500 font-bold">-</span> {c}
                   </li>
                 ))}
               </ul>
@@ -321,7 +321,7 @@ export default async function ComparisonPage({
               toolName={toolB.name}
               toolSlug={toolB.slug}
               placement="pros_cons"
-              className="mt-4 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700"
+              className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-500 transition-colors shadow-[0_0_10px_rgba(37,99,235,0.2)]"
             >
               Try {toolB.name} &rarr;
             </AffiliateCTA>
@@ -330,18 +330,18 @@ export default async function ComparisonPage({
       </section>
 
       {/* SEO Content */}
-      <section className="mt-12">
-        <h2 className="text-xl font-bold text-gray-900">
+      <section className="mt-12 rounded-xl bg-gray-900/30 border border-gray-800 p-8">
+        <h2 className="text-xl font-bold text-white">
           {toolA.name} vs {toolB.name}: The Bottom Line
         </h2>
-        <p className="mt-4 text-gray-600">
+        <p className="mt-4 text-gray-400 leading-relaxed">
           Both {toolA.name} and {toolB.name} are powerful AI tools, but they
-          serve slightly different needs. {toolA.name} excels at{" "}
+          serve slightly different needs. <strong className="text-white">{toolA.name}</strong> excels at{" "}
           {toolA.pros?.[0]?.toLowerCase() || "its core features"}, while{" "}
-          {toolB.name} stands out for{" "}
+          <strong className="text-white">{toolB.name}</strong> stands out for{" "}
           {toolB.pros?.[0]?.toLowerCase() || "its unique capabilities"}.
         </p>
-        <p className="mt-3 text-gray-600">
+        <p className="mt-3 text-gray-400 leading-relaxed">
           Your choice should depend on your specific requirements, budget, and
           the features that matter most to your workflow.
         </p>

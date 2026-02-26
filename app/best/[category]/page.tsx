@@ -82,9 +82,9 @@ export default async function CategoryPage({
   const displayName = category
     ? category.name
     : categorySlug
-        .split("-")
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(" ");
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -107,16 +107,16 @@ export default async function CategoryPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {/* Breadcrumb */}
-      <nav className="mb-6 text-sm text-gray-500">
-        <Link href="/" className="hover:text-gray-700">Home</Link>
+      <nav className="mb-6 text-sm text-gray-400">
+        <Link href="/" className="hover:text-white transition-colors">Home</Link>
         {" / "}
-        <span className="text-gray-900">Best {displayName}</span>
+        <span className="text-gray-200">Best {displayName}</span>
       </nav>
 
-      <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+      <h1 className="text-3xl font-extrabold text-white sm:text-4xl">
         Best {displayName} in {year}
       </h1>
-      <p className="mt-3 text-lg text-gray-600">
+      <p className="mt-3 text-lg text-gray-400">
         {category?.description ||
           `Compare the top ${displayName.toLowerCase()} to find the perfect solution for your needs. Updated with the latest pricing and features for ${year}.`}
       </p>
@@ -125,44 +125,44 @@ export default async function CategoryPage({
       {tools.length > 0 ? (
         <CategoryToolList tools={tools} />
       ) : (
-        <div className="mt-10 rounded-xl border border-dashed border-gray-300 p-12 text-center">
-          <p className="text-gray-500">No tools found in this category yet.</p>
-          <p className="mt-2 text-sm text-gray-400">
+        <div className="mt-10 rounded-xl border border-dashed border-gray-800 bg-gray-900/50 p-12 text-center">
+          <p className="text-gray-400">No tools found in this category yet.</p>
+          <p className="mt-2 text-sm text-gray-500">
             Connect Supabase and add tools with this category to see them here.
           </p>
         </div>
       )}
 
       {/* SEO Content */}
-      <section className="mt-16">
-        <h2 className="text-2xl font-bold text-gray-900">
+      <section className="mt-16 rounded-xl bg-gray-900/30 border border-gray-800 p-8">
+        <h2 className="text-2xl font-bold text-white mb-6">
           How to Choose the Right{" "}
           {displayName.replace(/^(Best |AI )/i, "")}
         </h2>
-        <div className="mt-4 space-y-3 text-gray-600">
+        <div className="space-y-4 text-gray-400 leading-relaxed">
           <p>
             Choosing the best {displayName.toLowerCase()} depends on your
             specific needs, budget, and technical requirements. Here are the key
             factors to consider:
           </p>
-          <ul className="list-disc pl-6 space-y-2">
+          <ul className="list-disc pl-6 space-y-3">
             <li>
-              <strong>Output Quality:</strong> How good is the AI&apos;s output
+              <strong className="text-white">Output Quality:</strong> How good is the AI&apos;s output
               for your specific use case?
             </li>
             <li>
-              <strong>Pricing:</strong> Does the tool fit within your budget?
+              <strong className="text-white">Pricing:</strong> Does the tool fit within your budget?
               Consider free trials before committing.
             </li>
             <li>
-              <strong>Integrations:</strong> Does it connect with your existing
+              <strong className="text-white">Integrations:</strong> Does it connect with your existing
               tools and workflow?
             </li>
             <li>
-              <strong>Ease of Use:</strong> How steep is the learning curve?
+              <strong className="text-white">Ease of Use:</strong> How steep is the learning curve?
             </li>
             <li>
-              <strong>Support:</strong> What level of customer support is
+              <strong className="text-white">Support:</strong> What level of customer support is
               available?
             </li>
           </ul>
@@ -172,14 +172,14 @@ export default async function CategoryPage({
       {/* Popular Comparisons in this category */}
       {tools.length >= 2 && (
         <div className="mt-12">
-          <h2 className="text-2xl font-bold mb-6">Popular Comparisons</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">Popular Comparisons</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {tools.slice(0, 6).flatMap((toolA, i) =>
               tools.slice(i + 1, i + 2).map(toolB => (
                 <a
                   key={`${toolA.slug}-${toolB.slug}`}
                   href={`/compare/${toolA.slug}-vs-${toolB.slug}`}
-                  className="p-3 border rounded-lg hover:shadow text-sm text-center hover:border-blue-400 transition"
+                  className="p-3 bg-gray-900/50 border border-gray-800 rounded-lg hover:shadow-[0_0_15px_rgba(37,99,235,0.1)] text-sm text-center text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-gray-800 transition-all"
                 >
                   {toolA.name} vs {toolB.name}
                 </a>

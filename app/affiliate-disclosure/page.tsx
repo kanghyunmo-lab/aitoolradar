@@ -11,18 +11,18 @@ export const metadata: Metadata = {
 export default function AffiliateDisclosurePage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <nav className="mb-8 text-sm text-gray-500">
-        <Link href="/" className="hover:text-gray-700">Home</Link>
+      <nav className="mb-8 text-sm text-gray-400">
+        <Link href="/" className="hover:text-gray-300">Home</Link>
         {" / "}
-        <span className="text-gray-900">Affiliate Disclosure</span>
+        <span className="text-white">Affiliate Disclosure</span>
       </nav>
 
-      <h1 className="text-3xl font-extrabold text-gray-900">Affiliate Disclosure</h1>
-      <p className="mt-2 text-sm text-gray-500">Last updated: February 20, 2026</p>
+      <h1 className="text-3xl font-extrabold text-white">Affiliate Disclosure</h1>
+      <p className="mt-2 text-sm text-gray-400">Last updated: February 20, 2026</p>
 
-      <div className="mt-8 space-y-6 text-gray-700 leading-relaxed">
+      <div className="mt-8 space-y-6 text-gray-300 leading-relaxed">
         <section>
-          <h2 className="text-xl font-bold text-gray-900 mb-3">Our Commitment to Transparency</h2>
+          <h2 className="text-xl font-bold text-white mb-3">Our Commitment to Transparency</h2>
           <p>
             AIToolRadar is committed to full transparency with our readers. This page explains how
             we earn revenue and how that may affect the content on this site.
@@ -30,7 +30,7 @@ export default function AffiliateDisclosurePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-gray-900 mb-3">Affiliate Links</h2>
+          <h2 className="text-xl font-bold text-white mb-3">Affiliate Links</h2>
           <p>
             Some of the links on AIToolRadar are affiliate links. This means that if you click on a
             link and then purchase or sign up for a product or service, we may earn a commission at
@@ -48,7 +48,7 @@ export default function AffiliateDisclosurePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-gray-900 mb-3">How This Affects Our Reviews</h2>
+          <h2 className="text-xl font-bold text-white mb-3">How This Affects Our Reviews</h2>
           <p>
             We only recommend products and services that we genuinely believe provide value to our
             readers. Our editorial opinions are our own and are not influenced by affiliate
@@ -62,7 +62,7 @@ export default function AffiliateDisclosurePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-gray-900 mb-3">FTC Compliance</h2>
+          <h2 className="text-xl font-bold text-white mb-3">FTC Compliance</h2>
           <p>
             In accordance with the Federal Trade Commission&apos;s guidelines (16 CFR Part 255),
             we disclose that affiliate links are present on this website. The footer of every page
@@ -71,7 +71,7 @@ export default function AffiliateDisclosurePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-gray-900 mb-3">Questions?</h2>
+          <h2 className="text-xl font-bold text-white mb-3">Questions?</h2>
           <p>
             If you have any questions about our affiliate relationships or editorial policies,
             please feel free to contact us. We value your trust and are happy to provide
@@ -80,7 +80,7 @@ export default function AffiliateDisclosurePage() {
         </section>
       </div>
 
-      <div className="mt-12 border-t border-gray-200 pt-8">
+      <div className="mt-12 border-t border-gray-800 pt-8">
         <Link href="/" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
           ← Back to AIToolRadar
         </Link>

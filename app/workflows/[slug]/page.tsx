@@ -101,35 +101,35 @@ export default async function WorkflowPage({
       />
 
       {/* Breadcrumb */}
-      <nav className="mb-6 text-sm text-gray-500">
-        <Link href="/" className="hover:text-gray-700">Home</Link>
+      <nav className="mb-6 text-sm text-gray-400">
+        <Link href="/" className="hover:text-white transition-colors">Home</Link>
         {" / "}
-        <Link href="/workflows" className="hover:text-gray-700">AI Workflows</Link>
+        <Link href="/workflows" className="hover:text-white transition-colors">AI Workflows</Link>
         {" / "}
-        <span className="text-gray-900">{workflow.title}</span>
+        <span className="text-gray-200">{workflow.title}</span>
       </nav>
 
       {/* Header */}
       <header className="mb-10">
-        <span className="text-sm font-semibold uppercase tracking-wide text-blue-600">
+        <span className="text-sm font-semibold uppercase tracking-wide text-blue-400">
           AI Workflow Guide
         </span>
-        <h1 className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+        <h1 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
           {workflow.title}
         </h1>
-        <p className="mt-1 text-lg font-medium text-gray-500">
+        <p className="mt-1 text-lg font-medium text-gray-400">
           {workflow.tagline}
         </p>
-        <p className="mt-4 text-base text-gray-600">{workflow.description}</p>
+        <p className="mt-4 text-base text-gray-300">{workflow.description}</p>
 
         <div className="mt-6 flex flex-wrap gap-4">
-          <span className="rounded-full bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700">
+          <span className="rounded-full bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 text-sm font-medium text-blue-400">
             {workflow.steps.length} Steps
           </span>
-          <span className="rounded-full bg-green-50 px-4 py-1.5 text-sm font-medium text-green-700">
+          <span className="rounded-full bg-green-500/10 border border-green-500/20 px-4 py-1.5 text-sm font-medium text-green-400">
             {totalTools} AI Tools
           </span>
-          <span className="rounded-full bg-yellow-50 px-4 py-1.5 text-sm font-medium text-yellow-700">
+          <span className="rounded-full bg-yellow-500/10 border border-yellow-500/20 px-4 py-1.5 text-sm font-medium text-yellow-400">
             High ROI
           </span>
         </div>
@@ -137,20 +137,20 @@ export default async function WorkflowPage({
 
       {/* Steps */}
       <section>
-        <h2 className="text-xl font-bold text-gray-900 mb-6">
+        <h2 className="text-xl font-bold text-white mb-6">
           Step-by-Step Workflow
         </h2>
         <div className="space-y-6">
           {workflow.steps.map((step) => (
             <div
               key={step.step}
-              className="rounded-xl border border-gray-200 bg-white p-6"
+              className="rounded-xl border border-gray-800 bg-gray-900/50 p-6"
             >
               <div className="flex items-center gap-3 mb-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] text-sm font-bold text-white">
                   {step.step}
                 </span>
-                <h3 className="text-base font-bold text-gray-900">
+                <h3 className="text-base font-bold text-white">
                   {step.goal}
                 </h3>
               </div>
@@ -161,7 +161,7 @@ export default async function WorkflowPage({
                   return (
                     <div
                       key={toolRef.slug}
-                      className="flex items-start gap-3 rounded-lg border border-gray-100 bg-gray-50 p-4"
+                      className="flex items-start gap-3 rounded-lg border border-gray-700 bg-gray-800/50 p-4 hover:border-gray-600 transition-colors"
                     >
                       {toolData ? (
                         <ToolLogo
@@ -170,26 +170,26 @@ export default async function WorkflowPage({
                           className="h-10 w-10 shrink-0"
                         />
                       ) : (
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gray-200 text-xs font-bold text-gray-600">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gray-700 text-xs font-bold text-gray-300 border border-gray-600">
                           {toolRef.name.slice(0, 2).toUpperCase()}
                         </div>
                       )}
                       <div className="min-w-0 flex-1">
                         <Link
                           href={`/ai-tools/${toolRef.slug}`}
-                          className="text-sm font-semibold text-gray-900 hover:text-blue-600"
+                          className="text-sm font-semibold text-white hover:text-blue-400 transition-colors"
                         >
                           {toolRef.name}
                         </Link>
                         {toolData?.short_description && (
-                          <p className="mt-0.5 text-xs text-gray-500 line-clamp-2">
+                          <p className="mt-0.5 text-xs text-gray-400 line-clamp-2">
                             {toolData.short_description}
                           </p>
                         )}
                         <div className="mt-2 flex items-center gap-2">
                           <Link
                             href={`/ai-tools/${toolRef.slug}`}
-                            className="text-xs font-medium text-blue-600 hover:text-blue-700"
+                            className="text-xs font-medium text-blue-400 hover:text-blue-300 transition-colors"
                           >
                             View Review &rarr;
                           </Link>
@@ -199,7 +199,7 @@ export default async function WorkflowPage({
                               toolName={toolRef.name}
                               toolSlug={toolRef.slug}
                               placement="pros_cons"
-                              className="rounded bg-blue-600 px-2.5 py-1 text-xs font-semibold text-white hover:bg-blue-700"
+                              className="rounded bg-gray-700 border border-gray-600 px-2.5 py-1 text-xs font-semibold text-white hover:bg-gray-600 hover:text-white transition-colors"
                             >
                               Try Free &rarr;
                             </AffiliateCTA>
@@ -216,16 +216,17 @@ export default async function WorkflowPage({
       </section>
 
       {/* Bottom CTA */}
-      <div className="mt-12 rounded-xl border-2 border-blue-100 bg-blue-50 p-8 text-center">
-        <h2 className="text-xl font-bold text-gray-900">
+      <div className="mt-12 rounded-xl border border-blue-500/30 bg-blue-900/10 p-8 text-center backdrop-blur-sm relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-500/5 blur-[50px] -z-10 rounded-full"></div>
+        <h2 className="text-xl font-bold text-white relative z-10">
           Ready to build your AI workflow?
         </h2>
-        <p className="mt-2 text-gray-600">
+        <p className="mt-2 text-gray-400 relative z-10">
           Compare all {totalTools} tools side by side before you decide.
         </p>
         <Link
           href="/compare"
-          className="mt-4 inline-block rounded-lg bg-blue-600 px-8 py-3 text-base font-semibold text-white hover:bg-blue-700"
+          className="mt-6 inline-block rounded-lg bg-blue-600 px-8 py-3 text-base font-semibold text-white hover:bg-blue-500 transition-colors shadow-[0_0_15px_rgba(37,99,235,0.3)] relative z-10"
         >
           Compare AI Tools &rarr;
         </Link>
@@ -234,7 +235,7 @@ export default async function WorkflowPage({
       {/* Related Workflows */}
       {relatedWorkflows.length > 0 && (
         <section className="mt-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">
+          <h2 className="text-xl font-bold text-white mb-4">
             Related Workflows
           </h2>
           <div className="grid gap-4 sm:grid-cols-3">
@@ -242,12 +243,12 @@ export default async function WorkflowPage({
               <Link
                 key={related.slug}
                 href={`/workflows/${related.slug}`}
-                className="rounded-xl border border-gray-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all"
+                className="rounded-xl border border-gray-800 bg-gray-900/50 p-4 hover:border-blue-500/50 hover:bg-gray-800 transition-all"
               >
-                <p className="text-sm font-bold text-gray-900 hover:text-blue-600">
+                <p className="text-sm font-bold text-white group-hover:text-blue-400">
                   {related.title}
                 </p>
-                <p className="mt-1 text-xs text-gray-500">{related.tagline}</p>
+                <p className="mt-1 text-xs text-gray-400">{related.tagline}</p>
               </Link>
             ))}
           </div>

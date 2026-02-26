@@ -55,20 +55,20 @@ export default async function AlternativesPage({
 
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <nav className="mb-6 text-sm text-gray-500">
-        <Link href="/" className="hover:text-gray-700">Home</Link>
+      <nav className="mb-6 text-sm text-gray-400">
+        <Link href="/" className="hover:text-white transition-colors">Home</Link>
         {" / "}
-        <Link href={`/ai-tools/${tool.slug}`} className="hover:text-gray-700">
+        <Link href={`/ai-tools/${tool.slug}`} className="hover:text-white transition-colors">
           {tool.name}
         </Link>
         {" / "}
-        <span className="text-gray-900">Alternatives</span>
+        <span className="text-gray-200">Alternatives</span>
       </nav>
 
-      <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-        Best {tool.name} Alternatives in 2026
+      <h1 className="text-3xl font-extrabold text-white sm:text-4xl">
+        Best {tool.name} Alternatives in {new Date().getFullYear()}
       </h1>
-      <p className="mt-3 text-lg text-gray-600">
+      <p className="mt-3 text-lg text-gray-400">
         Looking for something different from {tool.name}? Here are the top
         alternatives with similar features, often at better prices.
       </p>
@@ -79,20 +79,20 @@ export default async function AlternativesPage({
             <ToolCard key={alt.id} tool={alt} rank={i + 1} />
           ))
         ) : (
-          <div className="rounded-xl border border-dashed border-gray-300 p-12 text-center">
-            <p className="text-gray-500">
+          <div className="rounded-xl border border-dashed border-gray-800 bg-gray-900/50 p-12 text-center">
+            <p className="text-gray-400">
               Alternatives are being compiled. Check back soon.
             </p>
           </div>
         )}
       </div>
 
-      <section className="mt-16">
-        <h2 className="text-2xl font-bold text-gray-900">
+      <section className="mt-16 rounded-xl bg-gray-900/30 border border-gray-800 p-8">
+        <h2 className="text-2xl font-bold text-white">
           Why Consider {tool.name} Alternatives?
         </h2>
-        <p className="mt-4 text-gray-600">
-          While {tool.name} is a solid choice for{" "}
+        <p className="mt-4 text-gray-400 leading-relaxed">
+          While <strong className="text-white">{tool.name}</strong> is a solid choice for{" "}
           {tool.category?.name?.toLowerCase() || "AI tasks"}, there are several
           reasons you might want to explore alternatives: different pricing
           structures, specific features you need, better integrations with your

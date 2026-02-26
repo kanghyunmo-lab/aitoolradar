@@ -49,18 +49,16 @@ export default function CategoryToolList({ tools }: { tools: AiTool[] }) {
           <button
             key={btn.value}
             onClick={() => setFilter(btn.value)}
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-              filter === btn.value
-                ? "bg-blue-600 text-white"
-                : "border border-gray-200 text-gray-600 hover:border-blue-300 hover:text-blue-600"
-            }`}
+            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${filter === btn.value
+                ? "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.4)]"
+                : "border border-gray-700 bg-gray-800 text-gray-400 hover:border-blue-500 hover:text-white"
+              }`}
           >
             {btn.label}
             {btn.count > 0 && (
               <span
-                className={`ml-1.5 text-xs ${
-                  filter === btn.value ? "text-blue-100" : "text-gray-400"
-                }`}
+                className={`ml-1.5 text-xs ${filter === btn.value ? "text-blue-200" : "text-gray-500"
+                  }`}
               >
                 {btn.count}
               </span>

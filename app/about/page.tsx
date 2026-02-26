@@ -11,17 +11,17 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      <nav className="mb-8 text-sm text-gray-500">
-        <Link href="/" className="hover:text-gray-700">Home</Link>
+      <nav className="mb-8 text-sm text-gray-400">
+        <Link href="/" className="hover:text-gray-300">Home</Link>
         {" / "}
-        <span className="text-gray-900">About Us</span>
+        <span className="text-white">About Us</span>
       </nav>
 
-      <h1 className="text-3xl font-extrabold text-gray-900">About AIToolRadar</h1>
+      <h1 className="text-3xl font-extrabold text-white">About AIToolRadar</h1>
 
-      <div className="mt-8 space-y-6 text-gray-700 leading-relaxed">
+      <div className="mt-8 space-y-6 text-gray-300 leading-relaxed">
         <section>
-          <h2 className="text-xl font-bold text-gray-900 mb-3">Our Mission</h2>
+          <h2 className="text-xl font-bold text-white mb-3">Our Mission</h2>
           <p>
             AIToolRadar exists to cut through the noise in the rapidly expanding AI tools market.
             We independently research, test, and compare 177+ AI tools to help individuals,
@@ -30,7 +30,7 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-gray-900 mb-3">What We Do</h2>
+          <h2 className="text-xl font-bold text-white mb-3">What We Do</h2>
           <p>
             The AI tools market is growing faster than anyone can track. New tools launch every
             week, pricing changes constantly, and marketing claims are often misleading. We do the
@@ -55,7 +55,7 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-gray-900 mb-3">Our Editorial Standards</h2>
+          <h2 className="text-xl font-bold text-white mb-3">Our Editorial Standards</h2>
           <p>
             We maintain strict editorial independence. Our ratings and recommendations are based on
             objective criteria — features, reliability, value for money, and user experience — not
@@ -76,7 +76,7 @@ export default function AboutPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-gray-900 mb-3">Start Exploring</h2>
+          <h2 className="text-xl font-bold text-white mb-3">Start Exploring</h2>
           <div className="flex flex-wrap gap-3 mt-4">
             <Link
               href="/"
@@ -86,7 +86,7 @@ export default function AboutPage() {
             </Link>
             <Link
               href="/blog"
-              className="inline-block rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+              className="inline-block rounded-lg border border-gray-700 bg-gray-800 px-5 py-2.5 text-sm font-semibold text-gray-300 hover:bg-gray-700"
             >
               Read Our Blog
             </Link>
@@ -94,7 +94,7 @@ export default function AboutPage() {
         </section>
       </div>
 
-      <div className="mt-12 border-t border-gray-200 pt-8">
+      <div className="mt-12 border-t border-gray-800 pt-8">
         <Link href="/" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
           ← Back to AIToolRadar
         </Link>

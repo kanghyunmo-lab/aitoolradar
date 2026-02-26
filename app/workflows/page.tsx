@@ -48,37 +48,37 @@ export default async function WorkflowsPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
       {/* Breadcrumb */}
-      <nav className="mb-6 text-sm text-gray-500">
-        <Link href="/" className="hover:text-gray-700">Home</Link>
+      <nav className="mb-6 text-sm text-gray-400">
+        <Link href="/" className="hover:text-white transition-colors">Home</Link>
         {" / "}
-        <span className="text-gray-900">AI Workflows</span>
+        <span className="text-gray-300">AI Workflows</span>
       </nav>
 
       {/* Header */}
       <header className="mb-8">
-        <h1 className="text-4xl font-extrabold text-gray-900">
+        <h1 className="text-4xl font-extrabold text-white">
           AI Workflow Guides
         </h1>
-        <p className="mt-3 text-lg text-gray-600">
+        <p className="mt-3 text-lg text-gray-400">
           Stop searching for individual tools. Get the complete AI stack for
           your goal — step-by-step guidance on what to use and when.
         </p>
-        <p className="mt-2 text-sm font-medium text-blue-600">
+        <p className="mt-3 text-sm font-bold text-blue-400">
           {workflowList.length} workflows available
         </p>
       </header>
 
-      {/* Category Filter (static — JS-free, URL param 방식) */}
+      {/* Category Filter */}
       <div className="mb-8 flex flex-wrap gap-2">
         {CATEGORIES.map((cat) => (
           <Link
             key={cat}
             href={cat === "All" ? "/workflows" : `/workflows?cat=${encodeURIComponent(cat)}`}
-            className="rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm font-medium text-gray-700 hover:border-blue-400 hover:text-blue-600 transition-colors"
+            className="rounded-full border border-gray-700 bg-gray-800 px-4 py-1.5 text-sm font-medium text-gray-300 hover:border-blue-500 hover:text-white transition-colors"
           >
             {cat}
             {counts[cat] ? (
-              <span className="ml-1.5 text-xs text-gray-400">({counts[cat]})</span>
+              <span className="ml-1.5 text-xs text-gray-500">({counts[cat]})</span>
             ) : null}
           </Link>
         ))}
@@ -90,55 +90,57 @@ export default async function WorkflowsPage() {
       ) : (
         <div className="grid gap-5 sm:grid-cols-2">
           {workflowList.map((workflow) => {
-            const allTools = workflow.steps.flatMap((s) => s.tools);
+            const allToolsRaw = workflow.steps.flatMap((s) => s.tools);
+            const allTools = allToolsRaw.filter((t, idx, self) => self.findIndex(i => i.slug === t.slug) === idx);
             const cat = getCategory(workflow.slug);
             return (
               <Link
                 key={workflow.slug}
                 href={`/workflows/${workflow.slug}`}
-                className="group flex flex-col rounded-xl border border-gray-200 bg-white p-6 hover:border-blue-300 hover:shadow-md transition-all"
+                className="group flex flex-col rounded-xl border border-gray-800 bg-gray-900/50 p-6 hover:border-blue-500/50 hover:shadow-[0_10px_30px_rgba(37,99,235,0.1)] hover:bg-gray-800 transition-all transition-duration-300 relative overflow-hidden"
               >
+                <div className="absolute right-0 top-0 h-32 w-32 -translate-y-16 translate-x-16 rounded-full bg-blue-600/5 blur-2xl transition-all group-hover:bg-blue-600/10"></div>
                 {/* Category badge + steps */}
-                <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-600">
+                <div className="flex items-center justify-between relative z-10">
+                  <span className="rounded-full bg-blue-500/10 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider text-blue-400">
                     {cat}
                   </span>
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-gray-500">
                     {workflow.steps.length} steps · {allTools.length} tools
                   </span>
                 </div>
 
                 {/* Title + tagline */}
-                <h2 className="mt-3 text-base font-bold text-gray-900 group-hover:text-blue-600 leading-snug">
+                <h2 className="mt-4 text-lg font-bold text-white group-hover:text-blue-400 transition-colors leading-snug relative z-10">
                   {workflow.title}
                 </h2>
-                <p className="mt-0.5 text-sm text-gray-500">{workflow.tagline}</p>
+                <p className="mt-1 text-sm text-gray-400 relative z-10">{workflow.tagline}</p>
 
                 {/* Description */}
                 {workflow.description && (
-                  <p className="mt-2 text-xs text-gray-600 line-clamp-2">
+                  <p className="mt-3 text-xs text-gray-500 line-clamp-2 relative z-10">
                     {workflow.description}
                   </p>
                 )}
 
                 {/* Tool pills */}
-                <div className="mt-4 flex flex-wrap gap-1.5">
+                <div className="mt-5 flex flex-wrap gap-1.5 relative z-10">
                   {allTools.slice(0, 5).map((tool) => (
                     <span
                       key={tool.slug}
-                      className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700"
+                      className="rounded-md border border-gray-700 bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-300"
                     >
                       {tool.name}
                     </span>
                   ))}
                   {allTools.length > 5 && (
-                    <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-400">
+                    <span className="rounded-md border border-gray-700 bg-gray-800/50 px-2.5 py-0.5 text-xs font-medium text-gray-500">
                       +{allTools.length - 5} more
                     </span>
                   )}
                 </div>
 
-                <span className="mt-4 text-xs font-semibold text-blue-600 group-hover:text-blue-700">
+                <span className="mt-5 text-xs font-semibold text-blue-400 group-hover:text-blue-300 relative z-10">
                   View workflow &rarr;
                 </span>
               </Link>

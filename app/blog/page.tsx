@@ -47,15 +47,15 @@ export default async function BlogPage() {
 
       {/* Header */}
       <header className="mb-10">
-        <nav className="mb-4 text-sm text-gray-500">
-          <Link href="/" className="hover:text-gray-700">Home</Link>
+        <nav className="mb-4 text-sm text-gray-400">
+          <Link href="/" className="hover:text-white transition-colors">Home</Link>
           {" / "}
-          <span className="text-gray-900">Blog</span>
+          <span className="text-gray-300">Blog</span>
         </nav>
-        <h1 className="text-4xl font-extrabold text-gray-900">
+        <h1 className="text-4xl font-extrabold text-white">
           AI Tools Blog
         </h1>
-        <p className="mt-3 text-lg text-gray-600">
+        <p className="mt-3 text-lg text-gray-400">
           In-depth guides, comparisons, and reviews to help you find the right
           AI tools for your business.
         </p>
@@ -69,7 +69,7 @@ export default async function BlogPage() {
           {posts.map((post) => (
             <article
               key={post.slug}
-              className="flex flex-col rounded-xl border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow"
+              className="flex flex-col rounded-xl border border-gray-800 bg-gray-900/50 overflow-hidden hover:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:border-blue-500/30 transition-all"
             >
               {post.cover_image_url && (
                 <img
@@ -80,24 +80,24 @@ export default async function BlogPage() {
               )}
               <div className="flex flex-1 flex-col p-6">
                 {post.category && (
-                  <span className="mb-2 text-xs font-semibold uppercase tracking-wide text-blue-600">
+                  <span className="mb-2 text-xs font-semibold uppercase tracking-wide text-blue-400">
                     {post.category}
                   </span>
                 )}
-                <h2 className="text-lg font-bold text-gray-900 leading-snug">
+                <h2 className="text-lg font-bold text-white leading-snug">
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="hover:text-blue-600"
+                    className="hover:text-blue-400 transition-colors"
                   >
                     {post.title}
                   </Link>
                 </h2>
                 {post.excerpt && (
-                  <p className="mt-2 flex-1 text-sm text-gray-600 line-clamp-3">
+                  <p className="mt-2 flex-1 text-sm text-gray-400 line-clamp-3">
                     {post.excerpt}
                   </p>
                 )}
-                <div className="mt-4 flex items-center justify-between text-xs text-gray-400">
+                <div className="mt-4 flex items-center justify-between text-xs text-gray-500">
                   <span>
                     {new Date(post.published_at).toLocaleDateString("en-US", {
                       year: "numeric",
@@ -109,7 +109,7 @@ export default async function BlogPage() {
                 </div>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="mt-4 inline-block text-sm font-semibold text-blue-600 hover:text-blue-700"
+                  className="mt-4 inline-block text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   Read more &rarr;
                 </Link>
