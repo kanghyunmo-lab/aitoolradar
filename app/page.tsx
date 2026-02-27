@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllTools, getAllCategories } from "@/lib/queries/tools";
 import { getRecentBlogPosts } from "@/lib/queries/blog";
@@ -5,6 +6,19 @@ import { getRecentWorkflows } from "@/lib/queries/workflows";
 import ToolCard from "@/components/ToolCard";
 import VSWidget from "@/components/VSWidget";
 import type { BlogPost, Workflow } from "@/lib/types";
+
+export const metadata: Metadata = {
+  title: "AIToolRadar - Compare 177+ AI Tools | Honest Reviews & Pricing 2026",
+  description: "Compare 177+ AI tools side by side. Honest reviews, real pricing, and AI workflow guides to find the perfect tool for writing, coding, video, SEO, and more.",
+  alternates: {
+    canonical: "https://www.aitoolradar.net",
+  },
+  openGraph: {
+    title: "AIToolRadar - Compare 177+ AI Tools | Honest Reviews & Pricing 2026",
+    description: "Compare 177+ AI tools side by side. Honest reviews, real pricing, and AI workflow guides.",
+    url: "https://www.aitoolradar.net",
+  },
+};
 
 export default async function Home() {
   const year = new Date().getFullYear();
