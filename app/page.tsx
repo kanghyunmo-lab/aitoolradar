@@ -244,7 +244,53 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 
+      {/*
+        ========================================
+        LATEST BLOG POSTS (내부링크 + SEO)
+        ========================================
+      */}
+      {recentPosts.length > 0 && (
+        <section className="border-t border-gray-800 bg-[#0B0F19] px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+              <div>
+                <h2 className="text-3xl font-bold text-white">Latest AI Tool Guides</h2>
+                <p className="mt-2 text-gray-400">In-depth comparisons and guides to help you decide.</p>
+              </div>
+              <Link
+                href="/blog"
+                className="group flex items-center gap-2 rounded-xl bg-gray-800 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gray-700"
+              >
+                View all Posts
+                <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {recentPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group flex flex-col rounded-2xl border border-gray-800 bg-gray-900/50 p-5 transition-all hover:-translate-y-1 hover:border-blue-500/50 hover:bg-gray-800/80"
+                >
+                  {post.category && (
+                    <span className="mb-3 text-xs font-bold uppercase tracking-wider text-blue-400">
+                      {post.category}
+                    </span>
+                  )}
+                  <h3 className="text-sm font-semibold text-white line-clamp-3 group-hover:text-blue-400 transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="mt-auto pt-4 text-xs text-gray-500">{post.reading_time_minutes} min read</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/*
         ========================================
         SEO TEXT (Dark Mode)
         ========================================
