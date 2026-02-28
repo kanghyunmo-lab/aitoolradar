@@ -34,13 +34,6 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "AIToolRadar",
     url: "https://www.aitoolradar.net",
-    images: [
-      {
-        url: "https://www.aitoolradar.net/og-default.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
