@@ -25,13 +25,18 @@ export async function generateMetadata({
   const workflow = await getWorkflowBySlug(slug);
   if (!workflow) return { title: "Not Found" };
 
+  const stepSummary = workflow.steps.slice(0, 3).map((s) => s.goal).join(" → ");
+  const metaDesc = workflow.description
+    ? `${workflow.description} Steps: ${stepSummary}`
+    : stepSummary;
+
   return {
     title: `${workflow.title} — Step-by-Step AI Tool Stack | AIToolRadar`,
-    description: workflow.description ?? undefined,
+    description: metaDesc,
     alternates: { canonical: `/workflows/${workflow.slug}` },
     openGraph: {
       title: `${workflow.title} | AIToolRadar`,
-      description: workflow.description ?? undefined,
+      description: metaDesc,
       url: `https://www.aitoolradar.net/workflows/${workflow.slug}`,
       type: "article",
     },
@@ -88,7 +93,9 @@ export default async function WorkflowPage({
       "@type": "HowToStep",
       position: s.step,
       name: s.goal,
-      text: s.tools.map((t) => t.name).join(", "),
+      text: s.description
+        ? `${s.goal}: ${s.description.replace(/<[^>]*>/g, "")}`
+        : s.tools.map((t) => t.name).join(", "),
     })),
   };
 
@@ -156,9 +163,10 @@ export default async function WorkflowPage({
               </div>
 
               {step.description && (
-                <p className="mb-4 text-sm text-gray-300 leading-relaxed border-l-2 border-blue-500/40 pl-4">
-                  {step.description}
-                </p>
+                <div
+                  className="mb-4 text-sm text-gray-300 leading-relaxed border-l-2 border-blue-500/40 pl-4 [&_ul]:list-disc [&_ul]:ml-4 [&_ol]:list-decimal [&_ol]:ml-4 [&_strong]:text-white [&_p]:mb-2"
+                  dangerouslySetInnerHTML={{ __html: step.description }}
+                />
               )}
 
               <div className="grid gap-3 sm:grid-cols-2">

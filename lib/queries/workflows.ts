@@ -7,7 +7,7 @@ export async function getAllWorkflows(): Promise<Workflow[]> {
     .from("workflows")
     .select("*")
     .eq("is_published", true)
-    .order("created_at", { ascending: true });
+    .order("created_at", { ascending: false });
 
   if (error) throw error;
   return data ?? [];
