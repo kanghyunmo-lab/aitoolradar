@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | AIToolRadar",
   },
   description:
-    "Compare 177+ AI tools side by side. Read honest reviews, compare pricing, and find the perfect AI tool for writing, coding, image generation, and more.",
+    "Step-by-step AI workflow guides for YouTubers and content creators. Compare 177+ AI tools, find the best tool stack, and automate your content creation process.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
   ),

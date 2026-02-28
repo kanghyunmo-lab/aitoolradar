@@ -72,14 +72,14 @@ export default async function Home() {
           </div>
 
           <h1 className="mx-auto max-w-4xl text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Find the Perfect AI Tool <br className="hidden sm:block" />
+            AI Workflow Guides <br className="hidden sm:block" />
             <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              for Your Next Task
+              for Content Creators
             </span>
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-400">
-            Stop guessing. Start comparing. Get honest data, real workflows, and side-by-side match-ups to make the smartest choice for your business.
+            Step-by-step AI automation guides for YouTubers and content creators. Find the right tools, build faster workflows, and spend less time on repetitive tasks.
           </p>
 
           {/* Interactive VS Widget */}
@@ -99,19 +99,19 @@ export default async function Home() {
               <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Pricing Details
+              Step-by-step Guides
             </span>
             <span className="flex items-center gap-1.5">
               <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Real Use-cases
+              Real Tool Stacks
             </span>
             <span className="flex items-center gap-1.5">
               <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Side-by-side Stats
+              Save Hours Every Week
             </span>
           </div>
         </div>
@@ -130,13 +130,13 @@ export default async function Home() {
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
-                Task-Driven
+                For Creators
               </div>
               <h2 className="mt-4 text-3xl font-bold text-white">
-                How-to: AI Workflow Guides
+                AI Automation Workflows
               </h2>
               <p className="mt-2 text-gray-400">
-                Discover the exact tool stacks needed to accomplish real-world tasks.
+                Step-by-step guides to automate your YouTube and content creation process with AI.
               </p>
             </div>
             <Link
