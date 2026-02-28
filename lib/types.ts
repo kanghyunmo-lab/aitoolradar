@@ -64,6 +64,7 @@ export interface WorkflowTool {
 export interface WorkflowStep {
   step: number;
   goal: string;
+  description?: string;
   tools: WorkflowTool[];
 }
 

@@ -155,6 +155,12 @@ export default async function WorkflowPage({
                 </h3>
               </div>
 
+              {step.description && (
+                <p className="mb-4 text-sm text-gray-300 leading-relaxed border-l-2 border-blue-500/40 pl-4">
+                  {step.description}
+                </p>
+              )}
+
               <div className="grid gap-3 sm:grid-cols-2">
                 {step.tools.map((toolRef) => {
                   const toolData = toolDataMap[toolRef.slug];
