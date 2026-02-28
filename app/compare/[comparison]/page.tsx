@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getComparisonTools, getPopularComparisons } from "@/lib/queries/tools";
@@ -9,12 +9,12 @@ function parseComparison(comparison: string): {
   slugA: string;
   slugB: string;
 } | null {
-  // Use indexOf to split on the FIRST occurrence of "-vs-" only
-  // This handles slugs that may contain hyphens safely
-  const vsIdx = comparison.indexOf("-vs-");
+  // Normalize to lowercase and trim to handle case-insensitive URLs
+  const normalized = comparison.toLowerCase().trim();
+  const vsIdx = normalized.indexOf("-vs-");
   if (vsIdx === -1) return null;
-  const slugA = comparison.slice(0, vsIdx);
-  const slugB = comparison.slice(vsIdx + 4);
+  const slugA = normalized.slice(0, vsIdx);
+  const slugB = normalized.slice(vsIdx + 4);
   if (!slugA || !slugB) return null;
   return { slugA, slugB };
 }
@@ -104,6 +104,12 @@ export default async function ComparisonPage({
   const { comparison } = await params;
   const parsed = parseComparison(comparison);
   if (!parsed) notFound();
+
+  // Redirect non-normalized URLs to canonical lowercase form
+  const normalizedSlug = `${parsed.slugA}-vs-${parsed.slugB}`;
+  if (comparison !== normalizedSlug) {
+    redirect(`/compare/${normalizedSlug}`);
+  }
 
   let toolA: AiTool | null = null;
   let toolB: AiTool | null = null;
