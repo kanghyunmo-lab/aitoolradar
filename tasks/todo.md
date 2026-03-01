@@ -34,6 +34,10 @@
 - [x] 워크플로우 목록 페이지 카테고리 탭 + 그룹 레이아웃 — 2026-02-28
 - [x] PROGRESS.md 전략 전면 업데이트 — 2026-02-28
 - [x] weekly-routine.md 작성 — 2026-02-28
+- [x] 워크플로우 SEO 개선 (HTML렌더링 + JSON-LD + 메타) — 2026-03-01
+- [x] 워크플로우 16개 description 콘텐츠 업그레이드 (Antigravity) — 2026-03-01
+- [x] AI Faceless TikTok Automation 워크플로우 신규 추가 — 2026-03-01
+- [x] X(Twitter) 계정 개설 + 첫 트윗 — 2026-03-01
 
 ---
 
@@ -55,3 +59,12 @@
 - 현재 문제: steps가 goal(제목) + tools(목록)만 있음. 실제 사용법 없음
 - 해결: WorkflowStep에 `description` 필드 추가 필요
 - 우선순위: 코드 수정(Claude Code) → DB 콘텐츠 업데이트(Antigravity) 순서
+
+### 2026-03-01 워크플로우 SEO + 콘텐츠 업그레이드
+- `lib/types.ts`: WorkflowStep에 `description?` 필드 추가
+- `app/workflows/[slug]/page.tsx`: dangerouslySetInnerHTML로 HTML 렌더링
+- JSON-LD HowTo: step.text에 description 포함 (HTML 태그 제거)
+- generateMetadata: step 요약 추가 ("Steps: A → B → C")
+- `lib/queries/workflows.ts`: 목록 정렬 ASC → DESC
+- DB: 16개 워크플로우 전체 description + 프롬프트 + Pro tip 추가 (Antigravity)
+- 교훈: SSG 페이지는 DB 변경 후 반드시 Vercel 재빌드 필요
