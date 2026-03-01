@@ -3,14 +3,14 @@
 ## 현재 작업 (Current Sprint)
 
 ### Claude Code 담당
-- [ ] **워크플로우 단계별 설명 추가** — `WorkflowStep`에 `description` 필드 추가, 페이지 표시 개선
+- [x] **워크플로우 단계별 설명 추가** — `description` 필드 + HTML 렌더링 + JSON-LD + 메타 개선 ✅
 
 ### Antigravity 담당
-- [ ] **워크플로우 15개 콘텐츠 업그레이드** — 각 step에 `description` 2,000자+ 추가 (DB 업데이트)
+- [x] **워크플로우 15개 콘텐츠 업그레이드** — 각 step에 description + 프롬프트 + Pro tip 추가 ✅
 - [ ] **새 워크플로우 10개 추가** (월 10개 이하 속도 준수)
 
 ### 사용자 담당
-- [ ] X 계정 프로필 완성 (바이오, 웹사이트 링크)
+- [x] X 계정 프로필 완성 + 첫 트윗 게시 ✅
 - [ ] Reddit 계정 생성 + 첫 2주 링크 없이 답변 활동 시작
 
 ## 대기 중 (Backlog)
