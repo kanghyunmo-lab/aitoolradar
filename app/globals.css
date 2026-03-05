@@ -32,6 +32,9 @@ body {
   font-size: 1.0625rem;
   line-height: 1.8;
   color: #d1d5db;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .blog-content h2 {

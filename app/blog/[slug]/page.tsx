@@ -105,7 +105,7 @@ export default async function BlogPostPage({
 
       <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-12">
         {/* Main Content */}
-        <article>
+        <article className="min-w-0 overflow-hidden">
           {/* Breadcrumb */}
           <nav className="mb-6 text-sm text-gray-400">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
