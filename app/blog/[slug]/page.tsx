@@ -162,7 +162,7 @@ export default async function BlogPostPage({
           {/* Article Body */}
           {post.content_html ? (
             <div
-              className="blog-content prose prose-invert max-w-none"
+              className="blog-content prose prose-invert"
               dangerouslySetInnerHTML={{ __html: post.content_html }}
             />
           ) : (

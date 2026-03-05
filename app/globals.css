@@ -107,14 +107,21 @@ body {
   margin-bottom: 0;
 }
 
-/* Tables */
+/* Table wrapper — prevent horizontal page overflow */
+.blog-content .table-wrapper,
+.blog-content table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .blog-content table {
   width: 100%;
+  min-width: 500px;
   border-collapse: collapse;
   margin: 1.75rem 0;
   font-size: 0.9rem;
   border-radius: 0.5rem;
-  overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
@@ -163,10 +170,13 @@ body {
   padding: 1.25rem;
   border-radius: 0.5rem;
   overflow-x: auto;
+  max-width: 100%;
   margin: 1.5rem 0;
   font-size: 0.875rem;
   line-height: 1.6;
   border: 1px solid #1e293b;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .blog-content pre code {
