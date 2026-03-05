@@ -44,6 +44,18 @@
 - **해결방향**: WorkflowStep에 `description` 필드 추가 → 각 단계별 실제 사용법 2,000자+ 작성
 - **담당**: 코드 수정(Claude Code) + DB 콘텐츠 업데이트(Antigravity)
 
+### 2026-03-01 Antigravity SQL 쿼트 이스케이프 문제
+- **상황**: Antigravity가 생성한 march-week1~4.sql에서 `''''` (4중 쿼트) 사용
+- **문제**: SQL에서 `''''` = 싱글쿼트 2개(`''`)로 해석 → JSON에 `''`이 저장됨 (의도는 `'` 1개)
+- **수정**: 4개 파일 총 120곳 `''''` → `''` 일괄 수정
+- **교훈**: Antigravity SQL 결과물은 반드시 `''''` 패턴 검색 후 실행할 것
+- **참고**: 기존 정상 작동하는 `scripts/update_workflows.sql`은 `''`만 사용
+
+### 2026-03-01 X 계정 핸들 검증 실패
+- **상황**: X 팔로우 추천 10개 중 5개가 존재하지 않는 핸들
+- **실수**: @aiaboratory, @haboratory, @mattshumer_, @nonmayank, @bentaborsky — 모두 실제 없는 계정
+- **교훈**: 외부 계정/URL 추천 시 반드시 WebSearch로 실존 여부 검증 후 안내
+
 ---
 
 ## 프로젝트별 주의사항
