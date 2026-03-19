@@ -2,23 +2,32 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllTools, getAllCategories } from "@/lib/queries/tools";
 import { getRecentBlogPosts } from "@/lib/queries/blog";
-import { getRecentWorkflows } from "@/lib/queries/workflows";
+import { getRecentWorkflows, getWorkflowCount } from "@/lib/queries/workflows";
 import ToolCard from "@/components/ToolCard";
 import VSWidget from "@/components/VSWidget";
 import type { BlogPost, Workflow } from "@/lib/types";
 
-export const metadata: Metadata = {
-  title: "AIToolRadar - Compare 177+ AI Tools | Honest Reviews & Pricing 2026",
-  description: "Compare 177+ AI tools side by side. Honest reviews, real pricing, and AI workflow guides to find the perfect tool for writing, coding, video, SEO, and more.",
-  alternates: {
-    canonical: "https://www.aitoolradar.net",
-  },
-  openGraph: {
-    title: "AIToolRadar - Compare 177+ AI Tools | Honest Reviews & Pricing 2026",
-    description: "Compare 177+ AI tools side by side. Honest reviews, real pricing, and AI workflow guides.",
-    url: "https://www.aitoolradar.net",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  let toolCount = 177;
+  try {
+    const tools = await getAllTools();
+    toolCount = tools.length;
+  } catch {
+    // fallback to default
+  }
+  return {
+    title: `AIToolRadar - Compare ${toolCount}+ AI Tools | Honest Reviews & Pricing 2026`,
+    description: `Compare ${toolCount}+ AI tools side by side. Honest reviews, real pricing, and AI workflow guides to find the perfect tool for writing, coding, video, SEO, and more.`,
+    alternates: {
+      canonical: "https://www.aitoolradar.net",
+    },
+    openGraph: {
+      title: `AIToolRadar - Compare ${toolCount}+ AI Tools | Honest Reviews & Pricing 2026`,
+      description: `Compare ${toolCount}+ AI tools side by side. Honest reviews, real pricing, and AI workflow guides.`,
+      url: "https://www.aitoolradar.net",
+    },
+  };
+}
 
 export default async function Home() {
   const year = new Date().getFullYear();
@@ -26,13 +35,15 @@ export default async function Home() {
   let categories: Awaited<ReturnType<typeof getAllCategories>> = [];
   let recentPosts: BlogPost[] = [];
   let recentWorkflows: Workflow[] = [];
+  let workflowCount = 0;
 
   try {
-    [tools, categories, recentPosts, recentWorkflows] = await Promise.all([
+    [tools, categories, recentPosts, recentWorkflows, workflowCount] = await Promise.all([
       getAllTools(),
       getAllCategories(),
       getRecentBlogPosts(4),
       getRecentWorkflows(3),
+      getWorkflowCount(),
     ]);
   } catch {
     // DB not connected yet - show placeholder content
@@ -57,7 +68,7 @@ export default async function Home() {
           <div className="mb-8 inline-flex flex-wrap items-center justify-center gap-4 rounded-full border border-gray-700 bg-gray-800/50 px-5 py-2 text-sm font-medium text-gray-300 backdrop-blur-sm">
             <span className="flex items-center gap-1.5 whitespace-nowrap">
               <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
-              177+ Tools
+              {tools.length > 0 ? `${tools.length}+` : "177+"} Tools
             </span>
             <span className="hidden sm:inline text-gray-600">|</span>
             <span className="flex items-center gap-1.5 whitespace-nowrap">
@@ -67,7 +78,7 @@ export default async function Home() {
             <span className="hidden sm:inline text-gray-600">|</span>
             <span className="flex items-center gap-1.5 whitespace-nowrap">
               <span className="h-1.5 w-1.5 rounded-full bg-purple-500"></span>
-              15 Workflow Guides
+              {workflowCount > 0 ? workflowCount : 18} Workflow Guides
             </span>
           </div>
 

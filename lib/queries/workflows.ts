@@ -45,3 +45,12 @@ export async function getRecentWorkflows(limit = 3): Promise<Workflow[]> {
     .limit(limit);
   return data ?? [];
 }
+
+export async function getWorkflowCount(): Promise<number> {
+  const supabase = await createClient();
+  const { count } = await supabase
+    .from("workflows")
+    .select("*", { count: "exact", head: true })
+    .eq("is_published", true);
+  return count ?? 0;
+}
