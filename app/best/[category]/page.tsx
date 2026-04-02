@@ -86,7 +86,7 @@ export default async function CategoryPage({
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
 
-  const jsonLd = {
+  const itemListJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: `Best ${displayName} in ${year}`,
@@ -100,12 +100,56 @@ export default async function CategoryPage({
     })),
   };
 
+  // FAQ JSON-LD for Featured Snippets and AI crawlers
+  const faqJsonLd = tools.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `What is the best ${displayName.toLowerCase()} in ${year}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: tools[0]
+            ? `${tools[0].name} ranks #1 with a score of ${tools[0].rating ?? "N/A"}/10. ${tools[0].short_description}`
+            : `Compare our top-rated ${displayName.toLowerCase()} to find the best fit for your needs.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `Are there free ${displayName.toLowerCase()}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: tools.filter(t => t.has_free_trial || !t.starting_price).length > 0
+            ? `Yes. ${tools.filter(t => t.has_free_trial || !t.starting_price).map(t => t.name).slice(0, 3).join(", ")} all offer free plans or trials.`
+            : `Most tools require a paid plan, but free trials are available.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `How much do ${displayName.toLowerCase()} cost?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: tools.find(t => t.starting_price)
+            ? `Entry-level plans start at $${Math.min(...tools.filter(t => t.starting_price).map(t => t.starting_price!))}/month.`
+            : "Check each tool's pricing page for the latest rates.",
+        },
+      },
+    ],
+  } : null;
+
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       {/* Breadcrumb */}
       <nav className="mb-6 text-sm text-gray-400">
         <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -130,6 +174,28 @@ export default async function CategoryPage({
           <p className="mt-2 text-sm text-gray-500">
             Connect Supabase and add tools with this category to see them here.
           </p>
+        </div>
+      )}
+
+      {/* Quick Stats Bar */}
+      {tools.length > 0 && (
+        <div className="mt-10 grid grid-cols-3 gap-4 rounded-xl border border-gray-800 bg-gray-900/50 p-6">
+          <div className="text-center">
+            <p className="text-2xl font-extrabold text-white">{tools.length}</p>
+            <p className="text-xs text-gray-400 mt-1">Tools Compared</p>
+          </div>
+          <div className="text-center border-x border-gray-800">
+            <p className="text-2xl font-extrabold text-white">
+              {tools.filter(t => t.has_free_trial).length}
+            </p>
+            <p className="text-xs text-gray-400 mt-1">Free Trials Available</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-extrabold text-white">
+              ${tools.some(t => t.starting_price) ? Math.min(...tools.filter(t => t.starting_price).map(t => t.starting_price!)) : 'N/A'}
+            </p>
+            <p className="text-xs text-gray-400 mt-1">Lowest Starting Price</p>
+          </div>
         </div>
       )}
 
@@ -168,6 +234,46 @@ export default async function CategoryPage({
           </ul>
         </div>
       </section>
+
+      {/* FAQ Section - Content + Schema */}
+      {tools.length > 0 && (
+        <section className="mt-12 rounded-xl border border-gray-800 bg-gray-900/30 p-8">
+          <h2 className="text-xl font-bold text-white mb-6">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-6">
+            <div>
+              <h3 className="font-semibold text-white">
+                What is the best {displayName.toLowerCase()} in {year}?
+              </h3>
+              <p className="mt-2 text-sm text-gray-400">
+                Based on our testing and user ratings, <strong>{tools[0]?.name ?? "the top-rated tool"}</strong> ranks #1 with a score of {tools[0]?.rating ?? "N/A"}/10. {tools[0]?.short_description}
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-white">
+                Are there free {displayName.toLowerCase()}?
+              </h3>
+              <p className="mt-2 text-sm text-gray-400">
+                {tools.filter(t => t.has_free_trial || !t.starting_price).length > 0
+                  ? `Yes — ${tools.filter(t => t.has_free_trial || !t.starting_price).map(t => t.name).slice(0, 3).join(", ")} all offer free plans or trials.`
+                  : `Most ${displayName.toLowerCase()} require a paid subscription, but many offer free trials.`}
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-white">
+                How much do {displayName.toLowerCase()} cost?
+              </h3>
+              <p className="mt-2 text-sm text-gray-400">
+                {displayName} pricing ranges from free to enterprise plans.
+                {tools.find(t => t.starting_price)
+                  ? ` Entry-level plans start at $${Math.min(...tools.filter(t => t.starting_price).map(t => t.starting_price!))}/month.`
+                  : " Check each tool's pricing page for the latest rates."}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Popular Comparisons in this category */}
       {tools.length >= 2 && (

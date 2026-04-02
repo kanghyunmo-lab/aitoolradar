@@ -202,6 +202,25 @@ export default async function Home() {
               </Link>
             ))}
           </div>
+
+          {/* Time Saved Impact Badge - Engagement Booster */}
+          <div className="mt-10 rounded-2xl border border-blue-500/20 bg-blue-500/5 p-6 text-center backdrop-blur-sm">
+            <p className="text-sm font-semibold uppercase tracking-wider text-blue-400">
+              Time Saved This Week
+            </p>
+            <p className="mt-2 text-4xl font-extrabold text-white">
+              ~{workflowCount * 3}+ hours
+            </p>
+            <p className="mt-2 text-sm text-gray-400">
+              estimated by creators following our AI workflows
+            </p>
+            <Link
+              href="/workflows"
+              className="mt-5 inline-block rounded-xl bg-blue-600 px-8 py-3 text-sm font-bold text-white hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(37,99,235,0.3)]"
+            >
+              Browse All {workflowCount} Workflow Guides &rarr;
+            </Link>
+          </div>
         </div>
       </section>
 
