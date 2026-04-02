@@ -46,15 +46,49 @@ export async function generateMetadata({
 
   if (!toolA || !toolB) return { title: "Comparison Not Found" };
 
+  // Helper function: Generate dynamic, data-driven description
+  function buildDescription(a: AiTool | null, b: AiTool | null): string {
+    if (!a || !b) return "Compare AI tools side by side.";
+
+    // Rating comparison line
+    const ratingLine =
+      a.rating && b.rating
+        ? `${a.name} scores ${a.rating}/10 vs ${b.name}'s ${b.rating}/10. `
+        : "";
+
+    // Pricing comparison line
+    const priceLine = (() => {
+      const aPrice = a.starting_price ? `$${a.starting_price}/mo` : "Free";
+      const bPrice = b.starting_price ? `$${b.starting_price}/mo` : "Free";
+      if (aPrice === bPrice) return `Both start at ${aPrice}. `;
+      return `${a.name} from ${aPrice}, ${b.name} from ${bPrice}. `;
+    })();
+
+    // Winner determination line
+    const winnerLine = (() => {
+      if (!a.rating || !b.rating) return "";
+      const winner = a.rating > b.rating ? a : b;
+      const loser = winner === a ? b : a;
+      return `${winner.name} edges out ${loser.name} overall. `;
+    })();
+
+    // Combine and truncate to 160 chars for SEO
+    const combined = `${ratingLine}${priceLine}${winnerLine}Compare features, pros & cons side by side.`;
+    return combined.slice(0, 160);
+  }
+
+  const description = buildDescription(toolA, toolB);
+  const title = `${toolA.name} vs ${toolB.name} (2026): Which Is Better?`;
+
   return {
-    title: `${toolA.name} vs ${toolB.name} (2026): Which Is Better?`,
-    description: `Detailed comparison of ${toolA.name} vs ${toolB.name}. Compare features, pricing, pros & cons to find the best tool for your needs in 2026.`,
+    title,
+    description,
     alternates: {
       canonical: `/compare/${comparison}`,
     },
     openGraph: {
-      title: `${toolA.name} vs ${toolB.name} (2026): Which Is Better?`,
-      description: `Compare ${toolA.name} and ${toolB.name} side-by-side. Pricing, features, pros & cons.`,
+      title,
+      description: `${toolA.name} (${toolA.rating ?? "N/A"}/10) vs ${toolB.name} (${toolB.rating ?? "N/A"}/10). Compare pricing, features, and ratings.`,
       url: `https://www.aitoolradar.net/compare/${toolA.slug}-vs-${toolB.slug}`,
       type: 'article',
     },
@@ -127,7 +161,7 @@ export default async function ComparisonPage({
   const result = getWinner(toolA, toolB);
 
   // BreadcrumbList JSON-LD for structured data / SEO
-  const jsonLd = {
+  const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
@@ -137,12 +171,81 @@ export default async function ComparisonPage({
     ],
   };
 
+  // FAQPage JSON-LD for AI crawlers (ChatGPT, Perplexity) and Featured Snippets
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `Is ${toolA.name} better than ${toolB.name}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: result
+            ? `${result.winner.name} is generally considered better, scoring ${result.winner.rating}/10 compared to the alternative.`
+            : `Both ${toolA.name} and ${toolB.name} are strong tools. Your choice depends on your specific workflow needs.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `How much does ${toolA.name} cost compared to ${toolB.name}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `${toolA.name} starts at ${toolA.starting_price ? `$${toolA.starting_price}/month` : 'Free'}. ${toolB.name} starts at ${toolB.starting_price ? `$${toolB.starting_price}/month` : 'Free'}.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `Does ${toolA.name} have a free trial?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `${toolA.name} ${toolA.has_free_trial ? 'offers a free trial' : 'does not currently offer a free trial'}. ${toolB.name} ${toolB.has_free_trial ? 'offers a free trial' : 'does not currently offer a free trial'}.`,
+        },
+      },
+    ],
+  };
+
+  // ItemList JSON-LD for structured comparison data
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${toolA.name} vs ${toolB.name} Comparison`,
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: toolA.name,
+        url: `https://www.aitoolradar.net/ai-tools/${toolA.slug}`,
+        description: toolA.short_description || `${toolA.name} is an AI tool.`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: toolB.name,
+        url: `https://www.aitoolradar.net/ai-tools/${toolB.slug}`,
+        description: toolB.short_description || `${toolB.name} is an AI tool.`,
+      },
+    ],
+  };
+
   return (
     <article className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
       {/* JSON-LD: BreadcrumbList structured data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+
+      {/* JSON-LD: FAQPage for AI crawlers and Featured Snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+
+      {/* JSON-LD: ItemList for structured comparison data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
 
       {/* Breadcrumb */}

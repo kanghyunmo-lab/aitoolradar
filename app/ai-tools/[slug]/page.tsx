@@ -89,12 +89,60 @@ export default async function ToolPage({
     } : {}),
   };
 
+  // FAQ JSON-LD schema for AI crawlers (ChatGPT, Perplexity)
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `Is ${tool.name} free?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: tool.has_free_trial
+            ? `${tool.name} offers a free trial. Paid plans start at $${tool.starting_price ?? 'N/A'}/month.`
+            : tool.starting_price
+            ? `${tool.name} is not free. Plans start at $${tool.starting_price}/month.`
+            : `${tool.name} offers a free plan.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `What is ${tool.name} used for?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: tool.short_description ?? `${tool.name} is an AI tool in the ${tool.category?.name ?? 'AI'} category.`,
+        },
+      },
+      ...(tool.pros && tool.pros.length > 0
+        ? [{
+            '@type': 'Question',
+            name: `What are the pros and cons of ${tool.name}?`,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: `Pros: ${tool.pros.slice(0, 3).join(', ')}. ${
+                tool.cons && tool.cons.length > 0
+                  ? `Cons: ${tool.cons.slice(0, 2).join(', ')}.`
+                  : ''
+              }`,
+            },
+          }]
+        : []),
+    ],
+  };
+
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* JSON-LD: FAQ Schema for AI Crawlers */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       {/* Breadcrumb */}
       <nav className="mb-6 text-sm text-gray-400">
