@@ -83,14 +83,14 @@ export default async function Home() {
           </div>
 
           <h1 className="mx-auto max-w-4xl text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl">
-            AI Workflow Guides <br className="hidden sm:block" />
+            Find & Compare the <br className="hidden sm:block" />
             <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              for Content Creators
+              Best AI Tools
             </span>
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-400">
-            Step-by-step AI automation guides for YouTubers and content creators. Find the right tools, build faster workflows, and spend less time on repetitive tasks.
+            The most comprehensive AI tool comparison platform. Compare features, pricing, and reviews for {tools.length}+ AI tools — with step-by-step workflow guides for creators.
           </p>
 
           {/* Interactive VS Widget */}
@@ -110,27 +110,91 @@ export default async function Home() {
               <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Step-by-step Guides
+              {tools.length}+ AI Tools Compared
             </span>
             <span className="flex items-center gap-1.5">
               <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Real Tool Stacks
+              1,526+ Comparisons
             </span>
             <span className="flex items-center gap-1.5">
               <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Save Hours Every Week
+              {workflowCount} Workflow Guides
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/*
+        ========================================
+        CATEGORIES (Modern Card Tags)
+        ========================================
+      */}
+      <section className="border-t border-gray-800 bg-[#0B0F19] px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl text-center">
+          <h2 className="text-3xl font-bold text-white">
+            Explore by Category
+          </h2>
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            {categories.length > 0 ? (
+              categories.map((cat) => (
+                <Link
+                  key={cat.id}
+                  href={`/best/${cat.slug}`}
+                  className="rounded-xl border border-gray-800 bg-gray-900 px-6 py-3 text-sm font-medium text-gray-300 transition-all hover:border-blue-500 hover:text-white hover:shadow-[0_0_15px_rgba(37,99,235,0.2)]"
+                >
+                  {cat.name}
+                </Link>
+              ))
+            ) : (
+              // Fallback
+              ["AI Writing Tools", "AI Image Generators", "AI Coding Assistants", "AI Video Generators"].map((name) => (
+                <div key={name} className="rounded-xl border border-gray-800 bg-gray-900 px-6 py-3 text-sm font-medium text-gray-300">
+                  {name}
+                </div>
+              ))
+            )}
           </div>
         </div>
       </section>
 
       {/* 
         ========================================
-        PRIORITIZED WORKFLOW SECTION 
+        TOP RATED TOOLS (Dark Mode Variants)
+        ========================================
+      */}
+      <section className="border-t border-gray-800 bg-[#0B0F19] px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <h2 className="text-3xl font-bold text-white text-center sm:text-left">
+            Top Rated AI Tools {year}
+          </h2>
+          <div className="mt-10 grid gap-6">
+            {tools.length > 0 ? (
+              tools.slice(0, 5).map((tool, i) => (
+                <ToolCard key={tool.id} tool={tool} rank={i + 1} />
+              ))
+            ) : (
+              <div className="text-center text-gray-500 py-12">Loading tools...</div>
+            )}
+
+            <div className="mt-6 flex justify-center">
+              <Link
+                href="/best/ai-writing-tools"
+                className="rounded-xl border border-gray-700 bg-gray-800 px-8 py-3 text-sm font-bold text-white transition-colors hover:bg-gray-700"
+              >
+                View all Tools
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/*
+        ========================================
+        PRIORITIZED WORKFLOW SECTION
         ========================================
       */}
       <section className="relative border-t border-gray-800 bg-[#0B0F19] px-4 py-20 sm:px-6 lg:px-8">
@@ -224,70 +288,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 
-        ========================================
-        CATEGORIES (Modern Card Tags)
-        ========================================
-      */}
-      <section className="border-t border-gray-800 bg-[#0B0F19] px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl text-center">
-          <h2 className="text-3xl font-bold text-white">
-            Explore by Category
-          </h2>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            {categories.length > 0 ? (
-              categories.map((cat) => (
-                <Link
-                  key={cat.id}
-                  href={`/best/${cat.slug}`}
-                  className="rounded-xl border border-gray-800 bg-gray-900 px-6 py-3 text-sm font-medium text-gray-300 transition-all hover:border-blue-500 hover:text-white hover:shadow-[0_0_15px_rgba(37,99,235,0.2)]"
-                >
-                  {cat.name}
-                </Link>
-              ))
-            ) : (
-              // Fallback
-              ["AI Writing Tools", "AI Image Generators", "AI Coding Assistants", "AI Video Generators"].map((name) => (
-                <div key={name} className="rounded-xl border border-gray-800 bg-gray-900 px-6 py-3 text-sm font-medium text-gray-300">
-                  {name}
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* 
-        ========================================
-        TOP RATED TOOLS (Dark Mode Variants)
-        ========================================
-      */}
-      <section className="border-t border-gray-800 bg-[#0B0F19] px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="text-3xl font-bold text-white text-center sm:text-left">
-            Top Rated AI Tools {year}
-          </h2>
-          <div className="mt-10 grid gap-6">
-            {tools.length > 0 ? (
-              tools.slice(0, 5).map((tool, i) => (
-                <ToolCard key={tool.id} tool={tool} rank={i + 1} />
-              ))
-            ) : (
-              <div className="text-center text-gray-500 py-12">Loading tools...</div>
-            )}
-
-            <div className="mt-6 flex justify-center">
-              <Link
-                href="/best/ai-writing-tools"
-                className="rounded-xl border border-gray-700 bg-gray-800 px-8 py-3 text-sm font-bold text-white transition-colors hover:bg-gray-700"
-              >
-                View all Tools
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/*
         ========================================
         LATEST BLOG POSTS (내부링크 + SEO)
@@ -336,7 +336,7 @@ export default async function Home() {
 
       {/*
         ========================================
-        SEO TEXT (Dark Mode)
+        SEO TEXT (Dark Mode) + Popular Comparisons
         ========================================
       */}
       <section className="border-t border-gray-800 bg-gray-950 px-4 py-16">
@@ -348,6 +348,49 @@ export default async function Home() {
             AIToolRadar provides comprehensive, data-driven reviews and comparisons of AI tools across all categories.
             Our methodology combines real-world testing, pricing analysis, and feature comparison to help you make informed decisions in the fast-paced AI market.
           </p>
+
+          {/* Popular Comparisons Grid */}
+          <div className="mt-12">
+            <h3 className="text-lg font-semibold text-white mb-6">Popular Tool Comparisons</h3>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <Link
+                href="/compare/chatgpt-vs-claude"
+                className="p-3 bg-gray-900/50 border border-gray-800 rounded-lg hover:shadow-[0_0_15px_rgba(37,99,235,0.1)] text-sm text-center text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-gray-800 transition-all"
+              >
+                ChatGPT vs Claude
+              </Link>
+              <Link
+                href="/compare/adobe-firefly-vs-midjourney"
+                className="p-3 bg-gray-900/50 border border-gray-800 rounded-lg hover:shadow-[0_0_15px_rgba(37,99,235,0.1)] text-sm text-center text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-gray-800 transition-all"
+              >
+                Adobe Firefly vs Midjourney
+              </Link>
+              <Link
+                href="/compare/descript-vs-capcut"
+                className="p-3 bg-gray-900/50 border border-gray-800 rounded-lg hover:shadow-[0_0_15px_rgba(37,99,235,0.1)] text-sm text-center text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-gray-800 transition-all"
+              >
+                Descript vs CapCut
+              </Link>
+              <Link
+                href="/compare/jasper-vs-copy-ai"
+                className="p-3 bg-gray-900/50 border border-gray-800 rounded-lg hover:shadow-[0_0_15px_rgba(37,99,235,0.1)] text-sm text-center text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-gray-800 transition-all"
+              >
+                Jasper vs Copy.ai
+              </Link>
+              <Link
+                href="/compare/elevenlabs-vs-murf"
+                className="p-3 bg-gray-900/50 border border-gray-800 rounded-lg hover:shadow-[0_0_15px_rgba(37,99,235,0.1)] text-sm text-center text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-gray-800 transition-all"
+              >
+                ElevenLabs vs Murf
+              </Link>
+              <Link
+                href="/compare/runway-vs-pika"
+                className="p-3 bg-gray-900/50 border border-gray-800 rounded-lg hover:shadow-[0_0_15px_rgba(37,99,235,0.1)] text-sm text-center text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-gray-800 transition-all"
+              >
+                Runway vs Pika
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>

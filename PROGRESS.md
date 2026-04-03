@@ -1,8 +1,9 @@
 # AIToolRadar 진행 현황
 
-> 마지막 업데이트: **2026-04-02**
+> 마지막 업데이트: **2026-04-04**
 > 전략 기준: `docs/PRD_v3.md` | 참고 자료: `docs/참고자료.md`
 > **목표: 2026년 내 월 수익 $7,500 (월천만원) 달성**
+> ⚠️ **🚨 BREAKTHROUGH (2026-04-03): GEO 전략 명확화 — Google SEO vs AI GEO 완전 분리**
 > ⚠️ **이 파일이 단일 진행 기준점입니다. 다른 메모보다 이 파일을 우선합니다.**
 
 ---
@@ -103,58 +104,119 @@
 
 ---
 
-## 🔄 지금 당장 해야 할 것
+## 🚨 전략 명확화 (2026-04-03 돌파)
 
-### ✅ 오늘 완료 (2026-04-02)
-- [x] **GA4 + Search Console 데이터 분석** ✅ (427→522 +22%, CTR 0.1%, ChatGPT 38% 트래픽 발견)
+### 게임 2개 분리 완전 이해
+```
+게임 1: Google SEO (Traditional)
+상태: 순위 27.3, 노출 436만 → ✅ 이미 충분함
+다음: 더 이상 투자 불필요
+
+게임 2: AI GEO (Generative Engine Optimization) ← ★ 집중할 곳
+상태: ChatGPT 트래픽 33% (173/522)
+목표: 6개월 내 50% 달성
+핵심: 89% of AI citations come from position 100+ in Google
+      → Google 순위와 AI 추천은 무관
+      → Reddit, Quora, YouTube, 출판에서만 AI가 정보 끌어옴
+```
+
+### SmartRent 6주 사례 확인
+- 콘텐츠 재구성만으로 6주 내 **32% of sales-qualified leads from ChatGPT**
+- 당신의 기초는 SmartRent보다 나음 (이미 구조화 완료)
+- 할 일: Off-site Authority (Reddit/Quora/YouTube) 구축
+
+---
+
+## 🔄 지금 당장 해야 할 것 (2026-04-04 시작)
+
+### ✅ 과거 완료 (2026-04-02)
+- [x] **GA4 + Search Console 데이터 분석** ✅ (427→522 +22%, CTR 0.1%, ChatGPT 38% 트래픽)
 - [x] **CTR 개선 작업** ✅ (compare 동적 description, JSON-LD FAQPage/ItemList)
-- [x] **AI 도구 페이지 FAQ JSON-LD** ✅ (ChatGPT 통합 최적화)
-- [x] **블로그 SQL 업데이트** ✅ (상위 3개 title/meta_description 클릭 유도형으로 변경)
-- [x] **홈페이지 + /best/ 페이지 Engagement 개선** ✅ (Time Saved 배지, Quick Stats, FAQ)
-- [x] **전체 배포** ✅ (Vercel 자동 배포 완료)
+- [x] **블로그 제목 개선** ✅ (클릭 유도형으로 변경)
+- [x] **홈페이지 + /best/ 페이지 Engagement** ✅ (Time Saved, Quick Stats, FAQ)
 
 ### 사용자 담당 — 지금 바로 (우선순위 순)
 
-#### 🔥 1순위: Quora 시작 (즉시 효과, 며칠 내)
-- [ ] **Quora 계정 생성** (quora.com)
-- [ ] **주요 질문 검색 및 답변**
+#### 🔥 1순위: Quora 론칭 (즉시, 2-3시간)
+- [ ] **Quora 계정 생성** (quora.com) — 오늘
+- [ ] **첫 5개 답변 작성** (오늘~내일)
   - "Best AI tools for YouTubers"
   - "How to automate YouTube with AI"
+  - "Adobe Firefly vs Midjourney"
   - "Best AI video editing tools"
-  - "AI tools for content creators"
-  - "AI writing tools for 2026"
-- [ ] **답변 끝에 자연스럽게 링크**: "자세한 내용은 aitoolradar.net에서 볼 수 있습니다"
-- [ ] **목표**: 주 5개 답변 (2-4주 내 50~200명 추가 트래픽 기대)
+  - "AI tools for content creators 2026"
+- [ ] **답변 형식**: 최소 100자 전문적 답변 + 마지막에 자연스럽게 링크 1개
+- [ ] **목표**: 주 5개 × 26주(6개월) = 130개 언급
+  - **예상 효과**: 6주 후 ChatGPT 추천 확대 시작, 12주 후 월 방문자 +200명
 
-#### 2순위: Reddit karma 계속 축적 (병행)
-- [ ] **현재**: 50 karma / **목표**: 200+
-- [ ] **계속**: r/NewTubers, r/youtubers, r/ContentCreators 댓글 (주 3-4회)
-- [ ] **링크 불가 상태**: 팁/경험담만 공유, 링크는 금지
-- [ ] **200+ 달성 후**: 자신의 글에 링크 포함 가능
+#### 2순위: Reddit 전략 변경 (이번주, 병행)
+- [ ] **지난 전략**: 댓글만 (카르마 축적) → **NEW: 질문 답변 중심**
+- [ ] **현재**: 50 karma → **목표**: 계속 쌓되, 이제 "질문 답변"으로 전환
+- [ ] **일정**: 주 4개 답변
+  - r/NewTubers: 주 2개 (AI tools 질문)
+  - r/youtubers: 주 1개 (automation 질문)
+  - r/ContentCreators: 주 1개
+- [ ] **답변 품질**: 최소 100자+ 전문적, 실제 데이터/경험 기반, 마지막에 자연스럽게 링크 1개
+- [ ] **스팸 절대 금지**: "Please check my website" 같은 표현 금지, 자연스러운 답변만
+- [ ] **목표**: 주 4개 × 26주 = 104개 Reddit 언급
+  - **예상 효과**: 카르마 200+ 달성 + AI 신뢰도 축적
 
-#### 3순위: 성과 모니터링 (1-2주 후)
+#### 3순위: 비교 페이지 제목 재구성 (Claude Code)
+- [ ] **변경 대상**: 상위 30개 비교 페이지 (조회수 기반)
+- [ ] **형식 변경**: "Adobe Firefly vs Midjourney" → "YouTube 썸네일 만드는데 Adobe Firefly vs Midjourney 중 어느 게 싸고 빠를까?"
+- [ ] **왜**: AI와 인간이 실제 검색하는 자연 언어 질문 형식으로 변경 (SmartRent 사례)
+- [ ] **예상 효과**: CTR 0.1% → 0.4% (4배) in 6주
+- [ ] **모든 변경 후 자동 배포**
+
+---
+
+#### 4순위: 성과 모니터링 (1개월 후, 2026-05-04)
 - [ ] **Google Search Console**: CTR 변화 확인
-  - 목표: 0.1% → 0.3~0.4% (3-4배)
+  - 목표: 0.1% → 0.3~0.4% (by 5월)
   - 특히 "adobe firefly", "ai video editing" 키워드 추적
-- [ ] **GA4**: Engagement time 변화
-  - 홈페이지: 21초 → 60초+ 목표
-  - /best/ 페이지: 12초 → 45초+ 목표
-- [ ] **추적 캡처**: 변화 추이를 주간 보고서로 기록
+- [ ] **GA4**: ChatGPT 트래픽 증가 추이
+  - 목표: 33% → 40%+ (1개월), 50% (6개월)
+- [ ] **ChatGPT 직접 테스트**: 각 주요 키워드 검색 시 추천 여부 확인
+- [ ] **AI Overview**: 새로운 키워드 몇 개 랭크되었는지 추적
 
-#### 4순위: 주간 블로그 포스트 (지속)
-- [ ] **다음 주제 추천**:
+#### 5순위: 주간 블로그 포스트 (병행)
+- [ ] **다음 주제** (작성 예정):
   1. "Adobe Firefly 완전 무료 가이드 2026" (255 impressions 대응)
-  2. "AI 영상 편집 자동화 단계별 워크플로우"
-  3. "YouTube 자동화 도구 스택 한국인용"
-- [ ] **조건**: 최소 1,500자, 내부 링크 2-3개 포함, SEO 최적화
-- [ ] **주간 1회 목표**: 월 4개 → 월 8-12개로 확대
+  2. "AI 영상 편집 자동화 워크플로우 (YouTube 크리에이터용)"
+- [ ] **조건**: 최소 1,500자, 내부 링크 2-3개, Reddit/Quora 답변 링크 가능성 고려
+- [ ] **일정**: 주 1회 → 월 4개 이상 유지
 
-#### 5순위: 제휴 상태 확인 (1주일 후)
+#### 6순위: YouTube 계획 수립 (3개월 후 시작)
+- [ ] **지금 할 일**: 간단한 영상 1개만 계획하기
+  - 주제: "ChatGPT vs Claude vs Gemini 비교" (이미 높은 조회)
+  - 길이: 5-10분
+  - 스크립트: Claude가 작성
+- [ ] **선택지**: 당신이 직접 또는 유튜버 친구 협업
+- [ ] **타이밍**: 현재는 Reddit/Quora에 집중. YouTube는 트래픽 1,000명+ 후
+
+#### 7순위: 제휴 상태 확인 (1주일 후)
 - [ ] **HeyGen**: 승인 여부 확인 (승인 되면 우선순위 상향)
 - [ ] **Surfer SEO**: 응답 여부 확인
 - [ ] **거절 대비**: 소형 AI 도구들 직접 스폰서십 이메일 준비
 
+### 📊 6개월 언급 예측 (Off-site Authority 구축)
+
+| 채널 | 주당 | 월당 | 6개월 합계 |
+|------|------|------|----------|
+| Quora | 5 | 20 | **130** |
+| Reddit | 4 | 16 | **104** |
+| YouTube | 0 | 0 | **0** (3개월 후 시작) |
+| **합계** | **9** | **36** | **234+** |
+
+**의미:**
+- 234개 언급이 쌓이면 AI 시스템이 "YouTube automation" 주제에서 당신을 신뢰할 수 있는 출처로 인식
+- ChatGPT 추천: 현재 1-2개 페이지 → 10-20개 페이지로 확대 (예상)
+- 월 방문자: 522 → 1,500+ (예상, SmartRent 사례 기준)
+
+---
+
 ### Claude Code 담당 — 다음 세션 (트래픽 1,000명 이후)
+- [ ] **비교 페이지 30개 제목 재구성** (Smart 질문 형식)
 - [ ] **직접 스폰서십 신청 준비** (Jasper, HeyGen 등)
 - [ ] **AI 추천 퀴즈 위젯** 개발 (트래픽 500명+)
 - [ ] **신규 페이지 타입** (e.g., /tools/by-use-case)
